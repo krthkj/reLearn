@@ -1,2 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<CodeLite_Workspace Name="relearn" Database="" Version="10000"/>
+<CodeLite_Workspace Name="relearn" Database="" Version="10000" SWTLW="Yes">
+  <WorkspaceParserMacros/>
+  <WorkspaceParserPaths/>
+  <Project Name="relearn" Path="relearn/relearn.project" Active="Yes"/>
+  <Project Name="relearn_dl" Path="relearn_dl/relearn_dl.project" Active="No"/>
+  <Project Name="relearn_sl" Path="relearn_sl/relearn_sl.project" Active="No"/>
+  <BuildMatrix>
+    <WorkspaceConfiguration Name="Debug">
+      <Environment/>
+      <Project Name="relearn" ConfigName="Debug"/>
+      <Project Name="relearn_dl" ConfigName="Debug"/>
+      <Project Name="relearn_sl" ConfigName="Debug"/>
+    </WorkspaceConfiguration>
+    <WorkspaceConfiguration Name="Release">
+      <Environment/>
+      <Project Name="relearn" ConfigName="Debug"/>
+      <Project Name="relearn_dl" ConfigName="Release"/>
+      <Project Name="relearn_sl" ConfigName="Release"/>
+    </WorkspaceConfiguration>
+  </BuildMatrix>
+</CodeLite_Workspace>

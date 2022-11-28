@@ -1,0 +1,8 @@
+-I/home/karthik/develop/relearn/relearn_dl
+-I/include/c++
+-I/usr/lib/llvm-14/lib/clang/14.0.0/include
+-I/usr/local/include
+-I/usr/include/x86_64-linux-gnu
+-I/usr/include
+-target
+x86_64-pc-linux-gnu
