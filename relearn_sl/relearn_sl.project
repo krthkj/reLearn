@@ -19,11 +19,11 @@
       <ResourceCompiler Options=""/>
     </GlobalSettings>
     <Configuration Name="Debug" CompilerType="CLANG-14" DebuggerType="LLDB Debugger" Type="Static Library" BuildCmpWithGlobalSettings="append" BuildLnkWithGlobalSettings="append" BuildResWithGlobalSettings="append">
-      <Compiler Options="-pedantic-errors;-g;-O0;-std=c++17;-Wall" C_Options="-pedantic-errors;-g;-O0;-W;-std=c++17;-Wall" Assembler="" Required="yes" PreCompiledHeader="" PCHInCommandLine="no" PCHFlags="" PCHFlagsPolicy="1">
+      <Compiler Options="-pedantic-errors;-g;-O0;-pedantic;-W;-fopenmp;-std=c++17;-Wall" C_Options="-pedantic-errors;-g;-O0;-pedantic;-W;-fopenmp;-std=c++17;-Wall" Assembler="" Required="yes" PreCompiledHeader="" PCHInCommandLine="no" PCHFlags="" PCHFlagsPolicy="1">
         <IncludePath Value="."/>
         <IncludePath Value="./include"/>
       </Compiler>
-      <Linker Options="" Required="yes"/>
+      <Linker Options="-O0" Required="yes"/>
       <ResourceCompiler Options="" Required="no"/>
       <General OutputFile="lib$(ProjectName).a" IntermediateDirectory="" Command="$(WorkspacePath)/cmake-build-$(WorkspaceConfiguration)/output/$(ProjectName)" CommandArguments="" UseSeparateDebugArgs="no" DebugArguments="" WorkingDirectory="$(WorkspacePath)/cmake-build-$(WorkspaceConfiguration)/output" PauseExecWhenProcTerminates="yes" IsGUIProgram="no" IsEnabled="yes"/>
       <BuildSystem Name="CMake"/>
