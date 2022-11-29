@@ -1,7 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CodeLite_Project Name="relearn" Version="11000" InternalType="">
+  <VirtualDirectory Name="doc"/>
   <Description/>
   <Dependencies/>
+  <VirtualDirectory Name="src">
+    <File Name="src/main.cpp"/>
+  </VirtualDirectory>
+  <VirtualDirectory Name="include"/>
+  <Dependencies Name="Debug">
+    <Project Name="relearn_dl"/>
+    <Project Name="relearn_sl"/>
+  </Dependencies>
   <Settings Type="Executable">
     <GlobalSettings>
       <Compiler Options="" C_Options="" Assembler="">
@@ -13,17 +22,21 @@
       <ResourceCompiler Options=""/>
     </GlobalSettings>
     <Configuration Name="Debug" CompilerType="CLANG-14" DebuggerType="LLDB Debugger" Type="Executable" BuildCmpWithGlobalSettings="append" BuildLnkWithGlobalSettings="append" BuildResWithGlobalSettings="append">
-      <Compiler Options="-g -Wall" C_Options="" Assembler="" Required="yes" PreCompiledHeader="" PCHInCommandLine="no" PCHFlags="" PCHFlagsPolicy="0">
+      <Compiler Options="-pedantic-errors;-g;-O0;-W;-std=c++17;-Wall" C_Options="-pedantic-errors;-g;-O0;-W;-std=c++17;-Wall" Assembler="" Required="yes" PreCompiledHeader="" PCHInCommandLine="no" PCHFlags="" PCHFlagsPolicy="1">
         <IncludePath Value="."/>
+        <IncludePath Value="../relearn/include/"/>
+        <IncludePath Value="../relearn_dl/include/"/>
+        <IncludePath Value="../relearn_sl/include/"/>
       </Compiler>
       <Linker Options="-O0" Required="yes">
-        <LibraryPath Value="."/>
-        <LibraryPath Value="Debug"/>
+        <LibraryPath Value="$(WorkspacePath)/cmake-build-$(WorkspaceConfiguration)/output/"/>
+        <Library Value="librelearn_dl.so"/>
+        <Library Value="librelearn_sl.a"/>
       </Linker>
       <ResourceCompiler Options="" Required="no"/>
-      <General OutputFile="" IntermediateDirectory="" Command="$(WorkspacePath)/cmake-build-$(WorkspaceConfiguration)/output/$(ProjectName)" CommandArguments="" UseSeparateDebugArgs="no" DebugArguments="" WorkingDirectory="$(WorkspacePath)/cmake-build-$(WorkspaceConfiguration)/output" PauseExecWhenProcTerminates="yes" IsGUIProgram="no" IsEnabled="yes"/>
+      <General OutputFile="relearn" IntermediateDirectory="" Command="$(WorkspacePath)/cmake-build-$(WorkspaceConfiguration)/output/$(ProjectName)" CommandArguments="" UseSeparateDebugArgs="no" DebugArguments="" WorkingDirectory="$(WorkspacePath)/cmake-build-$(WorkspaceConfiguration)/output" PauseExecWhenProcTerminates="yes" IsGUIProgram="no" IsEnabled="yes"/>
       <BuildSystem Name="CMake"/>
-      <Environment EnvVarSetName="&lt;Use Workspace Settings&gt;" DbgSetName="&lt;Use Global Settings&gt;">
+      <Environment EnvVarSetName="&lt;Use Defaults&gt;" DbgSetName="&lt;Use Defaults&gt;">
         <![CDATA[]]>
       </Environment>
       <Debugger IsRemote="no" RemoteHostName="" RemoteHostPort="" DebuggerPath="" IsExtended="no">
@@ -55,6 +68,4 @@
       </Completion>
     </Configuration>
   </Settings>
-  <VirtualDirectory Name="src"/>
-  <VirtualDirectory Name="include"/>
 </CodeLite_Project>
