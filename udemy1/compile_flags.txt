@@ -1,7 +1,4 @@
--I/home/karthik/develop/relearn/relearn
--I/home/karthik/develop/relearn/relearn/include
--I/home/karthik/develop/relearn/relearn_dl/include
--I/home/karthik/develop/relearn/relearn_sl/include
+-I/home/karthik/develop/relearn/udemy1
 -I/home/karthik/develop/relearn/udemy1/include
 -I/include/c++
 -I/usr/lib/llvm-14/lib/clang/14.0.0/include

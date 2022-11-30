@@ -10,6 +10,7 @@
 
 #include "relearn_dl.hpp"
 #include "relearn_sl.hpp"
+#include "udemy1.hpp"
 #include <iostream>
 
 /**
@@ -20,5 +21,6 @@ int main()
     std::cout << "[relearn] <func> relearn::main" << std::endl;
     relearn_dl::printlib();
     relearn_sl::printlib();
+    udemy1::test_run_udemy1();
     return 0;
 }

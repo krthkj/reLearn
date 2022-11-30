@@ -24,6 +24,7 @@ set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CL_OUTPUT_DIRECTORY})
 ## Add the dependencies
 add_subdirectory(${CMAKE_SOURCE_DIR}/../relearn_dl ${CMAKE_CURRENT_BINARY_DIR}/relearn_dl-build)
 add_subdirectory(${CMAKE_SOURCE_DIR}/../relearn_sl ${CMAKE_CURRENT_BINARY_DIR}/relearn_sl-build)
+add_subdirectory(${CMAKE_SOURCE_DIR}/../udemy1 ${CMAKE_CURRENT_BINARY_DIR}/udemy1-build)
 # Define some variables
 set(PROJECT_relearn_PATH "${CMAKE_CURRENT_LIST_DIR}")
 set(WORKSPACE_PATH "${CMAKE_CURRENT_LIST_DIR}/..")
@@ -40,6 +41,7 @@ include_directories(
     ../relearn/include/
     ../relearn_dl/include/
     ../relearn_sl/include/
+    ../udemy1/include/
 
 )
 
@@ -96,12 +98,14 @@ target_link_libraries(relearn ${LINK_OPTIONS})
 target_link_libraries(relearn
     librelearn_dl.so
     librelearn_sl.a
+    libudemy1.so
 )
 
 
 # Adding dependencies
 add_dependencies(relearn relearn_dl)
 add_dependencies(relearn relearn_sl)
+add_dependencies(relearn udemy1)
 
 
 #{{{{ User Code 3
