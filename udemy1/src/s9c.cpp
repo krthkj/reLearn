@@ -3,8 +3,8 @@
  * All Rights Reserved.
  * Using MIT licence, refer the license file supplied with the project.
  *
- * File : s7c.cpp
- * Desc : Section 7 Challenge from Udemy course "Beginning C++ Programming
+ * File : s9c.cpp
+ * Desc : Section 9 Challenge from Udemy course "Beginning C++ Programming
  *        - From Beginner to Beyond"
  *
  * Author : Karthik Jain <krthkj.public@gmail.com>
@@ -13,10 +13,9 @@
  */
 
 #include "udemy1.hpp"
+#include <boost/algorithm/string/erase.hpp>
 #include <iostream>
 #include <vector>
-#include <string>
-#include <boost/algorithm/string/erase.hpp>
 
 namespace udemy1
 {
@@ -69,6 +68,7 @@ void s9c_run(void)
                   << "M - Display mean of the numbers" << std::endl
                   << "S - Display the smallest number" << std::endl
                   << "L - Display the largest number" << std::endl
+                  << "C - Clear the list" << std::endl
                   << "Q - Quit" << std::endl
                   << std::endl
                   << "Enter your choice: ";
@@ -76,36 +76,79 @@ void s9c_run(void)
         std::cout << std::endl;
 
         boost::algorithm::erase_all(choice, " ");
-        
+        int val{0};
+
         switch((char)choice.at(0)) {
 
         case 'P':
         case 'p':
-            std::cout << "[] - the list is empty" << std::endl;
+            if(!mylist.empty()) {
+                std::cout << "[ ";
+                for(auto i : mylist) {
+                    std::cout << i << " ";
+                }
+                std::cout << "]" << std::endl;
+            } else
+                std::cout << "[] - the list is empty" << std::endl;
+
             break;
         case 'A':
         case 'a':
-            std::cout << "<val> added" << std::endl;
-            std::cout << "invalid value, please try again." << std::endl;
+            std::cout << "Enter an integer to add to the list: ";
+            std::cin >> val;
+            if(!mylist.empty()) {
+                int count{0};
+                for(auto i : mylist) {
+                    if(val == i)
+                        count++;
+                }
+                if(count > 0)
+                    std::cout << val << " is a duplicate entry, it occurs " << count << " times" << std::endl;
+            }
+            mylist.push_back(val);
+            std::cout << val << " added" << std::endl;
+            break;
+        case 'C':
+        case 'c':
+            if(!mylist.empty()) {
+                mylist.clear();
+                std::cout << "List cleared" << std::endl;
+            } else
+                std::cout << "[] - the list is already empty" << std::endl;
             break;
         case 'M':
         case 'm':
-            std::cout << "The mean is <val>" << std::endl;
-            std::cout << "Unable to calculate the mean - no data" << std::endl;
+            if(!mylist.empty()) {
+                val = 0;
+                for(auto i : mylist)
+                    val += i;
+                std::cout << "The mean is " << static_cast<float> (val) / mylist.size() << std::endl;
+            } else
+                std::cout << "Unable to calculate the mean - no data" << std::endl;
             break;
         case 'S':
         case 's':
-            std::cout << "The smallest number is <val>" << std::endl;
-            std::cout << "Unable to determint the smallest number - list is empty" << std::endl;
+            if(!mylist.empty()) {
+                val = mylist.at(0);
+                for(auto i : mylist)
+                    val = (i < val) ? i : val;
+                std::cout << "The smallest number is " << val << std::endl;
+            } else
+                std::cout << "Unable to determint the smallest number - list is empty" << std::endl;
             break;
         case 'L':
         case 'l':
-            std::cout << "The largest number is <val>" << std::endl;
-            std::cout << "Unable to determint the smallest number - list is empty" << std::endl;
+            if(!mylist.empty()) {
+                val = mylist.at(0);
+                for(auto i : mylist)
+                    val = (i > val) ? i : val;
+                std::cout << "The largest number is " << val << std::endl;
+            } else
+                std::cout << "Unable to determint the smallest number - list is empty" << std::endl;
             break;
         case 'Q':
         case 'q':
-            std::cout << "Goodbye" << std::endl;
+            std::cout << "Goodbye..." << std::endl;
             loop_val = false;
             break;
         default:

@@ -27,7 +27,14 @@ void test_run_udemy1(void)
 //    s6c_run();
 //    s7c_run();
 //    s8c_run();
-    s9c_run();
+//    s9c_run();
+//    s10c_run();
+
+    /**
+     * @brief Running Section exercises
+     */
+//     e10_run();
+    assignment_pyramid();
 
     /**
      * @brief running test codes

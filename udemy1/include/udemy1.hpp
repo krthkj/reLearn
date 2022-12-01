@@ -26,6 +26,13 @@ void s6c_run(void);
 void s7c_run(void);
 void s8c_run(void);
 void s9c_run(void);
+void s10c_run(void);
+
+/**
+ * @brief Running Section exercises
+ */
+void e10_run(void);
+void assignment_pyramid(void);
 
 /**
  * @brief running test codes

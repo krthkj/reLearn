@@ -3,8 +3,8 @@
  * All Rights Reserved.
  * Using MIT licence, refer the license file supplied with the project.
  *
- * File : s7c.cpp
- * Desc : Section 7 Challenge from Udemy course "Beginning C++ Programming
+ * File : s8c.cpp
+ * Desc : Section 8 Challenge from Udemy course "Beginning C++ Programming
  *        - From Beginner to Beyond"
  *
  * Author : Karthik Jain <krthkj.public@gmail.com>
