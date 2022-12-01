@@ -4,8 +4,7 @@
  * Using MIT licence, refer the license file supplied with the project.
  *
  * File : s7c.cpp
- * Desc : Section 7 Challenge from Udemy course "Beginning C++ Programming
- *        - From Beginner to Beyond"
+ * Desc : Section 7 Challenge from Udemy course "Beginning C++ Programming - From Beginner to Beyond"
  *
  * Author : Karthik Jain <krthkj.public@gmail.com>
  * Date : 2022-11-30
@@ -127,6 +126,5 @@ void s7c_run(void)
     /**
      * @brief  What did you expect? Did you get what you expected? What do your think happened?
      */
-
 }
 } // namespace udemy1

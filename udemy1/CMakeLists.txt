@@ -53,6 +53,7 @@ set ( CXX_SRCS
     ${CMAKE_CURRENT_LIST_DIR}/src/s6c.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/s9c.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/e10.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/src/e11.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/a10.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/s10c.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/testing_ground.cpp

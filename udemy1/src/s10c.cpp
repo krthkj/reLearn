@@ -4,8 +4,7 @@
  * Using MIT licence, refer the license file supplied with the project.
  *
  * File : s10c.cpp
- * Desc : Section 10 Challenge from Udemy course "Beginning C++ Programming
- *        - From Beginner to Beyond"
+ * Desc : Section 10 Challenge from Udemy course "Beginning C++ Programming - From Beginner to Beyond"
  *
  * Author : Karthik Jain <krthkj.public@gmail.com>
  * Date : 2022-12-01
@@ -85,6 +84,5 @@ void s10c_run(void)
     std::cout << "Decrypting message ..." << std::endl;
     plain_msg = chipher_encode_string(cipher_msg, key, alphabet);
     std::cout << "Decrypted message: " << plain_msg << std::endl;
-
 }
 } // namespace udemy1

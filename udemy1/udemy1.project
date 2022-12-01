@@ -7,6 +7,7 @@
       <File Name="src/a10.cpp"/>
     </VirtualDirectory>
     <VirtualDirectory Name="exercise">
+      <File Name="src/e11.cpp"/>
       <File Name="src/e10.cpp"/>
     </VirtualDirectory>
     <File Name="src/runall.cpp"/>

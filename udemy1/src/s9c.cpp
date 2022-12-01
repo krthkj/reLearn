@@ -4,8 +4,7 @@
  * Using MIT licence, refer the license file supplied with the project.
  *
  * File : s9c.cpp
- * Desc : Section 9 Challenge from Udemy course "Beginning C++ Programming
- *        - From Beginner to Beyond"
+ * Desc : Section 9 Challenge from Udemy course "Beginning C++ Programming - From Beginner to Beyond"
  *
  * Author : Karthik Jain <krthkj.public@gmail.com>
  * Date : 2022-11-30
@@ -122,7 +121,7 @@ void s9c_run(void)
                 val = 0;
                 for(auto i : mylist)
                     val += i;
-                std::cout << "The mean is " << static_cast<float> (val) / mylist.size() << std::endl;
+                std::cout << "The mean is " << static_cast<float>(val) / mylist.size() << std::endl;
             } else
                 std::cout << "Unable to calculate the mean - no data" << std::endl;
             break;

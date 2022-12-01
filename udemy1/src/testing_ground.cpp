@@ -4,8 +4,7 @@
  * Using MIT licence, refer the license file supplied with the project.
  *
  * File : testing_ground.cpp
- * Desc : Section 7 Challenge from Udemy course "Beginning C++ Programming
- *        - From Beginner to Beyond"
+ * Desc : Section 7 Challenge from Udemy course "Beginning C++ Programming - From Beginner to Beyond"
  *
  * Author : Karthik Jain <krthkj.public@gmail.com>
  * Date : 2022-11-30
@@ -60,12 +59,11 @@ void assignment_test(void)
 */
 }
 
-
-
 /**
  * @brief Testing area for code
  */
-void testing_ground(void){
+void testing_ground(void)
+{
 }
 
 } // namespace udemy1

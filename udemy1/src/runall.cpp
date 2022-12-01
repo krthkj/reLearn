@@ -23,23 +23,28 @@ void test_run_udemy1(void)
     /**
      * @brief Running Section challenges
      */
-//    s4c_run();
-//    s6c_run();
-//    s7c_run();
-//    s8c_run();
-//    s9c_run();
-//    s10c_run();
+    s4c_run();
+    s6c_run();
+    s7c_run();
+    s8c_run();
+    s9c_run();
+    s10c_run();
 
     /**
      * @brief Running Section exercises
      */
-//     e10_run();
+    e10_run();
+    e11_run();
+
+    /**
+     * @brief Running Section Assignments
+     */
     assignment_pyramid();
 
     /**
      * @brief running test codes
      */
-//     testing_ground();
+    testing_ground();
 }
 
 } // namespace udemy1

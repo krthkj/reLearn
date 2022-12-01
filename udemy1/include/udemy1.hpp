@@ -32,6 +32,11 @@ void s10c_run(void);
  * @brief Running Section exercises
  */
 void e10_run(void);
+void e11_run(void);
+
+/**
+ * @brief Running Section Assignments
+ */
 void assignment_pyramid(void);
 
 /**

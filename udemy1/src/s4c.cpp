@@ -4,8 +4,7 @@
  * Using MIT licence, refer the license file supplied with the project.
  *
  * File : s4c.cpp
- * Desc : Section 4 Challenge from Udemy course "Beginning C++ Programming
- *        - From Beginner to Beyond"
+ * Desc : Section 4 Challenge from Udemy course "Beginning C++ Programming - From Beginner to Beyond"
  *
  * Author : Karthik Jain <krthkj.public@gmail.com>
  * Date : 2022-11-30
