@@ -537,9 +537,59 @@ void run_l_r_value(void)
     square(num);
     // square(5); // error: cant reference r-value '5' to l-value 'int&'
     // error: cannot bind non-const lvalue reference of type 'int&' to an rvalue of type 'int'
+
+    std::cout << x << " " << y << " " << max_num << std::endl;
 }
 
-/******************************************************************************/
+/******************************************************************************
+ * SUMMARY
+ ******************************************************************************
+ * Pass-by-value:
+ * - C++ does by default.
+ * - function doesnt maodify actual parameters.
+ * - parameters are small and effecient to copy (like simple data types).
+ *
+ * Pass-by-reference using pointer
+ * - function modifies the actual parameters.
+ * - parameters are expensive to copy.
+ * - its OKAY to the pointer is allowed a nullptr value (i.e, pointer can be nullptr)
+ *
+ * Pass-by-reference using pointer to const
+ * - function doesnot modify actual parameters
+ * - parameters are expensive to copy.
+ * - pointer can be nullptr
+ *
+ * Pass-by-reference using const pointer to const
+ * - function doesnot modify actual parameters
+ * - parameters are expensive to copy.
+ * - pointer can be nullptr
+ * - function never modifies the pointer itself
+ *
+ * Pass-by-reference using a reference
+ * - function modifies actual parameters
+ * - parameters are expensive to copy.
+ * - pointer cannot be nullptr
+ *
+ * Pass-by-reference using a const reference
+ * - function doesnt modify actual parameters
+ * - parameters are expensive to copy.
+ * - pointer cannot be nullptr
+ *
+ *******************************************************************************/
+
+/*
+ +------------------------+---------------+-----------+---------+------------+
+ | Type                   | Modify actual | expensive | allow   | modify     |
+ |                        |   parameters  |  copy     | nullptr | ptr itself |
+ +------------------------+---------------+-----------+---------+------------+
+ | value                  |     no        |    no     |   N/A   |     N/A    |
+ | pointer                |     yes       |    yes    |   yes   |     ?      |
+ | pointer to const       |     no        |    yes    |   yes   |     ?      |
+ | const pointer to const |     no        |    yes    |   yes   |     no     |
+ | reference              |     yes       |    yes    |   no    |     ?      |
+ | const reference        |     no        |    yes    |   no    |     ?      |
+ +------------------------+---------------+-----------+---------+------------+
+ */
 
 /**
  * @brief Exercise to run pointers and references
