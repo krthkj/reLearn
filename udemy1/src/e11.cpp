@@ -14,6 +14,7 @@
 #include "udemy1.hpp"
 #include <cstdlib>
 #include <ctime>
+#include <iomanip>
 #include <iostream>
 #include <vector>
 
@@ -417,6 +418,80 @@ void run_func_stack(void)
 }
 
 /******************************************************************************/
+/**
+ * @brief Example of Inline function
+ * - Modern compilers automatically optimize functions using 'inline' without users suggestion.
+ * - declared in header or .h files
+ */
+inline int add_num(int a, int b)
+{
+    return a + b;
+}
+
+/******************************************************************************/
+/**
+ * @brief Example of recursive function
+ *
+ */
+
+unsigned long long my_factorial(unsigned long long n)
+{
+    if(n == 0)
+        return 1;
+    return n * my_factorial(n - 1);
+}
+
+unsigned long long my_fibonacci(unsigned long long n)
+{
+    if(n <= 1)
+        return n;
+    return my_fibonacci(n - 1) + my_fibonacci(n - 2);
+}
+
+void run_recursive(void)
+{
+    std::cout << "factorial(3): " << my_factorial(3) << std::endl;
+    std::cout << "factorial(8): " << my_factorial(8) << std::endl;
+    std::cout << "factorial(12): " << my_factorial(12) << std::endl;
+    std::cout << "factorial(20): " << my_factorial(20) << std::endl;
+    std::cout << "factorial(40): " << my_factorial(40) << std::endl;
+
+    std::cout << "fibonacci(5): " << my_fibonacci(5) << std::endl;
+    std::cout << "fibonacci(30): " << my_fibonacci(30) << std::endl;
+    std::cout << "fibonacci(40): " << my_fibonacci(40) << std::endl;
+    //    std::cout << "fibonacci(80): " << my_fibonacci(80) << std::endl;
+}
+
+/******************************************************************************/
+/**
+ * @brief Implementing a Recursive Function - Save a Penny
+ */
+int function_activation_count{0};
+
+double a_penny_doubled_everyday(int, double amount = 0.01);
+
+void run_amount_accumulated(void)
+{
+    double total_amount = a_penny_doubled_everyday(25);
+    // header <iomanip> is required for std::setprecision()
+    std::cout << "If I start with a penny and doubled it every day for 25 days, I will have $" << std::setprecision(10)
+              << total_amount << std::endl;
+}
+
+double a_penny_doubled_everyday(int n, double amount)
+{
+    function_activation_count++;
+    if(n <= 1)
+        return amount;
+    return a_penny_doubled_everyday(--n, amount * 2);
+}
+
+int test_function_activation_count()
+{
+    return function_activation_count;
+}
+
+/******************************************************************************/
 
 /**
  * @brief aggregate of all the functions in the section
@@ -429,7 +504,9 @@ void e11_run(void)
     //    run_array_to_func();
     //    run_pass_by_ref();
     //    run_scope_variables();
-    run_func_stack();
+    //    run_func_stack();
+    //    run_recursive();
+    run_amount_accumulated();
 }
 
 } // namespace udemy1

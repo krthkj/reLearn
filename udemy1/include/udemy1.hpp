@@ -27,12 +27,15 @@ void s7c_run(void);
 void s8c_run(void);
 void s9c_run(void);
 void s10c_run(void);
+void s11c_run(void);
+void s12c_run(void);
 
 /**
  * @brief Running Section exercises
  */
 void e10_run(void);
 void e11_run(void);
+void e12_run(void);
 
 /**
  * @brief Running Section Assignments
@@ -43,6 +46,7 @@ void assignment_pyramid(void);
  * @brief running test codes
  */
 void testing_ground(void);
+void s12_test_debugger(void);
 
 } // namespace udemy1
 

@@ -7,14 +7,18 @@
       <File Name="src/a10.cpp"/>
     </VirtualDirectory>
     <VirtualDirectory Name="exercise">
+      <File Name="src/e12.cpp"/>
       <File Name="src/e11.cpp"/>
       <File Name="src/e10.cpp"/>
     </VirtualDirectory>
     <File Name="src/runall.cpp"/>
     <VirtualDirectory Name="practice">
+      <File Name="src/s12_test_debugger.cpp"/>
       <File Name="src/testing_ground.cpp"/>
     </VirtualDirectory>
     <VirtualDirectory Name="challenge">
+      <File Name="src/s12c.cpp"/>
+      <File Name="src/s11c.cpp"/>
       <File Name="src/s10c.cpp"/>
       <File Name="src/s9c.cpp"/>
       <File Name="src/s8c.cpp"/>
@@ -38,7 +42,6 @@
     </GlobalSettings>
     <Configuration Name="Debug" CompilerType="CLANG-14" DebuggerType="LLDB Debugger" Type="Dynamic Library" BuildCmpWithGlobalSettings="append" BuildLnkWithGlobalSettings="append" BuildResWithGlobalSettings="append">
       <Compiler Options="-pedantic-errors;-g;-O0;-pedantic;-W;-fopenmp;-std=c++17;-Wall" C_Options="-pedantic-errors;-g;-O0;-pedantic;-W;-fopenmp;-std=c++17;-Wall" Assembler="" Required="yes" PreCompiledHeader="" PCHInCommandLine="no" PCHFlags="" PCHFlagsPolicy="1">
-        <IncludePath Value="."/>
         <IncludePath Value="./include"/>
       </Compiler>
       <Linker Options="-O0" Required="yes"/>

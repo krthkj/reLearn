@@ -37,7 +37,6 @@ set(WORKSPACE_PATH "${CMAKE_CURRENT_LIST_DIR}/..")
 
 include_directories(
     .
-    .
     ../relearn/include/
     ../relearn_dl/include/
     ../relearn_sl/include/

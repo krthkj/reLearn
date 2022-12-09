@@ -29,12 +29,15 @@ void test_run_udemy1(void)
     s8c_run();
     s9c_run();
     s10c_run();
+    s11c_run();
+    s12c_run();
 
     /**
      * @brief Running Section exercises
      */
     e10_run();
     e11_run();
+    e12_run();
 
     /**
      * @brief Running Section Assignments
@@ -45,6 +48,7 @@ void test_run_udemy1(void)
      * @brief running test codes
      */
     testing_ground();
+    s12_test_debugger();
 }
 
 } // namespace udemy1

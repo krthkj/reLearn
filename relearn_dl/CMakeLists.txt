@@ -16,7 +16,6 @@ set(WORKSPACE_PATH "${CMAKE_CURRENT_LIST_DIR}/..")
 
 include_directories(
     .
-    .
     ./include
 
 )
