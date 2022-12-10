@@ -542,53 +542,116 @@ void run_l_r_value(void)
 }
 
 /******************************************************************************
- * SUMMARY
+ * SUMMARY of Pointer, Reference and related
+ ******************************************************************************
+ * pointer to constant : const int* var_1 = {&var_2};
+ * - can change the var_1                 ; { *var_1 = 100 ; // ERROR }
+ * - cannot change value pointed by var_1 ; { var_1 = var_3; // PASS }
+ *
+ * constant pointer : int* const var_1 = {&var_2};
+ * - cannot change the var_1           ; { *var_1 = 100 ; // PASS }
+ * - can change value pointed by var_1 ; { var_1 = var_3; // ERROR }
+ *
+ * constnat pointer to constant : const int* const var_1 = {&var_2};
+ * - cannot change the var_1              ; { *var_1 = 100 ; // ERROR }
+ * - cannot change value pointed by var_1 ; { var_1 = var_3; // ERROR }
+ ******************************************************************************
+ * Note: references can be considered as constant pointer (ref == const ptr )
+ * references:
+ * - alias for variable                  ; { int &ref_1 = var_1; }
+ * - cannot be null                      ; {
+ *                                           int* ptr_1{nullptr};
+ *                                           int &ref_1 = ptr_1;  // Runtime Error;
+ *                                         }
+ * - must be initialized when declared   ; {
+ *                                           int var_1;
+ *                                           int &ref_1 = &var_1;  // PASS
+ *                                           }
+ *                                       ; {
+ *                                           int var_1; int* ptr_1{nullptr};
+ *                                           ptr_1=&var_1;
+ *                                           int &ref_1 = ptr_1;  //PASS: ref_1 == var_1
+ *                                         }
+ * - cannot be modified after initialized; {
+ *                                           int &ref_1 = var_1;
+ *                                           ref_1 = var_2; // ERROR
+ *                                         }
+ * - reference values can be modified    ; {
+ *                                           int &ref_1 = var_1;
+ *                                           var_1 = 125;
+ *                                           ref_1 = 100; // PASS
+ *                                         }
+ *
+ * constant references:
+ * - same as references
+ * - cannot modify values ; {
+ *                        ;   const int &ref_1 = var_1;
+ *                        ;   var_1 = 125;
+ *                        ;   ref_1 = 100; // ERROR
+ *                        ; }
  ******************************************************************************
  * Pass-by-value:
+ * Ex: void test_pass_value(int);
  * - C++ does by default.
- * - function doesnt maodify actual parameters.
+ * - function never modify actual parameters.
  * - parameters are small and effecient to copy (like simple data types).
  *
- * Pass-by-reference using pointer
+ * Pass-by-reference using pointer:
+ * Ex: void test_pass_ptr(int*);
+ * - pointer can be nullptr
+ * - parameters are expensive to copy.
  * - function modifies the actual parameters.
- * - parameters are expensive to copy.
- * - its OKAY to the pointer is allowed a nullptr value (i.e, pointer can be nullptr)
+ * - function modifies the pointer itself
  *
- * Pass-by-reference using pointer to const
- * - function doesnot modify actual parameters
- * - parameters are expensive to copy.
+ * Pass-by-reference using pointer to const:
+ * Ex: void test_pass_ptr_const(const int*);
  * - pointer can be nullptr
+ * - parameters are expensive to copy.
+ * - function never modify actual parameters
+ * - function modifies the pointer itself
  *
- * Pass-by-reference using const pointer to const
- * - function doesnot modify actual parameters
- * - parameters are expensive to copy.
+ ? Pass-by-reference using constant pointer: (is there any use of this type?)
+ ? Ex: void test_pass_const_ptr(int* const);
+ ? - pointer can be nullptr
+ ? - parameters are expensive to copy.
+ ? - function modifies actual parameters
+ ? - function never modifies the pointer itself
+ *
+ * Pass-by-reference using const pointer to const:
+ * Ex: void test_pass_const_ptr_const(const int* const);
  * - pointer can be nullptr
+ * - parameters are expensive to copy.
+ * - function never modify actual parameters
  * - function never modifies the pointer itself
  *
- * Pass-by-reference using a reference
+ * Pass-by-reference using a reference:
+ * Ex: void test_pass_ref(int&);
+ * - reference cannot be nullptr
+ * - parameters are expensive to copy.
  * - function modifies actual parameters
- * - parameters are expensive to copy.
- * - pointer cannot be nullptr
  *
- * Pass-by-reference using a const reference
- * - function doesnt modify actual parameters
+ * Pass-by-reference using a const reference:
+ * Ex: void test_pass_const_ref(const int&);
+ * - reference cannot be nullptr
  * - parameters are expensive to copy.
- * - pointer cannot be nullptr
+ * - function never modify actual parameters
  *
- *******************************************************************************/
-
-/*
- +------------------------+---------------+-----------+---------+------------+
- | Type                   | Modify actual | expensive | allow   | modify     |
- |                        |   parameters  |  copy     | nullptr | ptr itself |
- +------------------------+---------------+-----------+---------+------------+
- | value                  |     no        |    no     |   N/A   |     N/A    |
- | pointer                |     yes       |    yes    |   yes   |     ?      |
- | pointer to const       |     no        |    yes    |   yes   |     ?      |
- | const pointer to const |     no        |    yes    |   yes   |     no     |
- | reference              |     yes       |    yes    |   no    |     ?      |
- | const reference        |     no        |    yes    |   no    |     ?      |
- +------------------------+---------------+-----------+---------+------------+
+ *******************************************************************************
+ +========================+========+============+============+=======+
+ | Function call          | Copy   | Mod actual | Mod ptr or |  null |
+ | Pass by Type           | Params |   params   | ref itself |  Ptr  |
+ +========================+========+============+============+=======+
+ | value                  |  Yes   |     No     |   undef    | undef |
+ +------------------------+--------+------------+------------+-------+
+ | Pointer                |   No   |     Yes    |     Yes    |  Yes  |
+ | pointer to const       |   No   |     No     |     Yes    |  Yes  |
+ | const pointer  ??????  |   No   |     Yes    |     No     |  Yes  | <<< Any use of this type??
+ | const pointer to const |   No   |     No     |     No     |  Yes  |
+ +------------------------+--------+------------+------------+-------+
+ | reference              |   No   |     Yes    |   undef    | undef |
+ | const reference        |   No   |     No     |   undef    | undef |
+ +========================+========+============+============+=======+
+ *******************************************************************************
  */
 
 /**
@@ -604,7 +667,7 @@ void e12_run(void)
     // run_pointer_function();
     // run_ptr_ret_func();
     // run_reference();
-    run_l_r_value();
+    // run_l_r_value();
 }
 
 } // namespace udemy1

@@ -13,6 +13,7 @@
 
 #include "udemy1.hpp"
 #include <iostream>
+#include <vector>
 
 namespace udemy1
 {
@@ -34,36 +35,207 @@ void assignment_test(void)
     std::cout << val2 << std::endl;
     std::cout << c2 << std::endl;
 
-/*
+    /*
     // uncomment to see the compiler warning/error
     int x3{val}; // error: possible truncation (good)
     std::cout << val << std::endl;
     std::cout << x3 << std::endl;
-*/
+    */
 
-/*
+    /*
     // uncomment to see the compiler warning/error
     char c3{val2}; // error: possible narrowing (good)
     std::cout << val2 << std::endl;
     std::cout << c3 << std::endl;
-*/
+    */
 
     char c4{24}; // OK: 24 can be represented exactly as a char (good)
     std::cout << c4 << std::endl;
 
-/*
+    /*
     // uncomment to see the compiler warning/error
     char c5{264}; // error (assuming 8-bit chars): 264 cannot be
                   // represented as a char (good)
     std::cout << c6 << std::endl;
-*/
+    */
 }
+
+/*************************************************************************************/
+
+void test_pass_value(int a)
+{
+    std::cout << "-------------------------" << std::endl << "pass by value" << std::endl;
+    std::cout << "[param_addr] &a: " << &a << std::endl;
+    a += 2;
+    std::cout << "[param_val]   a: " << a << std::endl;
+}
+
+void test_pass_ptr(int* a)
+{
+    if(a == nullptr) {
+        std::cout << "nullptr param success" << std::endl;
+        return;
+    }
+    std::cout << "-------------------------" << std::endl << "pass by pointer" << std::endl;
+    std::cout << "[param_addr] a        : " << a << std::endl;
+    *a += 5;
+    std::cout << "[param_val] *a        : " << *a << std::endl;
+
+    a = new int{1000};
+    std::cout << "[param_addr_mod] new a: " << a << std::endl;
+    std::cout << "[param_val_mod] new *a: " << *a << std::endl;
+}
+
+void test_pass_ptr_const(const int* a)
+{
+    if(a == nullptr) {
+        std::cout << "nullptr param success" << std::endl;
+        return;
+    }
+    std::cout << "-------------------------" << std::endl << "pass by pointer to const" << std::endl;
+    std::cout << "[param_addr] a        : " << a << std::endl;
+    // *a += 10; // readonly
+    std::cout << "[param_val] *a        : " << *a << std::endl;
+
+    a = new int{1000};
+    std::cout << "[param_addr_mod] new a: " << a << std::endl;
+    std::cout << "[param_val_mod] new *a: " << *a << std::endl;
+}
+
+void test_pass_const_ptr(int* const a)
+{
+    if(a == nullptr) {
+        std::cout << "nullptr param success" << std::endl;
+        return;
+    }
+    std::cout << "-------------------------" << std::endl << "pass by const pointer" << std::endl;
+    std::cout << "[param_addr] a        : " << a << std::endl;
+    *a += 10;
+    std::cout << "[param_val] *a        : " << *a << std::endl;
+
+    // a = new int{1000}; //readonly
+    std::cout << "[param_addr_mod] new a: " << a << std::endl;
+    std::cout << "[param_val_mod] new *a: " << *a << std::endl;
+}
+
+void test_pass_const_ptr_const(const int* const a)
+{
+    if(a == nullptr) {
+        std::cout << "nullptr param success" << std::endl;
+        return;
+    }
+    std::cout << "-------------------------" << std::endl << "pass by const pointer to const" << std::endl;
+    std::cout << "[param_addr] a        : " << a << std::endl;
+    // *a += 10; // readonly
+    std::cout << "[param_val] *a        : " << *a << std::endl;
+
+    // a = new int{1000}; // readonly
+    std::cout << "[param_addr_mod] new a: " << a << std::endl;
+    std::cout << "[param_val_mod] new *a: " << *a << std::endl;
+}
+
+void test_pass_ref(int& a)
+{
+    std::cout << "-------------------------" << std::endl << "pass by reference" << std::endl;
+    std::cout << "[param_addr] &a        : " << &a << std::endl;
+    a += 10;
+    std::cout << "[param_val] a          : " << a << std::endl;
+}
+
+void test_pass_const_ref(const int& a)
+{
+    std::cout << "-------------------------" << std::endl << "pass by const reference" << std::endl;
+    std::cout << "[param_addr] &a        : " << &a << std::endl;
+    // a += 10; // readonly
+    std::cout << "[param_val] a          : " << a << std::endl;
+}
+
+void run_pass_by_expt(void)
+{
+
+    int test_val{100};
+    std::cout << "&test_val: " << &test_val << std::endl;
+    std::cout << "test_val : " << test_val << std::endl;
+    std::cout << std::endl;
+
+    int* test_ptr{nullptr};
+    test_ptr = &test_val;
+    std::cout << "test_ptr : " << test_ptr << std::endl;
+    std::cout << "*test_ptr: " << *test_ptr << std::endl;
+    std::cout << std::endl;
+
+    test_ptr = &test_val;
+    test_pass_value(test_val);
+    std::cout << "&test_val: " << &test_val << std::endl;
+    std::cout << "test_val : " << test_val << std::endl;
+    std::cout << std::endl;
+
+    test_ptr = &test_val;
+    test_pass_ptr(test_ptr);
+    std::cout << "test_ptr : " << test_ptr << std::endl;
+    std::cout << "*test_ptr: " << *test_ptr << std::endl;
+    test_pass_ptr(nullptr);
+    std::cout << std::endl;
+
+    test_ptr = &test_val;
+    test_pass_ptr_const(test_ptr);
+    std::cout << "test_ptr : " << test_ptr << std::endl;
+    std::cout << "*test_ptr: " << *test_ptr << std::endl;
+    test_pass_ptr_const(nullptr);
+    std::cout << std::endl;
+
+    test_ptr = &test_val;
+    test_pass_const_ptr(test_ptr);
+    std::cout << "test_ptr : " << test_ptr << std::endl;
+    std::cout << "*test_ptr: " << *test_ptr << std::endl;
+    test_pass_const_ptr(nullptr);
+    std::cout << std::endl;
+
+    test_ptr = &test_val;
+    test_pass_const_ptr_const(test_ptr);
+    std::cout << "test_ptr : " << test_ptr << std::endl;
+    std::cout << "*test_ptr: " << *test_ptr << std::endl;
+    test_pass_const_ptr_const(nullptr);
+    std::cout << std::endl;
+
+    int& test_ref = test_val;
+    std::cout << "&test_val: " << &test_val << std::endl;
+    std::cout << "&test_ref: " << &test_ref << std::endl;
+    std::cout << "test_ref : " << test_ref << std::endl;
+
+    test_pass_ref(test_ref);
+    std::cout << "&test_ref: " << &test_ref << std::endl;
+    std::cout << "test_ref : " << test_ref << std::endl;
+    std::cout << std::endl;
+
+    test_pass_const_ref(test_ref);
+    std::cout << "&test_ref: " << &test_ref << std::endl;
+    std::cout << "test_ref : " << test_ref << std::endl;
+    std::cout << std::endl;
+
+    //  test_ptr =nullptr;
+    int& tr1 = *test_ptr;
+    std::cout << "&test_ptr: " << &test_ptr << std::endl;
+    tr1 = test_val * test_val; // readonly
+    std::cout << "&tr1     : " << &tr1 << std::endl;
+    std::cout << "tr1      : " << tr1 << std::endl;
+
+    const int& tr2 = test_val;
+    std::cout << "&test_ptr: " << &test_val << std::endl;
+    // tr2 = test_val*test_val; // readonly
+    std::cout << "&tr2     : " << &tr2 << std::endl;
+    std::cout << "tr2      : " << tr2 << std::endl;
+}
+
+/*************************************************************************************/
 
 /**
  * @brief Testing area for code
  */
 void testing_ground(void)
 {
+    // assignment_test();
+    // run_pass_by_expt();
 }
 
 } // namespace udemy1
