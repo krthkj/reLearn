@@ -21,9 +21,8 @@
       </Linker>
       <ResourceCompiler Options=""/>
     </GlobalSettings>
-    <Configuration Name="Debug" CompilerType="CLANG-14" DebuggerType="LLDB Debugger" Type="Executable" BuildCmpWithGlobalSettings="append" BuildLnkWithGlobalSettings="append" BuildResWithGlobalSettings="append">
+    <Configuration Name="Debug" CompilerType="CLANG" DebuggerType="LLDB Debugger" Type="Executable" BuildCmpWithGlobalSettings="append" BuildLnkWithGlobalSettings="append" BuildResWithGlobalSettings="append">
       <Compiler Options="-Wmain;-pedantic-errors;-g;-O0;-pedantic;-W;-fopenmp;-std=c++17;-Wall" C_Options="-Wmain;-pedantic-errors;-g;-O0;-pedantic;-W;-fopenmp;-std=c++17;-Wall" Assembler="" Required="yes" PreCompiledHeader="" PCHInCommandLine="no" PCHFlags="" PCHFlagsPolicy="1">
-        <IncludePath Value="."/>
         <IncludePath Value="../relearn/include/"/>
         <IncludePath Value="../relearn_dl/include/"/>
         <IncludePath Value="../relearn_sl/include/"/>
