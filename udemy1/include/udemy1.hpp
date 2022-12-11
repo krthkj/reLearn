@@ -29,6 +29,7 @@ void s9c_run(void);
 void s10c_run(void);
 void s11c_run(void);
 void s12c_run(void);
+void s13c_run(void);
 
 /**
  * @brief Running Section exercises
@@ -36,6 +37,7 @@ void s12c_run(void);
 void e10_run(void);
 void e11_run(void);
 void e12_run(void);
+void e13_run(void);
 
 /**
  * @brief Running Section Assignments

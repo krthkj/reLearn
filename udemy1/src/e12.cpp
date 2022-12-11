@@ -637,20 +637,21 @@ void run_l_r_value(void)
  * - function never modify actual parameters
  *
  *******************************************************************************
- +========================+========+============+============+=======+
- | Function call          | Copy   | Mod actual | Mod ptr or |  null |
- | Pass by Type           | Params |   params   | ref itself |  Ptr  |
- +========================+========+============+============+=======+
- | value                  |  Yes   |     No     |   undef    | undef |
- +------------------------+--------+------------+------------+-------+
- | Pointer                |   No   |     Yes    |     Yes    |  Yes  |
- | pointer to const       |   No   |     No     |     Yes    |  Yes  |
- | const pointer  ??????  |   No   |     Yes    |     No     |  Yes  | <<< Any use of this type??
- | const pointer to const |   No   |     No     |     No     |  Yes  |
- +------------------------+--------+------------+------------+-------+
- | reference              |   No   |     Yes    |   undef    | undef |
- | const reference        |   No   |     No     |   undef    | undef |
- +========================+========+============+============+=======+
+ +========================+=========+============+============+=======+
+ | Function call          | Copy    | Mod actual | Mod ptr or |  null |
+ | Pass by Type           |  Params |   params   | ref itself |  Ptr  |
+ +========================+=========+============+============+=======+
+ | value                  |   Yes   |     No     |   undef    | undef |
+ |                        |Expensive|            |            |       |
+ +------------------------+---------+------------+------------+-------+
+ | Pointer                |   Yes   |     Yes    |     Yes    |  Yes  |
+ | pointer to const       |   Yes   |     No     |     Yes    |  Yes  |
+ | const pointer  ??????  |   Yes   |     Yes    |     No     |  Yes  | <<< Any use of this type??
+ | const pointer to const |   Yes   |     No     |     No     |  Yes  |
+ +------------------------+---------+------------+------------+-------+
+ | reference              |    No   |     Yes    |   undef    | undef |
+ | const reference        |    No   |     No     |   undef    | undef |
+ +========================+=========+============+============+=======+
  *******************************************************************************
  */
 

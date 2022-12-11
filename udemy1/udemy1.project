@@ -7,6 +7,9 @@
       <File Name="src/a10.cpp"/>
     </VirtualDirectory>
     <VirtualDirectory Name="exercise">
+      <File Name="src/account.cpp"/>
+      <File Name="src/account.hpp"/>
+      <File Name="src/e13.cpp"/>
       <File Name="src/e12.cpp"/>
       <File Name="src/e11.cpp"/>
       <File Name="src/e10.cpp"/>
@@ -17,6 +20,7 @@
       <File Name="src/testing_ground.cpp"/>
     </VirtualDirectory>
     <VirtualDirectory Name="challenge">
+      <File Name="src/s13c.cpp"/>
       <File Name="src/s12c.cpp"/>
       <File Name="src/s11c.cpp"/>
       <File Name="src/s10c.cpp"/>

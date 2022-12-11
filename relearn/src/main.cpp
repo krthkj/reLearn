@@ -18,9 +18,9 @@
  */
 int main()
 {
-    std::cout << "[relearn] <func> relearn::main" << std::endl;
-    relearn_dl::printlib();
-    relearn_sl::printlib();
+//    std::cout << "[relearn] <func> relearn::main" << std::endl;
+//    relearn_dl::printlib();
+//    relearn_sl::printlib();
     udemy1::test_run_udemy1();
     return 0;
 }

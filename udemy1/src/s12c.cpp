@@ -3,8 +3,8 @@
  * All Rights Reserved.
  * Using MIT licence, refer the license file supplied with the project.
  *
- * File : s11c.cpp
- * Desc : Section 11: Pointers and references
+ * File : s12c.cpp
+ * Desc : Section 12: Pointers and references
  *        Challenge from Udemy course "Beginning C++ Programming - From Beginner to Beyond"
  *
  * Author : Karthik Jain <krthkj.public@gmail.com>
