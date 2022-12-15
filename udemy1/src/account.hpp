@@ -23,5 +23,5 @@ class Account
     bool withdraw(double);
 };
 
-} // namespace udemy1::ex4
+} // namespace udemy1::myclass
 #endif // ACCOUNT_HPP

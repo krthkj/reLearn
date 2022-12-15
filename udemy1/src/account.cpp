@@ -38,4 +38,4 @@ bool Account::withdraw(double amt)
     return false;
 }
 
-} // namespace udemy1::ex4
+} // namespace udemy1::myclass
