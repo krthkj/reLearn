@@ -17,9 +17,6 @@
 #include <iostream>
 #include <vector>
 
-namespace udemy1
-{
-
 /*
  ***********************************************************************************************
  * Object-Oriented Programming
@@ -265,15 +262,68 @@ namespace udemy1
  ***********************************************************************************************
  * this pointer
  * - points to current obejct
- * 
+ * - can only be used in class scope
+ * - All member access is done via 'this' pointer
+ *
+ ***********************************************************************************************
+ * const with Classes
+ * - pass argements to class member methods as const
+ * - create const objects
+ * - call member funcinos on const objeccts
+ * - const-correctness
+ ***********************************************************************************************
+ * Static class members
+ * - Class data members can be declared as static
+ *   - A single data member that belongs to the class, not the objects
+ *   - Useful to store class-wide information
+ * - class functinos can be declared as static
+ *   - independent of any objects
+ *   - can be called usign class name
+ ***********************************************************************************************
+ * +====================================+====================================+
+ * |           struct                   |             class                  |
+ * +====================================+====================================+
+ * | - used for passive object with     | - used for active object with      |
+ * |   public access                    |   private access                   |
+ * |                                    | - implement getters and setters    |
+ * +------------------------------------+------------------------------------+
+ * | - There are no member methods      | - implement member methods         |
+ * +====================================+====================================+
+ *
+ ***********************************************************************************************
+ * Friends if a class
+ * - a function or a class that has access to private class member
+ * - And, function of or calss in NOT a member of the class its accessing
+ *
+ * Function:
+ * - can be regular non-member functions
+ * - can be member member of another class
+ *
+ * Class:
+ * - Another class can have access to private class members
+ *
+ * Note:
+ * - Friendship must be granted NOT take,
+ *   - Declares explicitly in the class that is granting friendship
+ *   - Declares in the fiction protorype with the keywork 'friend'
+ * - Friendship is not symmetric.
+ *   - Must be explicitly granted:
+ *                                  if A is friend of B
+ *                                  B is NOT a friend of A
+ * - Freindship os not transitive.
+ *   - Must be explicitly granted:
+ *                                  if A is friend of B
+ *                                  B is a friend of C
+ *                                  then A is NOT a friend of C
+ *
+ * Note: friend functions have access to private member, with read and wite permissions
  ***********************************************************************************************
  */
 
-//-----------------------------------------------------------------------------------------
+/***********************************************************************************************/
 
-namespace ex1
+namespace udemy1::ex1
 {
-
 class Player
 {
   public:
@@ -314,11 +364,48 @@ class Account
     }
 };
 
-} // namespace ex1
+/***********************************************************/
 
-//-----------------------------------------------------------------------------------------
+void run_class_example(void)
+{
+    // objects
+    Player frank;
+    Player hero;
 
-namespace ex2
+    frank.name = "Frank";
+    frank.health = 80;
+    frank.xp = 15;
+    frank.talk("Hi there..!");
+
+    Player player[]{frank, hero};
+    std::vector<ex1::Player> player_vec{frank};
+    player_vec.push_back(hero);
+
+    Player* enemy{nullptr};
+    enemy = new ex1::Player();
+
+    (*enemy).name = "Enemy";
+    (*enemy).health = 200;
+    enemy->xp = 20;
+
+    enemy->talk("I will destroy you!!");
+    delete enemy;
+
+    //----------------------------------------
+    Account frank_account;
+
+    frank_account.name = "Frank's account";
+    frank_account.balance = 5000;
+
+    frank_account.deposit(1000);
+    frank_account.withdraw(1000);
+}
+
+} // namespace udemy1::ex1
+
+/***********************************************************************************************/
+
+namespace udemy1::ex2
 {
 
 class Player
@@ -379,11 +466,34 @@ double Account::GetBalance()
     return balance;
 }
 
-} // namespace ex2
+/***********************************************************/
 
-//-----------------------------------------------------------------------------------------
+void run_class_access(void)
+{
+    // objects
+    Player frank;
+    Player hero;
 
-namespace ex3
+    // frank.name = "Frank"; // Error access is private
+    // frank.health = 80;    // Error access is private
+    // frank.xp = 15;        // Error access is private
+    frank.talk("Hi there..!");
+
+    //----------------------------------------
+    Account frank_account;
+
+    frank_account.name = "Frank's account"; // PASS access is public
+    // frank_account.balance = 5000;           // Error access is private
+
+    frank_account.deposit(1000);
+    frank_account.withdraw(1000);
+}
+
+} // namespace udemy1::ex2
+
+/***********************************************************************************************/
+
+namespace udemy1::ex3
 {
 
 class Account
@@ -393,27 +503,32 @@ class Account
     double balance{0.0};
 
   public:
-    void set_balance(double bal)
-    {
-        balance = bal;
-    }
-    double get_balance()
-    {
-        return balance;
-    }
-
-    void set_name(std::string n)
-    {
-        name = n;
-    }
-    std::string get_name()
-    {
-        return name;
-    }
+    void set_balance(double bal);
+    void set_name(std::string n);
+    double get_balance();
+    std::string get_name();
 
     bool deposit(double);
     bool withdraw(double);
 };
+
+void Account::set_balance(double bal)
+{
+    balance = bal;
+}
+double Account::get_balance()
+{
+    return balance;
+}
+
+void Account::set_name(std::string n)
+{
+    name = n;
+}
+std::string Account::get_name()
+{
+    return name;
+}
 
 bool Account::deposit(double amt)
 {
@@ -430,73 +545,11 @@ bool Account::withdraw(double amt)
     return false;
 }
 
-} // namespace ex3
-
-//-----------------------------------------------------------------------------------------
-
-void run_class_example(void)
-{
-    // objects
-    ex1::Player frank;
-    ex1::Player hero;
-
-    frank.name = "Frank";
-    frank.health = 80;
-    frank.xp = 15;
-    frank.talk("Hi there..!");
-
-    ex1::Player player[]{frank, hero};
-    std::vector<ex1::Player> player_vec{frank};
-    player_vec.push_back(hero);
-
-    ex1::Player* enemy{nullptr};
-    enemy = new ex1::Player();
-
-    (*enemy).name = "Enemy";
-    (*enemy).health = 200;
-    enemy->xp = 20;
-
-    enemy->talk("I will destroy you!!");
-    delete enemy;
-
-    //----------------------------------------
-    ex1::Account frank_account;
-
-    frank_account.name = "Frank's account";
-    frank_account.balance = 5000;
-
-    frank_account.deposit(1000);
-    frank_account.withdraw(1000);
-}
-
-//-----------------------------------------------------------------------------------------
-
-void run_class_access(void)
-{
-    // objects
-    ex2::Player frank;
-    ex2::Player hero;
-
-    // frank.name = "Frank"; // Error access is private
-    // frank.health = 80;    // Error access is private
-    // frank.xp = 15;        // Error access is private
-    frank.talk("Hi there..!");
-
-    //----------------------------------------
-    ex2::Account frank_account;
-
-    frank_account.name = "Frank's account"; // PASS access is public
-    // frank_account.balance = 5000;           // Error access is private
-
-    frank_account.deposit(1000);
-    frank_account.withdraw(1000);
-}
-
-//-----------------------------------------------------------------------------------------
+/***********************************************************/
 
 void run_test_class(void)
 {
-    ex3::Account frank_account;
+    Account frank_account;
     frank_account.set_name("Frank's account");
     frank_account.set_balance(1000.0);
 
@@ -516,9 +569,15 @@ void run_test_class(void)
         std::cout << "Insufficient funds" << std::endl;
 }
 
+} // namespace udemy1::ex3
+
+/***********************************************************************************************/
+
+namespace udemy1::ex4
+{
 void run_test_classfile(void)
 {
-    myclass::Account frank_account;
+    udemy1::myclass::Account frank_account;
     frank_account.set_name("Frank's account");
     frank_account.set_balance(1000.0);
 
@@ -537,10 +596,13 @@ void run_test_classfile(void)
     else
         std::cout << "Insufficient funds" << std::endl;
 }
-//-----------------------------------------------------------------------------------------
+} // namespace udemy1::ex4
 
-namespace ex4
+/***********************************************************************************************/
+
+namespace udemy1::ex5
 {
+
 class Player
 {
   private:
@@ -554,25 +616,13 @@ class Player
     Player(std::string name, int health, int xp); // overloaded constructor
     ~Player();                                    // destructor
 
-    void set_name(std::string val)
-    {
-        name = val;
-    }
+    void set_name(std::string val);
     void set_health(int val);
     void set_xp(int val);
 
-    std::string get_name(void)
-    {
-        return name;
-    }
-    int get_health(void)
-    {
-        return health;
-    }
-    int get_xp(void)
-    {
-        return xp;
-    }
+    std::string get_name(void);
+    int get_health(void);
+    int get_xp(void);
 };
 
 Player::Player()
@@ -602,6 +652,7 @@ Player::~Player()
     std::cout << "Destructor called for : " << get_name() << std::endl;
 }
 
+// setters
 void Player::set_health(int val)
 {
     if(val < 0)
@@ -616,35 +667,59 @@ void Player::set_xp(int val)
     else
         xp = val;
 }
+void Player::set_name(std::string val)
+{
+    name = val;
+}
 
-} // namespace ex4
+// getters
+std::string Player::get_name(void)
+{
+    return name;
+}
+
+int Player::get_health(void)
+{
+    return health;
+}
+
+int Player::get_xp(void)
+{
+    return xp;
+}
+
+/***********************************************************/
 
 void run_construct_destruct(void)
 {
     {
-        ex4::Player slayer;
+        Player slayer;
         slayer.set_name("slayer");
     }
 
     {
-        ex4::Player frank;
+        Player frank;
         frank.set_name("Frank");
-        ex4::Player hero{"Hero"};
-        ex4::Player villain{"Villain", 100, 12};
+        Player hero{"Hero"};
+        Player villain{"Villain", 100, 12};
     }
-    ex4::Player* enemy = new ex4::Player("Enemy");
-    ex4::Player* level_boss = new ex4::Player("Level Boss", 1000, 0);
+    Player* enemy = new Player("Enemy");
+    Player* level_boss = new Player("Level Boss", 1000, 0);
 
     delete enemy;
     delete level_boss;
 }
 
-//-----------------------------------------------------------------------------------------
+} // namespace udemy1::ex5
 
-namespace ex5
+/***********************************************************************************************/
+
+namespace udemy1::ex6
 {
-// example class for constructor initialization list
-class Player
+/*****************************************************
+ * example class for constructor initialization list
+ *****************************************************/
+class Player1
 {
   private:
     std::string name;
@@ -653,39 +728,37 @@ class Player
 
   public:
     // Constructor initialization list
-    Player() // no args constructor
+    Player1() // no args constructor
         : name{"None"}
         , health{0}
         , xp{0}
     {
         std::cout << "No args conctructor called: " << name << std::endl;
     }
-    Player(std::string n) // string args constructor
+    Player1(std::string n) // string args constructor
         : name{n}
         , health{0}
         , xp{0}
     {
         std::cout << "String args conctructor called: " << name << std::endl;
     }
-    Player(std::string n, int h, int x) // three args constructor
+    Player1(std::string n, int h, int x) // three args constructor
         : name{n}
         , health{h}
         , xp{x}
     {
         std::cout << "three args conctructor called: " << name << std::endl;
     }
-    ~Player()
+    ~Player1()
     {
         std::cout << "Destructor called: " << name << std::endl;
     }
 };
 
-} // namespace ex5
-
-namespace ex6
-{
-// example class for deligating constructor
-class Player
+/********************************************
+ * example class for deligating constructor
+ ********************************************/
+class Player2
 {
   private:
     std::string name;
@@ -694,26 +767,26 @@ class Player
 
   public:
     // constructors
-    Player();
-    Player(std::string n);
-    Player(std::string n, int h, int x);
+    Player2();
+    Player2(std::string n);
+    Player2(std::string n, int h, int x);
     // destructor
-    ~Player();
+    ~Player2();
 };
 
-Player::Player() // deligating constructor
-    : Player{"None", 100, 0}
+Player2::Player2() // deligating constructor
+    : Player2{"None", 100, 0}
 {
     std::cout << "No args conctructor called: " << name << std::endl;
 }
 
-Player::Player(std::string n) // deligating constructor
-    : Player{n, 100, 0}
+Player2::Player2(std::string n) // deligating constructor
+    : Player2{n, 100, 0}
 {
     std::cout << "String args conctructor called: " << name << std::endl;
 }
 
-Player::Player(std::string n, int h, int x) // constructor initialization list
+Player2::Player2(std::string n, int h, int x) // constructor initialization list
     : name{n}
     , health{h}
     , xp{x}
@@ -721,17 +794,15 @@ Player::Player(std::string n, int h, int x) // constructor initialization list
     std::cout << "three args conctructor called: " << name << std::endl;
 }
 
-Player::~Player() // destructor
+Player2::~Player2() // destructor
 {
     std::cout << "Destructor called: " << name << std::endl;
 }
 
-} // namespace ex6
-
-namespace ex7
-{
-// example class for deligating constructor
-class Player
+/********************************************
+ * example class for deligating constructor
+ ********************************************/
+class Player3
 {
   private:
     std::string name;
@@ -740,12 +811,12 @@ class Player
 
   public:
     // constructors
-    Player(std::string n = "none", int h = 0, int x = 0);
+    Player3(std::string n = "none", int h = 0, int x = 0);
     // destructor
-    ~Player();
+    ~Player3();
 };
 
-Player::Player(std::string n, int h, int x) // constructor initialization list
+Player3::Player3(std::string n, int h, int x) // constructor initialization list
     : name{n}
     , health{h}
     , xp{x}
@@ -753,45 +824,47 @@ Player::Player(std::string n, int h, int x) // constructor initialization list
     std::cout << "three args conctructor called: " << name << std::endl;
 }
 
-Player::~Player() // destructor
+Player3::~Player3() // destructor
 {
     std::cout << "Destructor called: " << name << std::endl;
 }
-
-} // namespace ex7
+/***********************************************************/
 
 void run_construct_variations(void)
 {
     {
         std::cout << "### Construction initialization list example ###" << std::endl;
         // example constructor initialization list
-        ex5::Player empty;
-        ex5::Player frank{"Frank"};
-        ex5::Player villain{"Villain", 100, 55};
+        Player1 empty;
+        Player1 frank{"Frank"};
+        Player1 villain{"Villain", 100, 55};
     }
     std::cout << std::endl;
     {
         std::cout << "### Construction delication example ###" << std::endl;
         // example deligating constructor
-        ex6::Player empty;
-        ex6::Player frank{"Frank"};
-        ex6::Player villain{"Villain", 100, 55};
+        Player2 empty;
+        Player2 frank{"Frank"};
+        Player2 villain{"Villain", 100, 55};
     }
     std::cout << std::endl;
     {
         std::cout << "### default Constructor parameters example ###" << std::endl;
         // example deligating constructor
-        ex7::Player empty;
-        ex7::Player frank{"Frank"};
-        ex7::Player hero{"Hero", 100};
-        ex7::Player villain{"Villain", 100, 55};
+        Player3 empty;
+        Player3 frank{"Frank"};
+        Player3 hero{"Hero", 100};
+        Player3 villain{"Villain", 100, 55};
     }
 }
 
-//-----------------------------------------------------------------------------------------
+} // namespace udemy1::ex6
 
-namespace ex8
+/***********************************************************************************************/
+
+namespace udemy1::ex7
 {
+
 class Player
 {
   private:
@@ -804,34 +877,10 @@ class Player
     Player(const Player& source);                         // copy constructor
     ~Player();                                            // destructor
 
-    std::string get_name(void)
-    {
-        return name;
-    }
-    int get_health(void)
-    {
-        return health;
-    }
-    int get_xp(void)
-    {
-        return xp;
-    }
-    void display(Player P);
+    std::string get_name(void);
+    int get_health(void);
+    int get_xp(void);
 };
-
-// Player::Player(const Player& src) // copy constructor
-//     : name{src.name}
-//     , health{src.health}
-//     , xp{src.xp}
-//{
-//     std::cout << "copy constructor made copy of " << src.name << std::endl;
-// }
-
-Player::Player(const Player& src) // copy constructor with deligation
-    : Player{src.name, src.health, src.xp}
-{
-    std::cout << "copy constructor made copy of " << src.name << std::endl;
-}
 
 Player::Player(std::string n, int h, int x) // constructor initialization list
     : name{n}
@@ -841,10 +890,31 @@ Player::Player(std::string n, int h, int x) // constructor initialization list
     std::cout << "three args conctructor called: " << name << std::endl;
 }
 
+Player::Player(const Player& src) // copy constructor with deligation
+    : Player{src.name, src.health, src.xp}
+{
+    std::cout << "copy constructor made copy of " << src.name << std::endl;
+}
+
 Player::~Player() // destructor
 {
     std::cout << "Destructor called: " << name << std::endl;
 }
+
+std::string Player::get_name(void)
+{
+    return name;
+}
+int Player::get_health(void)
+{
+    return health;
+}
+int Player::get_xp(void)
+{
+    return xp;
+}
+
+/***********************************************************/
 
 void display_Player(Player P)
 {
@@ -853,324 +923,629 @@ void display_Player(Player P)
     std::cout << "XP     " << P.get_xp() << std::endl;
 }
 
-} // namespace ex8
-
 void run_copy_constructs(void)
 {
     {
-        ex8::Player empty;
-        ex8::Player frank{"Frank"};
-        ex8::display_Player(empty);
-        ex8::Player hero{"Hero", 100};
-        ex8::Player villain{"Villain", 100, 55};
+        Player empty;
+        Player frank{"Frank"};
+        display_Player(empty);
+        Player hero{"Hero", 100};
+        Player villain{"Villain", 100, 55};
     }
 }
+} // namespace udemy1::ex7
 
-//-----------------------------------------------------------------------------------------
-namespace ex9
+/***********************************************************************************************/
+
+namespace udemy1::ex8
 {
-//-----------------
-class Shallow
+/*****************
+ * Shallow copy
+ ****************/
+class Test_Shallow
 {
   private:
     int* data;
 
   public:
-    Shallow();                   // Constructor
-    Shallow(int d);              // Constructor
-    Shallow(const Shallow& src); // copy Constructor
-    ~Shallow();                  // destructor
+    Test_Shallow();                        // Constructor
+    Test_Shallow(int d);                   // Constructor
+    Test_Shallow(const Test_Shallow& src); // copy Constructor
+    ~Test_Shallow();                       // destructor
 
-    void set_data(int d)
-    {
-        *data = d;
-    }
-    int get_data(void)
-    {
-        return *data;
-    }
+    void set_data(int d);
+    int get_data(void);
 };
 
 // Constructor
-Shallow::Shallow(int d)
+Test_Shallow::Test_Shallow()
+    : Test_Shallow{0}
+{
+    std::cout << "no arg Constructor: " << *data << std::endl;
+}
+
+// Constructor
+Test_Shallow::Test_Shallow(int d)
     : data{nullptr}
 {
     data = new int;
     *data = d;
-    std::cout << "Constructor" << std::endl;
-}
-
-Shallow::Shallow()
-    : Shallow{0}
-{
-    std::cout << "no arg Constructor" << std::endl;
+    std::cout << "Constructor : " << *data << std::endl;
 }
 
 // copy Constructor
-Shallow::Shallow(const Shallow& src)
+Test_Shallow::Test_Shallow(const Test_Shallow& src)
     : data{src.data}
 {
-    std::cout << "Copy constructor - Shallow copy" << std::endl;
+    std::cout << "Copy constructor - Shallow copy: " << *data << std::endl;
 }
 
 // destructor
-Shallow::~Shallow()
+Test_Shallow::~Test_Shallow()
 {
     if(data != nullptr)
         delete data;
-    std::cout << "Destructor called " << std::endl;
+    std::cout << "Destructor freeing data:  " << *data << std::endl;
 }
 
-void display_shallow(Shallow s)
+// getter and setter
+void Test_Shallow::set_data(int d)
 {
-    std::cout << s.get_data() << std::endl;
+    *data = d;
 }
-//-----------------
-class Deep
+int Test_Shallow::get_data(void)
+{
+    return *data;
+}
+
+/*****************
+ * Deep copy
+ ****************/
+class Test_Deep
 {
   private:
     int* data;
 
   public:
-    Deep();                // Constructor
-    Deep(int d);           // Constructor
-    Deep(const Deep& src); // copy Constructor
-    ~Deep();               // destructor
+    Test_Deep();                     // Constructor
+    Test_Deep(int d);                // Constructor
+    Test_Deep(const Test_Deep& src); // copy Constructor
+    ~Test_Deep();                    // destructor
 
-    void set_data(int d)
-    {
-        *data = d;
-    }
-    int get_data(void)
-    {
-        return *data;
-    }
+    void set_data(int d);
+    int get_data(void);
 };
 
 // Constructor
-Deep::Deep(int d)
+Test_Deep::Test_Deep()
+    : Test_Deep{0}
+{
+    std::cout << "no arg Constructor : " << *data << std::endl;
+}
+
+// Constructor
+Test_Deep::Test_Deep(int d)
 {
     data = new int;
     *data = d;
-    std::cout << "Constructor" << std::endl;
+    std::cout << "Constructor: " << *data << std::endl;
 }
 
-Deep::Deep()
-    : Deep{0}
+/*// copy Constructor : can be optimized
+Test_Deep::Test_Deep(const Test_Deep& src)
 {
-    std::cout << "no arg Constructor" << std::endl;
-}
-
-// copy Constructor
-// Deep::Deep(const Deep& src)
-//{
-//    data = new int;
-//    *data = *src.data;
-//    std::cout << "Copy constructor - Deep copy" << std::endl;
-//}
+    data = new int;
+    *data = *src.data;
+    std::cout << "Copy constructor - Deep copy" << std::endl;
+} */
 
 // copy Constructor using deligation
-Deep::Deep(const Deep& src)
-    : Deep{*src.data}
+Test_Deep::Test_Deep(const Test_Deep& src)
+    : Test_Deep{*src.data}
 {
-    std::cout << "Copy constructor - Deep copy" << std::endl;
+    std::cout << "Copy constructor - Deep copy: " << *src.data << std::endl;
 }
 
-// destructor
-Deep::~Deep()
+// Destructor
+Test_Deep::~Test_Deep()
 {
-    if(data != nullptr)
-        delete data;
-    std::cout << "Destructor freeing data" << std::endl;
+    std::cout << "Destructor freeing data: " << *data << std::endl;
+    delete data;
 }
 
-void display_deep(Deep s)
+void Test_Deep::set_data(int d)
+{
+    *data = d;
+}
+int Test_Deep::get_data(void)
+{
+    return *data;
+}
+
+/***********************************************************/
+
+void display_shallow(Test_Shallow s)
 {
     std::cout << s.get_data() << std::endl;
 }
-//-----------------
-} // namespace ex9
+
+void display_deep(Test_Deep s)
+{
+    std::cout << s.get_data() << std::endl;
+}
 
 void run_copy_shallow_deep(void)
 {
     {
         // Shallow copy example
-        ex9::Shallow obj1{100};
-        // ex9::display_shallow(obj1); // runtime error: free() double free detected
+        Test_Shallow obj1{100};
+        // display_shallow(obj1); // runtime error: free() double free detected
 
-        // ex9::Shallow obj2{obj1}; // runtime error: free() double free detected
+        // Test_Shallow obj2{obj1}; // runtime error: free() double free detected
         // obj2.set_data(1000);
-        //    ex9::display_shallow(obj1);
+        // display_shallow(obj1);
     }
     {
         // Deep copy example
-        ex9::Deep obj1{100};
-        ex9::display_deep(obj1);
+        Test_Deep obj1{100};
+        display_deep(obj1);
 
-        ex9::Deep obj2{obj1};
-        ex9::display_deep(obj2);
+        Test_Deep obj2{obj1};
+        display_deep(obj2);
         obj2.set_data(1000);
-        ex9::display_deep(obj2);
+        display_deep(obj2);
     }
 }
 
-//-----------------------------------------------------------------------------------------
+} // namespace udemy1::ex8
 
-namespace ex10
+/***********************************************************************************************/
+
+namespace udemy1::ex9
 {
-// Copy constructor ineffectient
-class Move_Test
+/*************************************************
+ * Move constructor - Why copy is ineffectient?
+ *************************************************/
+class Move_Test_1
 {
   private:
     int* data;
 
   public:
-    void set_data_value(int d)
-    {
-        *data = d;
-    }
-    int get_data_value()
-    {
-        return *data;
-    }
-    // Constructor
-    Move_Test(int d);
-    // Copy Constructor
-    Move_Test(const Move_Test& source);
-    // Destructor
-    ~Move_Test();
+    Move_Test_1(int d);                     // Constructor
+    Move_Test_1(const Move_Test_1& source); // Copy Constructor
+    ~Move_Test_1();                         // Destructor
+
+    void set_data_value(int d);
+    int get_data_value();
 };
 
-Move_Test::Move_Test(int d)
+// Constructor
+Move_Test_1::Move_Test_1(int d)
 {
     data = new int;
     *data = d;
     std::cout << "Constructor for: " << d << std::endl;
 }
 
-// Copy ctor
-Move_Test::Move_Test(const Move_Test& source)
-    : Move_Test{*source.data}
+// Copy Constructor
+Move_Test_1::Move_Test_1(const Move_Test_1& source)
+    : Move_Test_1{*source.data}
 {
     std::cout << "Copy constructor  - deep copy for: " << *data << std::endl;
 }
 
-Move_Test::~Move_Test()
+// Destructor
+Move_Test_1::~Move_Test_1()
 {
-    if(data != nullptr) {
+    if(data != nullptr)
         std::cout << "Destructor freeing data for: " << *data << std::endl;
-    } else {
+    else
         std::cout << "Destructor freeing data for nullptr" << std::endl;
-    }
     delete data;
 }
 
-} // namespace ex10
-
-namespace ex11
+// Getter and setter
+void Move_Test_1::set_data_value(int d)
 {
-// Effecient Move constructor
-class Move_Test2
+    *data = d;
+}
+int Move_Test_1::get_data_value()
+{
+    return *data;
+}
+
+/**************************************
+ * Move constructor - Implimention
+ **************************************/
+class Move_Test_2
 {
   private:
     int* data;
 
   public:
-    void set_data_value(int d)
-    {
-        *data = d;
-    }
-    int get_data_value()
-    {
-        return *data;
-    }
-    // Constructor
-    Move_Test2(int d);
-    // Copy Constructor
-    Move_Test2(const Move_Test2& source);
-    // Move_Test2 Constructor
-    Move_Test2(Move_Test2&& source) noexcept;
-    // Destructor
-    ~Move_Test2();
+    Move_Test_2(int d);                         // Constructor
+    Move_Test_2(const Move_Test_2& source);     // Copy Constructor
+    Move_Test_2(Move_Test_2&& source) noexcept; // Move Constructor
+    ~Move_Test_2();                             // Destructor
+
+    void set_data_value(int d);
+    int get_data_value();
 };
 
-Move_Test2::Move_Test2(int d)
+// Constructor
+Move_Test_2::Move_Test_2(int d)
 {
     data = new int;
     *data = d;
     std::cout << "Constructor for: " << d << std::endl;
 }
 
-// Copy ctor
-Move_Test2::Move_Test2(const Move_Test2& source)
-    : Move_Test2{*source.data}
+// Copy Constructor
+Move_Test_2::Move_Test_2(const Move_Test_2& source)
+    : Move_Test_2{*source.data}
 {
     std::cout << "Copy constructor  - deep copy for: " << *data << std::endl;
 }
 
-// Move ctor
-Move_Test2::Move_Test2(Move_Test2&& source) noexcept
+// Move Constructor
+Move_Test_2::Move_Test_2(Move_Test_2&& source) noexcept
     : data{source.data}
 {
     source.data = nullptr;
     std::cout << "Move constructor - moving resource: " << *data << std::endl;
 }
 
-Move_Test2::~Move_Test2()
+// Destructor
+Move_Test_2::~Move_Test_2()
 {
-    if(data != nullptr) {
+    if(data != nullptr)
         std::cout << "Destructor freeing data for: " << *data << std::endl;
-    } else {
+    else
         std::cout << "Destructor freeing data for nullptr" << std::endl;
-    }
     delete data;
 }
 
-} // namespace ex11
+// Getter and setter
+void Move_Test_2::set_data_value(int d)
+{
+    *data = d;
+}
+int Move_Test_2::get_data_value()
+{
+    return *data;
+}
+
+/***********************************************************/
 
 void run_move_constructor(void)
 {
     {
         std::cout << "#### Ineffecient COPY constructor example ####" << std::endl;
-        std::vector<ex10::Move_Test> vec;
+        std::vector<Move_Test_1> vec;
 
-        vec.push_back(ex10::Move_Test{10});
-        vec.push_back(ex10::Move_Test{20});
-        vec.push_back(ex10::Move_Test{30});
-        vec.push_back(ex10::Move_Test{40});
-        vec.push_back(ex10::Move_Test{50});
-        vec.push_back(ex10::Move_Test{60});
-        vec.push_back(ex10::Move_Test{70});
-        vec.push_back(ex10::Move_Test{80});
+        vec.push_back(Move_Test_1{10});
+        vec.push_back(Move_Test_1{20});
+        vec.push_back(Move_Test_1{30});
+        vec.push_back(Move_Test_1{40});
+        vec.push_back(Move_Test_1{50});
+        vec.push_back(Move_Test_1{60});
+        vec.push_back(Move_Test_1{70});
+        vec.push_back(Move_Test_1{80});
     }
     std::cout << std::endl;
     {
         std::cout << "#### effecient MOVE constructor example ####" << std::endl;
-        std::vector<ex11::Move_Test2> vec;
-        vec.push_back(ex11::Move_Test2{10});
-        vec.push_back(ex11::Move_Test2{20});
-        vec.push_back(ex11::Move_Test2{30});
-        vec.push_back(ex11::Move_Test2{40});
-        vec.push_back(ex11::Move_Test2{50});
-        vec.push_back(ex11::Move_Test2{60});
-        vec.push_back(ex11::Move_Test2{70});
-        vec.push_back(ex11::Move_Test2{80});
+        std::vector<Move_Test_2> vec;
+        vec.push_back(Move_Test_2{10});
+        vec.push_back(Move_Test_2{20});
+        vec.push_back(Move_Test_2{30});
+        vec.push_back(Move_Test_2{40});
+        vec.push_back(Move_Test_2{50});
+        vec.push_back(Move_Test_2{60});
+        vec.push_back(Move_Test_2{70});
+        vec.push_back(Move_Test_2{80});
     }
 }
 
-//-----------------------------------------------------------------------------------------
+} // namespace udemy1::ex9
 
-void e13_run(void)
+/***********************************************************************************************/
+
+namespace udemy1::ex10
 {
-    // run_class_example();
-    // run_class_access();
-    // run_test_class();
-    // run_test_classfile();
-    // run_construct_destruct();
-    // run_construct_variations();
-    // run_copy_constructs();
-    // run_copy_shallow_deep();
-    run_move_constructor();
+
+/*******************************
+ * const in classes : example
+ *******************************/
+class Player
+{
+  private:
+    std::string name;
+    int health;
+
+  public:
+    int xp;
+
+    Player(std::string n = "none", int h = 0, int x = 0); // constructors
+    ~Player();                                            // destructor
+
+    std::string get_name(void) const;
+    int get_health(void) const;
+    void set_name(std::string);
+    void set_health(int);
+};
+
+// constructor initialization list
+Player::Player(std::string n, int h, int x)
+    : name{n}
+    , health{h}
+    , xp{x}
+{
+    std::cout << "three args conctructor called: " << name << std::endl;
 }
 
-} // namespace udemy1
+// Destructor
+Player::~Player()
+{
+    std::cout << "Destructor called: " << name << std::endl;
+}
+// Getters
+std::string Player::get_name(void) const
+{
+    return name;
+}
+int Player::get_health(void) const
+{
+    return health;
+}
+
+// Setters
+void Player::set_name(std::string n)
+{
+    name = n;
+}
+void Player::set_health(int h)
+{
+    health = h;
+}
+
+/***********************************************************/
+
+void display_player_name(const Player& p)
+{
+    std::cout << "Name  : " << p.get_name() << std::endl;
+    //    std::cout << "Health: " << p.get_health() << std::endl;
+    //    std::cout << "XP    : " << p.get_xp() << std::endl;
+}
+
+void run_const_class(void)
+{
+    const Player villain{"Villain", 100, 55};
+    Player hero{"Hero", 100};
+    Player slayer;
+
+    // villain.xp = 11000; // Error read-only object
+    // villain.set_name("Super Villain"); // Error
+    std::cout << villain.get_name() << std::endl;
+    std::cout << hero.get_name() << std::endl;
+
+    display_player_name(villain);
+    display_player_name(hero);
+    display_player_name(slayer);
+}
+
+} // namespace udemy1::ex10
+
+/***********************************************************************************************/
+
+namespace udemy1::ex11
+{
+/*******************************
+ * static in classes : example
+ *******************************/
+class Player
+{
+  private:
+    std::string name;
+    int health;
+    int xp;
+    static int num_players; // static member
+
+  public:
+    Player(std::string n = "none", int h = 0, int x = 0); // constructors
+    Player(const Player& source);                         // Copy Constructor
+    ~Player();                                            // destructor
+
+    // setter and getter
+    std::string get_name(void);
+    void set_name(std::string);
+
+    // getter for static variable (there is no setter)
+    static int get_num_player(void);
+};
+
+// Initialize static variable (Ideally done in .cpp file)
+int Player::num_players{0};
+
+// constructor initialization list
+Player::Player(std::string n, int h, int x)
+    : name{n}
+    , health{h}
+    , xp{x}
+{
+    ++num_players;
+    std::cout << "Conctructor called: " << name << std::endl;
+}
+// Copy Constructor
+Player::Player(const Player& src)
+    : Player{src.name, src.health, src.xp}
+{
+    std::cout << "Copy constructor for: " << src.name << std::endl;
+}
+
+// Destructor
+Player::~Player()
+{
+    --num_players;
+    std::cout << "Destructor called: " << name << std::endl;
+}
+
+// Getter and setter
+int Player::get_num_player()
+{
+    return num_players;
+}
+std::string Player::get_name(void)
+{
+    return name;
+}
+void Player::set_name(std::string n)
+{
+    name = n;
+}
+
+/***********************************************************/
+
+void dislpay_active_players()
+{
+    std::cout << "Active players: " << Player::get_num_player() << std::endl;
+}
+
+void run_static_class(void)
+{
+    dislpay_active_players();
+    Player hero{"Hero"};
+    dislpay_active_players();
+    std::cout << std::endl;
+    {
+        Player frank{"Frank"};
+        dislpay_active_players();
+    }
+    dislpay_active_players();
+    std::cout << std::endl;
+    Player* enemy = new Player{"Enemy", 100, 100};
+    dislpay_active_players();
+    delete enemy;
+    dislpay_active_players();
+}
+
+} // namespace udemy1::ex11
+
+/***********************************************************************************************/
+
+// namespace udemy1::ex12
+//{
+///*******************************
+// * Friend class : example
+// *******************************/
+// class Other_class1
+//{
+//  public:
+//    void display_player(Player&);
+//};
+//
+// void Other_class1::display_player(Player& p)
+//{
+//    std::cout << "Name  : " << p.name << std::endl;
+//    std::cout << "Health: " << p.health << std::endl;
+//    std::cout << "XP    : " << p.xp << std::endl;
+//}
+//
+///***********************************************************/
+// class Other_class2
+//{
+//   public:
+//     void display_player(Player&);
+// };
+//
+// void Other_class2::display_player(Player& p)
+//{
+//     std::cout << "Name  : " << p.name << std::endl;
+//     std::cout << "Health: " << p.health << std::endl;
+//     std::cout << "XP    : " << p.xp << std::endl;
+// }
+//
+///***********************************************************/
+// class Player
+//{
+//   private:
+//     std::string name;
+//     int health;
+//     int xp;
+//
+//     friend void display_player(Player& p);               // non-member method as Friend
+//     friend void Other_class1::display_player(Player& p); // member method from different class as Friend
+//     friend class Other_class2;                           // Another class as friend
+//
+//   public:
+//     Player(std::string n = "none", int h = 0, int x = 0); // constructors
+//     Player(const Player& source);                         // Copy Constructor
+//     ~Player();                                            // destructor
+//
+//     // setter and getter
+//     std::string get_name(void);
+//     void set_name(std::string);
+// };
+//
+//// constructor initialization list
+// Player::Player(std::string n, int h, int x)
+//     : name{n}
+//     , health{h}
+//     , xp{x}
+//{
+//     std::cout << "Conctructor called: " << name << std::endl;
+// }
+//// Copy Constructor
+// Player::Player(const Player& src)
+//     : Player{src.name, src.health, src.xp}
+//{
+//     std::cout << "Copy constructor for: " << src.name << std::endl;
+// }
+//
+//// Destructor
+// Player::~Player()
+//{
+//     std::cout << "Destructor called: " << name << std::endl;
+// }
+//
+//// Getter and setter
+// std::string Player::get_name(void)
+//{
+//     return name;
+// }
+// void Player::set_name(std::string n)
+//{
+//     name = n;
+// }
+///***********************************************************/
+// void display_player(Player& p)
+//{
+//     std::cout << "Name  : " << p.name << std::endl;
+//     std::cout << "Health: " << p.health << std::endl;
+//     std::cout << "XP    : " << p.xp << std::endl;
+// }
+//
+// void run_friend_class(void)
+//{
+// }
+//
+// } // namespace udemy1::ex12
+
+/***********************************************************************************************/
+
+void udemy1::e13_run(void)
+{
+    // udemy1::ex1::run_class_example();
+    // udemy1::ex2::run_class_access();
+    // udemy1::ex3::run_test_class();
+    // udemy1::ex4::run_test_classfile();
+    // udemy1::ex5::run_construct_destruct();
+    // udemy1::ex6::run_construct_variations();
+    // udemy1::ex7::run_copy_constructs();
+    // udemy1::ex8::run_copy_shallow_deep();
+    // udemy1::ex9::run_move_constructor();
+    // udemy1::ex10::run_const_class();
+    // udemy1::ex11::run_static_class();
+    // udemy1::ex12::run_friend_class(); // undefined
+}
