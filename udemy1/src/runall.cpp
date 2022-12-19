@@ -36,9 +36,9 @@ void test_run_udemy1(void)
     /**
      * @brief Running Section exercises
      */
-    // e10_run();
-    // e11_run();
-    // e12_run();
+    e10_run();
+    e11_run();
+    e12_run();
     e13_run();
 
     /**

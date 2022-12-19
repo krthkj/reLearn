@@ -428,7 +428,13 @@ class Player
             return true;
         return false;
     }
+    void display(void);
 };
+
+void Player::display(void)
+{
+    std::cout << "Name: " << name << ", Health: " << health << " ,XP: " << xp << std::endl;
+}
 
 class Account
 {
@@ -753,6 +759,10 @@ class Player1
     {
         std::cout << "Destructor called: " << name << std::endl;
     }
+    void display(void)
+    {
+        std::cout << "Name: " << name << ", Health: " << health << " ,XP: " << xp << std::endl;
+    }
 };
 
 /********************************************
@@ -772,7 +782,14 @@ class Player2
     Player2(std::string n, int h, int x);
     // destructor
     ~Player2();
+
+    void display(void);
 };
+
+void Player2::display(void)
+{
+    std::cout << "Name: " << name << ", Health: " << health << " ,XP: " << xp << std::endl;
+}
 
 Player2::Player2() // deligating constructor
     : Player2{"None", 100, 0}
@@ -814,7 +831,13 @@ class Player3
     Player3(std::string n = "none", int h = 0, int x = 0);
     // destructor
     ~Player3();
+    void display(void);
 };
+
+void Player3::display(void)
+{
+    std::cout << "Name: " << name << ", Health: " << health << " ,XP: " << xp << std::endl;
+}
 
 Player3::Player3(std::string n, int h, int x) // constructor initialization list
     : name{n}

@@ -498,15 +498,15 @@ int test_function_activation_count()
  */
 void e11_run(void)
 {
-    //    random_nums();
-    //    run_default_args();
-    //    run_func_overloading();
-    //    run_array_to_func();
-    //    run_pass_by_ref();
-    //    run_scope_variables();
-    //    run_func_stack();
-    //    run_recursive();
-    run_amount_accumulated();
+    // random_nums();
+    // run_default_args();
+    // run_func_overloading();
+    // run_array_to_func();
+    // run_pass_by_ref();
+    // run_scope_variables();
+    // run_func_stack();
+    // run_recursive();
+    // run_amount_accumulated();
 }
 
 } // namespace udemy1
