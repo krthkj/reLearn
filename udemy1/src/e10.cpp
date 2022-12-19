@@ -357,7 +357,7 @@ void e10_run(void)
 {
     // c_style_string();
     // strings_and_functions();
-    //    cpp_string();
-    working_with_cpp_string();
+    // cpp_string();
+    // working_with_cpp_string();
 }
 } // namespace udemy1
