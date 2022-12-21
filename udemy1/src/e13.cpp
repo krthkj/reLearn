@@ -24,7 +24,25 @@
  * Class and object
  * - Focus is on class and model real-world domain entities
  * - allows to hink at a higher level of abstraction
- * - used succeffully un very large programs.
+ * - used succefully un very large programs.
+ *
+ * synatax:
+ *
+ * class ClassName{
+ *   private:
+ *     member-variable;
+ *   public:
+ *     Member_functions;
+ *
+ *     // Speical member functions
+ *     Constructor;
+ *     Destructor;
+ *     Copy Constructor;
+ *     Copy Assignment;
+ *     Move Constructor;
+ *     Move Assignment;
+ * }
+ *
  ***********************************************************************************************
  * Concepts:
  * - Encapsulation:
@@ -317,6 +335,65 @@
  *                                  then A is NOT a friend of C
  *
  * Note: friend functions have access to private member, with read and wite permissions
+ ***********************************************************************************************
+ *
+ * in C++03: special members:
+ * - default constructor
+ * - copy constructor
+ * - copy-assignment constructor
+ * - destructor
+ *
+ * in C++11: move semantics
+ * - move constructor
+ * - move-assignment constructor
+ *
+ ***********************************************************************************************
+ * Special Methods:
+ * ================
+ * Explicit control over whether the sepecal member dunctinos are automatically generated.
+ *
+ * 1. Deleted Functions (C++11 onwards)
+ *   - Disable automatic generation of constructor
+ *   - prevent problematic type promotions from occuring in arguments.
+ *   Syntax:
+ *     class ClassName{
+ *       ClassName() = delete;                            // disable default constructor
+ *
+ *       ClassName(const ClassName&) = delete;            // disable copy constructor
+ *       ClassName& operator=(const ClassName&) = delete; // disable assignment operator constructor
+ *
+ *       ClassName(ClassName&&) = delete;                 // disable move constructor
+ *       ClassName& operator=(ClassName&&) = delete;      // disable move-assignment constructor
+ *
+ *       double func_name(float  x) = delete              // disable automatic type promotion
+ *       double func_name(double x) { return x; }         // ordinay function
+ *     };
+ *
+ * 2. Default Functions (c++11 onwards)
+ *   - Force compiler to create default constructor
+ *   - sometimes redundant, only used for documentations purpose
+ *   Syntax:
+ *     class ClassName{
+ *       ClassName() = default;  // force automatic generation of default constructor
+ *     };
+ *
+ ***********************************************************************************************
+ * Rules the prevents creatoin of special member functions
+ * =======================================================
+ * - if any constructor is explicitely declared. then, no default constructor is automatically generated
+ * - if a virtual destructor is explicitly declared, then no default contructor is automatically generated
+ * - if a move constructor or move-assignment operator is explicitely declared. then,
+ *    1. No copy constructor is automatically generated.
+ *    2. no copy-assignment operator is automatically generated.
+ * - if a copy constructor, copy-assignment operator, move constructor, move-assignment operator or destructor is
+ *   explicitely declared. then,
+ *    1. No move constructor is automatically generated.
+ *    2. no move-assignment operator is automatically generated.
+ * - if copy constructor or destructor is explicitly declared, then automatically generation of copy-assignment operator
+ *   is depricated. (C++11)
+ * - if copy-assignment operator or destructor is explicitly declared, then automatically generation of copy constructor
+ *   is depricated. (C++11)
+ *
  ***********************************************************************************************
  */
 
@@ -1557,6 +1634,113 @@ void run_static_class(void)
 
 /***********************************************************************************************/
 
+namespace udemy1::spl1
+{
+
+class Rectangle
+{
+    int length;
+    int width;
+
+  public:
+    Rectangle(int a = 1, int b = 1) // default constructor
+        : length{a}
+        , width{b}
+    {
+    }
+    // following constructors are disabled
+    Rectangle(float, float) = delete;
+    Rectangle(short int, short int) = delete;
+    Rectangle(char, char) = delete;
+    Rectangle(double, double) = delete;
+
+    void display_area(void)
+    {
+        std::cout << "Area is " << length * width << std::endl;
+    }
+
+    double CalcArea(int, int) = delete; // prevents automatic type promotion from int to double
+    double CalcArea(double l, double b) // if float is passed as parameter, auto type promotion occurs
+    {
+        return b + l;
+    }
+};
+class Data
+{
+  public:
+    int value;
+    Data(int set_val)
+    {
+        value = set_val;
+    }
+    Data() = default; // explicitely generate constructor
+};
+
+class Unique
+{
+  private:
+    int id;
+
+  public:
+    static int next_id;
+    Unique()
+    {
+        id = next_id;
+        ++next_id;
+    }
+    int getID()
+    {
+        return id;
+    }
+
+    Unique(const Unique&) = delete;
+    Unique& operator=(const Unique&) = delete;
+};
+
+int Unique::next_id = 1;
+
+void run_delete_default_class(void)
+{
+    {
+        Rectangle objRect;
+        double l{10.0}, b{100.0};
+        float x{2.0}, y{40.0};
+        // std::cout << "auto promo int to double: " << objRect.CalcArea(3, 9) << std::endl;      // works without issue
+        std::cout << "auto promo float to double: " << objRect.CalcArea(x, y) << std::endl;    // works without issue
+        std::cout << "Defined function using double: " << objRect.CalcArea(l, b) << std::endl; // works without issue
+    }
+    {
+        Rectangle objRect1{(int)1, (int)2};
+        objRect1.display_area();
+
+        /* Following objects cant be created because of "delete"
+        Rectangle objRect2{(char)1, (char)2};
+        Rectangle objRect3{(short int)1, (short int)2};
+        Rectangle objRect4{(double)1, (double)2};
+        objRect2.display_area();
+        objRect3.display_area();
+        objRect4.display_area();
+         */
+    }
+    {
+        Data data1;     // calls for default constructor.
+        Data data2{12}; // calls for argument constructor.
+        data1.value = 8;
+        std::cout << "data1.value = " << data1.value << std::endl;
+    }
+    {
+        Unique unique1;
+        Unique unique2;
+        Unique unique3;
+        // Unique unique4 = unique1; // error: this will copy constructor - a deleted constructor
+        // unique3 = unique1; // error: this will call copy-assignment operator - a deleted operator
+        std::cout << "unique1 id: " << unique1.getID() << std::endl;
+        std::cout << "unique2 id: " << unique2.getID() << std::endl;
+        std::cout << "unique3 id: " << unique3.getID() << std::endl;
+    }
+}
+
+} // namespace udemy1::spl1
 void udemy1::e13_run(void)
 {
     // udemy1::ex1::run_class_example();
@@ -1571,4 +1755,5 @@ void udemy1::e13_run(void)
     // udemy1::ex10::run_const_class();
     // udemy1::ex11::run_static_class();
     // udemy1::ex12::run_friend_class(); // undefined
+    // udemy1::spl1::run_delete_default_class();
 }

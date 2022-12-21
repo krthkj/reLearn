@@ -14,7 +14,6 @@
 #include "udemy1.hpp"
 #include <boost/algorithm/string/erase.hpp>
 #include <iostream>
-#include <vector>
 
 namespace udemy1
 {

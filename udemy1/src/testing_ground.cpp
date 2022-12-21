@@ -229,6 +229,23 @@ void run_pass_by_expt(void)
 
 /*************************************************************************************/
 
+void vector_play(void)
+{
+    std::vector<int> a;
+    std::vector<float> b;
+    std::cout << "size of a : " << sizeof(a) << std::endl;
+    std::cout << "size of b : " << sizeof(b) << std::endl;
+    for(int i{0}; i < 10; ++i)
+        a.push_back(i + 1);
+
+    std::cout << "size of a : " << sizeof(a) << std::endl;
+    for(int i{0}; i < 10; ++i)
+        std::cout << a.at(i) << ", ";
+    std::cout << std::endl;
+}
+
+/*************************************************************************************/
+
 /**
  * @brief Testing area for code
  */
@@ -236,6 +253,7 @@ void testing_ground(void)
 {
     // assignment_test();
     // run_pass_by_expt();
+    // vector_play();
 }
 
 } // namespace udemy1

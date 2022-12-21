@@ -40,7 +40,7 @@ void run_test_ptrs(void)
     if(p != nullptr)
         std::cout << "dereferenced Value of p is: " << *p << std::endl << std::endl;
 
-    int q;
+    int q{0};
     std::cout << "Value of q is: " << q << std::endl;
     std::cout << "Address of q is: " << &q << std::endl;
     std::cout << "size of q is: " << sizeof(q) << std::endl;
