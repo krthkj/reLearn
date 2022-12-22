@@ -38,6 +38,7 @@ void e10_run(void);
 void e11_run(void);
 void e12_run(void);
 void e13_run(void);
+void e14_run(void);
 
 /**
  * @brief Running Section Assignments

@@ -31,7 +31,7 @@ void test_run_udemy1(void)
     // s10c_run();
     // s11c_run();
     // s12c_run();
-    s13c_run();
+    // s13c_run();
 
     /**
      * @brief Running Section exercises
@@ -40,6 +40,7 @@ void test_run_udemy1(void)
     // e11_run();
     // e12_run();
     // e13_run();
+    e14_run();
 
     /**
      * @brief Running Section Assignments
@@ -49,7 +50,7 @@ void test_run_udemy1(void)
     /**
      * @brief running test codes
      */
-    testing_ground();
+    // testing_ground();
     // s12_test_debugger();
 }
 
