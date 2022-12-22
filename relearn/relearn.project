@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CodeLite_Project Name="relearn" Version="11000" InternalType="">
+  <Plugins>
+    <Plugin Name="CppCheck"/>
+  </Plugins>
   <VirtualDirectory Name="doc"/>
   <Description/>
   <Dependencies/>
