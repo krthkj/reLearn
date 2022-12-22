@@ -209,6 +209,7 @@
  * - moves an object instead of copy
  * - Optional but recommended when using raw pointers
  * - copy elision - C++ may optimize copying away completely (RVO - return value optimization)
+ * - using "noexcept" is expected for better practice - need more reasons.
  * Example:
  *   class Move {
  *   private:
@@ -216,14 +217,16 @@
  *   public:
  *      void set_data(int d) { *data = d; }
  *      int get_data()    { return *data; }
- *      Move ();                // Constructor
- *      Move (int d);           // Constructor
- *      Move (const Move &src); // Copy Constructor
- *      ~Move ();               // Destructor
+ *      Move ();                       // Constructor
+ *      Move (int d);                  // Constructor
+ *      Move (const Move &src);        // Copy Constructor
+ *      Move (Move&& source) noexcept; // move constructor
+ *      ~Move ();                      // Destructor
  *   }
- *   Move::Move(): Move{0};                                             // deligated Constructor
- *   Move::Move{int d} {data = new int ; *data = *d.data;}              // Constructor
- *   Move::Move(const Move &src) {data = new int ; *data = *src.data;}  // copy constructor
+ *   Move::Move(): Move{0};                                                 // deligated Constructor
+ *   Move::Move{int d} {data = new int ; *data = *d.data;}                  // Constructor
+ *   Move::Move(const Move& src) {data = new int ; *data = *src.data;}      // copy constructor
+ *   Move::Move(Move&& src) noexcept {data = src.data; src.data = nullptr;} // move constructor
  *
  ***********************************************************************************************
  * r-value references:
