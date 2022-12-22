@@ -30,6 +30,16 @@ void s10c_run(void);
 void s11c_run(void);
 void s12c_run(void);
 void s13c_run(void);
+void s14c_run(void);
+void s15c_run(void);
+void s16c_run(void);
+void s17c_run(void);
+void s18c_run(void);
+void s19c_run(void);
+void s20c_run(void);
+void s21c_run(void);
+void s22c_run(void);
+void s23c_run(void);
 
 /**
  * @brief Running Section exercises
@@ -39,6 +49,14 @@ void e11_run(void);
 void e12_run(void);
 void e13_run(void);
 void e14_run(void);
+void e15_run(void);
+void e16_run(void);
+void e17_run(void);
+void e18_run(void);
+void e19_run(void);
+void e21_run(void);
+void e22_run(void);
+void e23_run(void);
 
 /**
  * @brief Running Section Assignments

@@ -23,6 +23,11 @@
       <File Name="src/testing_ground.cpp"/>
     </VirtualDirectory>
     <VirtualDirectory Name="challenge">
+      <VirtualDirectory Name="s14c">
+        <File Name="src/mystring.cpp"/>
+        <File Name="src/mystring.hpp"/>
+      </VirtualDirectory>
+      <File Name="src/s14c.cpp"/>
       <VirtualDirectory Name="s13c">
         <File Name="src/movie.cpp"/>
         <File Name="src/movie.hpp"/>
