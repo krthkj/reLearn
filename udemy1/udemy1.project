@@ -7,9 +7,11 @@
       <File Name="src/a10.cpp"/>
     </VirtualDirectory>
     <VirtualDirectory Name="exercise">
+      <VirtualDirectory Name="e13">
+        <File Name="src/account.hpp"/>
+        <File Name="src/account.cpp"/>
+      </VirtualDirectory>
       <File Name="src/e14.cpp"/>
-      <File Name="src/account.cpp"/>
-      <File Name="src/account.hpp"/>
       <File Name="src/e13.cpp"/>
       <File Name="src/e12.cpp"/>
       <File Name="src/e11.cpp"/>
