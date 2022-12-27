@@ -42,6 +42,7 @@ void test_run_udemy1(void)
     // e12_run();
     // e13_run();
     // e14_run();
+    e15_run();
 
     /**
      * @brief Running Section Assignments
@@ -51,7 +52,7 @@ void test_run_udemy1(void)
     /**
      * @brief running test codes
      */
-    testing_ground();
+    // testing_ground();
     // s12_test_debugger();
 }
 
