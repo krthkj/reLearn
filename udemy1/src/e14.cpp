@@ -638,7 +638,6 @@ void run_global_operator_overloading(void)
     stooges_3.display();
 }
 
-} // namespace udemy1::ex2
 
 /********************************************************************************************************************/
 
@@ -649,11 +648,14 @@ void run_global_operator_overloading(void)
 /***************************************************************
  * stream Insertion operator overloading as non freind function
  ***************************************************************/
-std::ostream& udemy1::ex2::operator<<(std::ostream& os, const Mystring& rhs)
+std::ostream& operator<<(std::ostream& os, const Mystring& rhs)
 {
     os << rhs.str;
     return os;
 }
+
+} // namespace udemy1::ex2
+
 
 /***************************************************************
  * stream extraction operator overloading as non freind function
