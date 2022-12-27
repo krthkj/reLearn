@@ -13,6 +13,7 @@
 
 #include "udemy1.hpp"
 #include <iostream>
+#include <numeric> // std::iota
 #include <vector>
 
 namespace udemy1
@@ -246,6 +247,55 @@ void vector_play(void)
 
 /*************************************************************************************/
 
+const char* string_literal_lifetimes(void)
+{
+    return "string_literals";
+}
+
+void test_iota(void)
+{
+    int num[10]{};
+    int st{100};
+    const char* strr;
+    strr = string_literal_lifetimes();
+    std::cout << "Elemelnts are : ";
+    std::iota(num, num + 10, st);
+    for(auto i : num)
+        std::cout << " " << i;
+    std::cout << std::endl;
+    std::cout << strr << std::endl;
+}
+
+void const_pointer_vs_pointer_to_const(void)
+{
+    using std::cout, std::endl;
+    int x{100}, y{20};
+
+    const int* ptr1 = &x; // pointer to const
+    int const* ptr2 = &x; // pointer to const
+    int* const ptr3 = &x; // cosntant pointer
+
+    cout << *ptr1 << " " << *ptr2 << " " << *ptr3 << endl;
+
+    //++(*ptr1);
+    ptr1 = &y;
+    // *ptr1 = 12;
+    cout << *ptr1 << " " << *ptr2 << " " << *ptr3 << endl;
+
+    //++(*ptr2);
+    ptr2 = &y;
+    //*ptr2 = 17;
+    cout << *ptr1 << " " << *ptr2 << " " << *ptr3 << endl;
+
+    ++(*ptr3);
+    //ptr3 = &y;
+    *ptr3 = *ptr2 + 12;
+
+    cout << *ptr1 << " " << *ptr2 << " " << *ptr3 << endl;
+}
+
+/*************************************************************************************/
+
 /**
  * @brief Testing area for code
  */
@@ -254,6 +304,8 @@ void testing_ground(void)
     // assignment_test();
     // run_pass_by_expt();
     // vector_play();
+    // test_iota();
+    const_pointer_vs_pointer_to_const();
 }
 
 } // namespace udemy1
