@@ -4,7 +4,7 @@
 #include <iostream>
 #include <string>
 
-namespace udemy::s15c
+namespace udemy1::s15c
 {
 /**
  * @class Account
@@ -34,5 +34,5 @@ class Account
     bool withdraw(double amt);
     double get_balance() const;
 };
-} // namespace udemy::s15c
+} // namespace udemy1::s15c
 #endif // S15C_ACCOUNT_HPP

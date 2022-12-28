@@ -6,7 +6,7 @@ using std::cout, std::endl;
 /**
  * @brief Example of Public, private , protected access specifier
  */
-namespace udemy::e15::ex2
+namespace udemy1::e15::ex2
 {
 void Base::display()
 {
@@ -26,12 +26,12 @@ void Derived_Public::access_base_member()
     // cout << c; // Compiler error - private member
     cout << endl;
 }
-} // namespace udemy::e15::ex2
+} // namespace udemy1::e15::ex2
 
 /**
  * @brief Example of constructor and destructors with inheritance
  */
-namespace udemy::e15::ex3
+namespace udemy1::e15::ex3
 {
 Base::Base()
     : value{0}
@@ -72,12 +72,12 @@ void Derived_Public::display(void) // simply defined to prevent compiler warning
     cout << doubled_value << endl;
 }
 
-} // namespace udemy::e15::ex3
+} // namespace udemy1::e15::ex3
 
 /**
  * @brief Example of passing arg to base class constructors
  */
-namespace udemy::e15::ex4
+namespace udemy1::e15::ex4
 {
 Base::Base()
     : value{0}
@@ -111,12 +111,12 @@ Derived_Public::Derived_Public(int x)
     cout << "Derived_Public (int) overloaded Constructor" << endl;
 }
 
-} // namespace udemy::e15::ex4
+} // namespace udemy1::e15::ex4
 
 /**
  * @brief Example of Copy and Move constructors
  */
-namespace udemy::e15::ex4
+namespace udemy1::e15::ex4
 {
 Base::Base(const Base& src)
     : value{src.value}
@@ -145,4 +145,4 @@ Derived_Public& Derived_Public::operator=(const Derived_Public& src)
     return *this;
 }
 
-} // namespace udemy::e15::ex4
+} // namespace udemy1::e15::ex4

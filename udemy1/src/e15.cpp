@@ -209,7 +209,7 @@ namespace udemy1::e15::ex1
 {
 void run_class_inhertance(void)
 {
-    using udemy::e15::ex1::Account, udemy::e15::ex1::Savings_Account;
+    using udemy1::e15::ex1::Account, udemy1::e15::ex1::Savings_Account;
 
     // using account class
     cout << "=== Account ====================================" << endl;
@@ -256,7 +256,7 @@ namespace udemy1::e15::ex2
 
 void run_access_specifier(void)
 {
-    using udemy::e15::ex2::Base, udemy::e15::ex2::Derived_Public;
+    using udemy1::e15::ex2::Base, udemy1::e15::ex2::Derived_Public;
 
     cout << "=== Base member access from base objects =========================" << endl;
     Base base;
@@ -283,7 +283,7 @@ namespace udemy1::e15::ex3
 
 void run_const_dest(void)
 {
-    using udemy::e15::ex3::Base, udemy::e15::ex3::Derived_Public;
+    using udemy1::e15::ex3::Base, udemy1::e15::ex3::Derived_Public;
     {
         cout << "=== Base object ======================= " << endl;
         Base base;
@@ -320,7 +320,7 @@ namespace udemy1::e15::ex4
 
 void run_passing_args(void)
 {
-    using udemy::e15::ex4::Base, udemy::e15::ex4::Derived_Public;
+    using udemy1::e15::ex4::Base, udemy1::e15::ex4::Derived_Public;
     {
         cout << "=== Derived Object ==================== " << endl;
         Derived_Public derived;
@@ -345,7 +345,7 @@ namespace udemy1::e15::ex5
 
 void run_copy_move_const(void)
 {
-    using udemy::e15::ex4::Base, udemy::e15::ex4::Derived_Public;
+    using udemy1::e15::ex4::Base, udemy1::e15::ex4::Derived_Public;
     {
         cout << "=== Base object ======================= " << endl;
         Base base_1{100};    // default constructor called
@@ -380,7 +380,7 @@ namespace udemy1::e15::ex6
 
 void run_redef_static(void)
 {
-    using udemy::e15::ex6::Account, udemy::e15::ex6::Savings_Account;
+    using udemy1::e15::ex6::Account, udemy1::e15::ex6::Savings_Account;
 
     cout << "=== Account ====================================" << endl;
     Account a1{1000.0};

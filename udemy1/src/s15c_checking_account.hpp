@@ -2,7 +2,7 @@
 #define S15C_CHECKING_ACCOUNT_HPP
 
 #include "s15c_account.hpp"
-namespace udemy::s15c
+namespace udemy1::s15c
 {
 /**
  * @class Checking_Account
@@ -30,6 +30,6 @@ class Checking_Account : public Account
     bool withdraw(double amt);
 };
 
-} // namespace udemy::s15c
+} // namespace udemy1::s15c
 
 #endif // S15C_CHECKING_ACCOUNT_HPP

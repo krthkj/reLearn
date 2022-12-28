@@ -7,7 +7,7 @@
 #include "s15c_trust_account.hpp"
 #include <vector>
 
-namespace udemy::s15c
+namespace udemy1::s15c
 {
 
 // Utility helper functions for Account class
@@ -30,6 +30,6 @@ void display(const std::vector<Trust_Account>& acc);
 void deposit(std::vector<Trust_Account>& acc, double amt);
 void withdraw(std::vector<Trust_Account>& account, double amt);
 
-} // namespace udemy::s15c
+} // namespace udemy1::s15c
 
 #endif // S15C_ACCOUNT_UTIL_HPP

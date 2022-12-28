@@ -12,7 +12,7 @@
 #include "movie.hpp"
 #include <iostream>
 
-namespace udemy::s13c
+namespace udemy1::s13c
 {
 // Constructor - expects all 3 movie attributes
 Movie::Movie(std::string name_val, std::string rating_val, int watched_val)
@@ -44,4 +44,4 @@ void Movie::display(void) const
     std::cout << name << ", " << rating << ", " << watched << std::endl;
 }
 
-} // namespace udemy::s13c
+} // namespace udemy1::s13c

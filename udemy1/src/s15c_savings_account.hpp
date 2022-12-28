@@ -3,7 +3,7 @@
 
 #include "s15c_account.hpp"
 
-namespace udemy::s15c
+namespace udemy1::s15c
 {
 /**
  * @class Savings_Account
@@ -36,5 +36,5 @@ class Savings_Account : public Account
     // withdraw is inherited
 };
 
-} // namespace udemy::s15c
+} // namespace udemy1::s15c
 #endif // S15C_SAVINGS_ACCOUNT_HPP

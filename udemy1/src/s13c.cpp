@@ -107,7 +107,7 @@
 #include "udemy1.hpp"
 #include <iostream>
 
-namespace udemy::s13c 
+namespace udemy1::s13c
 {
 
 // Function prototypes
@@ -180,4 +180,4 @@ void add_movie(Movies& movies, std::string name, std::string rating, int watched
     }
 }
 
-} // namespace udemy1
+} // namespace udemy1::s13c

@@ -288,7 +288,7 @@ void const_pointer_vs_pointer_to_const(void)
     cout << *ptr1 << " " << *ptr2 << " " << *ptr3 << endl;
 
     ++(*ptr3);
-    //ptr3 = &y;
+    // ptr3 = &y;
     *ptr3 = *ptr2 + 12;
 
     cout << *ptr1 << " " << *ptr2 << " " << *ptr3 << endl;

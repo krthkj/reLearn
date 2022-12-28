@@ -1,6 +1,6 @@
 #include "s15c_account_util.hpp"
 
-namespace udemy::s15c
+namespace udemy1::s15c
 {
 using std::cout, std::endl;
 
@@ -176,4 +176,4 @@ void withdraw(std::vector<Trust_Account>& account, double amt)
     }
 }
 
-} // namespace udemy::s15c
+} // namespace udemy1::s15c

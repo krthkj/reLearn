@@ -8,7 +8,7 @@
 #include "movies.hpp"
 #include <iostream>
 
-namespace udemy::s13c
+namespace udemy1::s13c
 {
 
 /**
@@ -100,4 +100,4 @@ Movies::~Movies()
     //     if(i != nullptr)
     //         delete i;
 }
-} // namespace udemy::s13c
+} // namespace udemy1::s13c

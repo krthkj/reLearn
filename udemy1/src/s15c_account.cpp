@@ -1,6 +1,6 @@
 #include "s15c_account.hpp"
 
-namespace udemy::s15c
+namespace udemy1::s15c
 {
 Account::Account(std::string name, double balance)
     : name{name}
@@ -38,4 +38,4 @@ std::ostream& operator<<(std::ostream& os, const Account& acc)
     return os;
 }
 
-} // namespace udemy::s15c
+} // namespace udemy1::s15c

@@ -3,7 +3,7 @@
 
 #include "s15c_savings_account.hpp"
 
-namespace udemy::s15c
+namespace udemy1::s15c
 {
 
 /**
@@ -40,10 +40,10 @@ class Trust_Account : public Savings_Account
   public:
     Trust_Account(std::string n = def_name, double b = def_balance, double r = def_int_rate);
     ~Trust_Account();
-    bool deposit(double amt); // $50 bonus if deposit is >= $5000
-    bool withdraw(double amt); // max 3 transaction allowed, max allowed 20% or balance 
+    bool deposit(double amt);  // $50 bonus if deposit is >= $5000
+    bool withdraw(double amt); // max 3 transaction allowed, max allowed 20% or balance
 };
 
-} // namespace udemy::s15c
+} // namespace udemy1::s15c
 
 #endif // S15C_TRUST_ACCOUNT_HPP

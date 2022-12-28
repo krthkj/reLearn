@@ -70,8 +70,8 @@ namespace udemy1
  */
 void s15c_run(void)
 {
-    using udemy::s15c::Account, udemy::s15c::Savings_Account;
-    using udemy::s15c::Checking_Account, udemy::s15c::Trust_Account;
+    using udemy1::s15c::Account, udemy1::s15c::Savings_Account;
+    using udemy1::s15c::Checking_Account, udemy1::s15c::Trust_Account;
 
     std::cout.precision(2);
     std::cout << std::fixed;
@@ -83,9 +83,9 @@ void s15c_run(void)
     accounts.push_back(Account{"Moe", 2000});
     accounts.push_back(Account{"Curly", 5000});
 
-    udemy::s15c::display(accounts);
-    udemy::s15c::deposit(accounts, 1000);
-    udemy::s15c::withdraw(accounts, 2000);
+    udemy1::s15c::display(accounts);
+    udemy1::s15c::deposit(accounts, 1000);
+    udemy1::s15c::withdraw(accounts, 2000);
 
     // Savings
     std::vector<Savings_Account> sav_accounts;
@@ -94,9 +94,9 @@ void s15c_run(void)
     sav_accounts.push_back(Savings_Account{"Batman", 2000});
     sav_accounts.push_back(Savings_Account{"Wonder Woman", 5000, 5.0});
 
-    udemy::s15c::display(sav_accounts);
-    udemy::s15c::deposit(sav_accounts, 1000);
-    udemy::s15c::withdraw(sav_accounts, 2000);
+    udemy1::s15c::display(sav_accounts);
+    udemy1::s15c::deposit(sav_accounts, 1000);
+    udemy1::s15c::withdraw(sav_accounts, 2000);
 
     // Checking
 

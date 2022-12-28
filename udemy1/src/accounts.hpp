@@ -6,7 +6,7 @@
 /**
  * @brief Example of inheritance
  */
-namespace udemy::e15::ex1
+namespace udemy1::e15::ex1
 {
 
 class Account
@@ -36,13 +36,13 @@ class Savings_Account : public Account
     void withdraw(double amt);
 };
 
-} // namespace udemy::e15::ex1
+} // namespace udemy1::e15::ex1
 
 /**
  * @brief Example of redefinig base class methods
  *        Example of static binding
  */
-namespace udemy::e15::ex6
+namespace udemy1::e15::ex6
 {
 
 class Account
@@ -82,6 +82,6 @@ class Savings_Account : public Account
     // withdraw method is inherited
 };
 
-} // namespace udemy::e15::ex6
+} // namespace udemy1::e15::ex6
 
 #endif // ACCOUNTS_HPP

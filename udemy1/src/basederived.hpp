@@ -4,7 +4,7 @@
 /**
  * @brief Example of Public, private , protected access specifier
  */
-namespace udemy::e15::ex2
+namespace udemy1::e15::ex2
 {
 
 class Base
@@ -32,12 +32,12 @@ class Derived_Public : public Base
     void access_base_member();
 };
 
-} // namespace udemy::e15::ex2
+} // namespace udemy1::e15::ex2
 
 /**
  * @brief Example of constructor and destructors with inheritance
  */
-namespace udemy::e15::ex3
+namespace udemy1::e15::ex3
 {
 
 class Base
@@ -70,13 +70,13 @@ class Derived_Public : public Base
     void display(void); // simply defined to prevent compiler warning for unused varialble 'doubled_value'
 };
 
-} // namespace udemy::e15::ex3
+} // namespace udemy1::e15::ex3
 
 /**
  * @brief Example of passing arg to base class constructors
  *        Example of Copy and move constructor
  */
-namespace udemy::e15::ex4
+namespace udemy1::e15::ex4
 {
 
 class Base
@@ -106,6 +106,6 @@ class Derived_Public : public Base
     Derived_Public& operator=(const Derived_Public& src); // assignment operator example
 };
 
-} // namespace udemy::e15::ex4
+} // namespace udemy1::e15::ex4
 
 #endif // BASEDERIVED_HPP

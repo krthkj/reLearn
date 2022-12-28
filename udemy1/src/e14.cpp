@@ -638,7 +638,6 @@ void run_global_operator_overloading(void)
     stooges_3.display();
 }
 
-
 /********************************************************************************************************************/
 
 /**
@@ -655,7 +654,6 @@ std::ostream& operator<<(std::ostream& os, const Mystring& rhs)
 }
 
 } // namespace udemy1::ex2
-
 
 /***************************************************************
  * stream extraction operator overloading as non freind function

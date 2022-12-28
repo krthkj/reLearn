@@ -1,6 +1,6 @@
 #include "s15c_trust_account.hpp"
 
-namespace udemy::s15c
+namespace udemy1::s15c
 {
 Trust_Account::Trust_Account(std::string n, double b, double r)
     : Savings_Account{n, b, r}
@@ -32,4 +32,4 @@ std::ostream& operator<<(std::ostream& os, const Trust_Account& acc)
        << "%, withdrawals: " << acc.num_withdraw << "]";
     return os;
 }
-} // namespace udemy::s15c
+} // namespace udemy1::s15c

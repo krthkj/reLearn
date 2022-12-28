@@ -1,6 +1,6 @@
 #include "s15c_savings_account.hpp"
 
-namespace udemy::s15c
+namespace udemy1::s15c
 {
 
 Savings_Account::Savings_Account(std::string n, double b, double r)
@@ -23,4 +23,4 @@ std::ostream& operator<<(std::ostream& os, const Savings_Account& acc)
     return os;
 }
 
-} // namespace udemy::s15c
+} // namespace udemy1::s15c
