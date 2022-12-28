@@ -8,6 +8,9 @@
 #include "movies.hpp"
 #include <iostream>
 
+namespace udemy::s13c
+{
+
 /**
  * @brief add_movie expects the name of the move, rating and watched count
  *
@@ -97,3 +100,4 @@ Movies::~Movies()
     //     if(i != nullptr)
     //         delete i;
 }
+} // namespace udemy::s13c

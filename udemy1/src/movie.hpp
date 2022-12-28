@@ -13,6 +13,8 @@
 #define MOVIE_HPP
 
 #include <string>
+namespace udemy::s13c
+{
 class Movie
 {
   private:
@@ -55,5 +57,5 @@ class Movie
         return watched;
     }
 };
-
+} // namespace udemy::myclass
 #endif // MOVIE_HPP

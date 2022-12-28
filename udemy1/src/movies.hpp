@@ -14,6 +14,8 @@
 #include <string>
 #include <vector>
 
+namespace udemy::s13c
+{
 class Movies
 {
   private:
@@ -30,5 +32,5 @@ class Movies
     Movies();  // default constructor
     ~Movies(); // destructor
 };
-
+} // namespace udemy::s13c
 #endif // MOVIES_HPP
