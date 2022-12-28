@@ -85,11 +85,8 @@
  * - accessible from classes derived from base class
  * - not accessible by objects of base or derived
  *
- *
- *
- *
- *
- *
+ * Understanding access modifiers
+ * ------------------------------
  *
  * Example:
  *   class Base {
@@ -120,6 +117,82 @@
  *   };
  *
  *******************************************************************************
+ * Constructor and destructor with inheritance
+ * ===========================================
+ * - Derived class inherits from its base class
+ * - Base class parts must be initialized before the derived class is initialized
+ * - when derived object is created, base class constructor executs first and then derived class constructor executes
+ *
+ * Note:
+ * 1. Derived class doent inherit
+ *    - Base class constructor
+ *    - Base class destructor
+ *    - Base class overloaded assignment operator
+ *    - Base class friend functions
+ * 2. Derived class constructors, destructors and overloaded assignement operators can be invoke the base-class versions
+ * 3. C++11 allows explicit inheritance of base 'non-special' constructors with
+ *    - `using Base::Base;` anywhere in the derived class decleration
+ *    - lots of rules involved, often better to deifne constructors yourself
+ *
+ * Syntax:
+ *   class Base {
+ *   public:
+ *     Base();
+ *     Base(int x);
+ *   };
+ *   Derived::Derived(int x) : Base (x), <optional initializers for derived> {
+ *   }
+ *******************************************************************************
+ * Copy & move constructors with inheritance
+ * =========================================
+ * - Not inherited from base class
+ * - you may not need to provide your own, copmiler provided version may be just fine
+ * - we can explicitly invoke the base class version fron the derived class
+ *
+ * Copy constructor:
+ * - can invoke base copy constructor explicitely,
+ * - derived object 'other' will be sliced. (see below example)
+ *
+ * Derived;:Derived (const Derived& other) : Base(other), <derived initialization list> {
+ *   // code
+ * }
+ *
+ * Copy/Move constructor and overloaded operator=
+ * ----------------------------------------------
+ * - Often you do not need to provide your own
+ * - If you dont define them in derived, then compiler will created ans automatically call the base class version
+ * - if you do provide derived versions, them you must invoke the base version explicitly.
+ * - Be careful with raw pointers.
+ *   1. especially if Base and derived have raw pointers
+ *   2. provide them with deep copy semantics
+ *
+ *******************************************************************************
+ * override and redefinig base class methods
+ * - derived class can directly invoke base class methods
+ * - derived class can override or redefine base class methods
+ * - very powerful in the contect of polymorphism
+ *
+ *******************************************************************************
+ * Static binding of method calls
+ * - Default binding for C++ is static
+ * - derived class object will use derived-class methods
+ * - we can explicitly involke base-class methods from derived-class methods
+ * - not useful in all cases, reason we have other mechanism knowns as runtime binding
+ *
+ *******************************************************************************
+ * Multiple inheritance
+ * - Derived class inherits from two or more base class at the same time
+ * - base classs may belong to unrelated class hierarchies
+ *
+ * Note:
+ * - Can be very complex
+ * - Easily misused
+ *
+ * Syntax:
+ *   class Derived: public Base_A, public Base_B {
+ *     // members and methods
+ *   }
+ *******************************************************************************
  */
 
 #include "accounts.hpp"
@@ -127,6 +200,7 @@
 #include "udemy1.hpp"
 #include <iostream>
 
+using std::cout, std::endl;
 /**
  * @brief Example of inheritance
  */
@@ -135,8 +209,7 @@ namespace udemy1::e15::ex1
 {
 void run_class_inhertance(void)
 {
-    using std::cout, std::endl;
-    using udemy::e15::Account, udemy::e15::Savings_Account;
+    using udemy::e15::ex1::Account, udemy::e15::ex1::Savings_Account;
 
     // using account class
     cout << "=== Account ====================================" << endl;
@@ -183,19 +256,18 @@ namespace udemy1::e15::ex2
 
 void run_access_specifier(void)
 {
-    using std::cout, std::endl;
-    using udemy::e15::Base, udemy::e15::Derived_Public;
+    using udemy::e15::ex2::Base, udemy::e15::ex2::Derived_Public;
 
     cout << "=== Base member access from base objects =========================" << endl;
     Base base;
-    base.a = 100 ; // Okay
+    base.a = 100; // Okay
     // base.b = 100 ; // compilet error - protected member
     // base.c = 100 ; // compiler error - private member
     base.display();
 
     cout << "=== Base member access from derived objects ======================" << endl;
     Derived_Public derived_1;
-    derived_1.a = 1000 ; // Okay
+    derived_1.a = 1000; // Okay
     // derived_1.b = 2000 ; // Compiler error - protected member
     // derived_1.c = 3000 ; // Compiler error - private member
     derived_1.access_base_member();
@@ -204,10 +276,151 @@ void run_access_specifier(void)
 } // namespace udemy1::e15::ex2
 
 /**
+ * @brief Example of constructor and destructors with inheritance
+ */
+namespace udemy1::e15::ex3
+{
+
+void run_const_dest(void)
+{
+    using udemy::e15::ex3::Base, udemy::e15::ex3::Derived_Public;
+    {
+        cout << "=== Base object ======================= " << endl;
+        Base base;
+        cout << endl;
+    }
+    cout << endl;
+    {
+        cout << "=== Base object ======================= " << endl;
+        Base b{100};
+        cout << endl;
+    }
+    cout << endl;
+    {
+        cout << "=== Derived Object ==================== " << endl;
+        Derived_Public derived;
+        cout << endl;
+    }
+    cout << endl;
+    {
+        cout << "=== Derived Object ==================== " << endl;
+        Derived_Public derived{1000};
+        cout << endl;
+    }
+    cout << endl;
+}
+
+} // namespace udemy1::e15::ex3
+
+/**
+ * @brief Example of passing arg to base class constructors
+ */
+namespace udemy1::e15::ex4
+{
+
+void run_passing_args(void)
+{
+    using udemy::e15::ex4::Base, udemy::e15::ex4::Derived_Public;
+    {
+        cout << "=== Derived Object ==================== " << endl;
+        Derived_Public derived;
+        cout << endl;
+    }
+    cout << endl;
+    {
+        cout << "=== Derived Object ==================== " << endl;
+        Derived_Public derived{1000};
+        cout << endl;
+    }
+    cout << endl;
+}
+
+} // namespace udemy1::e15::ex4
+
+/**
+ * @brief Example of Copy and Move constructors
+ */
+namespace udemy1::e15::ex5
+{
+
+void run_copy_move_const(void)
+{
+    using udemy::e15::ex4::Base, udemy::e15::ex4::Derived_Public;
+    {
+        cout << "=== Base object ======================= " << endl;
+        Base base_1{100};    // default constructor called
+        Base base_2{base_1}; // copy constructor called
+
+        Base base_3;
+        base_3 = base_1; // Assigmnemt operator overloading called
+
+        cout << endl;
+    }
+    cout << endl;
+    {
+        cout << "=== Derived Object ==================== " << endl;
+        Derived_Public derived_1{1000};      // default constructor called
+        Derived_Public derived_2{derived_1}; // copy constructor called
+
+        Derived_Public derived_3;
+        derived_3 = derived_1; // Assigmnemt operator overloading called
+        cout << endl;
+    }
+    cout << endl;
+}
+
+} // namespace udemy1::e15::ex5
+
+/**
+ * @brief Example of redefinig base class methods
+ *        Example of static binding
+ */
+namespace udemy1::e15::ex6
+{
+
+void run_redef_static(void)
+{
+    using udemy::e15::ex6::Account, udemy::e15::ex6::Savings_Account;
+
+    cout << "=== Account ====================================" << endl;
+    Account a1{1000.0};
+    cout << a1 << endl; // Account balance: 1000
+
+    a1.deposit(500.0);  // 500 deposited
+    cout << a1 << endl; // Account balance: 1500
+
+    a1.withdraw(1000.0); // 1000 withdrawn
+    cout << a1 << endl;  // Account balance: 500
+
+    a1.withdraw(5000.0); // Insufficient funds
+    cout << a1 << endl;  // Account balance: 500
+
+    cout << "\n=== Savings Account ============================" << endl;
+
+    Savings_Account s1{1000.0, 5.0};
+    cout << s1 << endl; // Savings Account Balance: 1000 Interest rate: 5
+
+    s1.deposit(1000.0); // 1050 Deposited
+    cout << s1 << endl; // Savings Account Balance: 2050 Interest rate: 5
+
+    s1.withdraw(2000.0); // 2000 withdrawn
+    cout << s1 << endl;  // Savings Account Balance: 50 Interest rate: 5
+
+    s1.withdraw(5000.0); // Insufficient funds
+    cout << s1 << endl;  // Savings Account Balance: 50 Interest rate: 5
+}
+
+} // namespace udemy1::e15::ex6
+
+/**
  * @brief main function to run all the underlying examples
  */
 void udemy1::e15_run(void)
 {
-    //udemy1::e15::ex1::run_class_inhertance();
-    udemy1::e15::ex2::run_access_specifier();
+    // udemy1::e15::ex1::run_class_inhertance();
+    // udemy1::e15::ex2::run_access_specifier();
+    // udemy1::e15::ex3::run_const_dest();
+    // udemy1::e15::ex4::run_passing_args();
+    // udemy1::e15::ex5::run_copy_move_const();
+    // udemy1::e15::ex6::run_redef_static();
 }

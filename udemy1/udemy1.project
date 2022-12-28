@@ -33,6 +33,19 @@
       <File Name="src/testing_ground.cpp"/>
     </VirtualDirectory>
     <VirtualDirectory Name="challenge">
+      <File Name="src/s15c.cpp"/>
+      <VirtualDirectory Name="s15c">
+        <File Name="src/s15c_trust_account.cpp"/>
+        <File Name="src/s15c_trust_account.hpp"/>
+        <File Name="src/s15c_checking_account.cpp"/>
+        <File Name="src/s15c_checking_account.hpp"/>
+        <File Name="src/s15c_account_util.cpp"/>
+        <File Name="src/s15c_account_util.hpp"/>
+        <File Name="src/s15c_savings_account.cpp"/>
+        <File Name="src/s15c_savings_account.hpp"/>
+        <File Name="src/s15c_account.cpp"/>
+        <File Name="src/s15c_account.hpp"/>
+      </VirtualDirectory>
       <VirtualDirectory Name="s14c">
         <File Name="src/mystring.cpp"/>
         <File Name="src/mystring.hpp"/>

@@ -46,17 +46,23 @@ link_directories(
 
 # Define the CXX sources
 set ( CXX_SRCS
+    ${CMAKE_CURRENT_LIST_DIR}/src/s15c_account.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/src/s15c.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/movies.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/movie.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/e11.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/src/s15c_checking_account.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/e13.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/e14.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/src/s15c_trust_account.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/src/s15c_account_util.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/s14c.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/s12_test_debugger.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/e15.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/s13c.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/a10.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/s8c.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/src/s15c_savings_account.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/account.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/e12.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/testing_ground.cpp
