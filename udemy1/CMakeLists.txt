@@ -46,20 +46,20 @@ link_directories(
 
 # Define the CXX sources
 set ( CXX_SRCS
-    ${CMAKE_CURRENT_LIST_DIR}/src/s15c_account.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/src/s15c.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/movies.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/src/mystring.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/src/s15c_account.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/movie.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/src/s15c.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/e11.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/s15c_checking_account.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/e13.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/e14.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/src/s15c_trust_account.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/s15c_account_util.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/s14c.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/src/s15c_trust_account.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/s12_test_debugger.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/e15.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/src/s13c.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/a10.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/s8c.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/s15c_savings_account.cpp
@@ -69,6 +69,7 @@ set ( CXX_SRCS
     ${CMAKE_CURRENT_LIST_DIR}/src/s12c.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/runall.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/accounts.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/src/s13c.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/e10.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/s10c.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/s9c.cpp
@@ -77,7 +78,6 @@ set ( CXX_SRCS
     ${CMAKE_CURRENT_LIST_DIR}/src/s4c.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/basederived.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/s11c.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/src/mystring.cpp
 )
 
 set_source_files_properties(
