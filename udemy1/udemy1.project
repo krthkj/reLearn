@@ -38,6 +38,11 @@
       <File Name="src/testing_ground.cpp"/>
     </VirtualDirectory>
     <VirtualDirectory Name="challenge">
+      <File Name="src/s16c.cpp"/>
+      <VirtualDirectory Name="s16c">
+        <File Name="src/s16c_class.cpp"/>
+        <File Name="src/s16c_class.hpp"/>
+      </VirtualDirectory>
       <File Name="src/s15c.cpp"/>
       <VirtualDirectory Name="s15c">
         <File Name="src/s15c_trust_account.cpp"/>

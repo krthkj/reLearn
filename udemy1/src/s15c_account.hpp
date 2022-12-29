@@ -20,7 +20,7 @@ class Account
   private:
     // need C++11 to create following static constexpr varialbes
     static constexpr const char* def_name = "Unnames Account";
-    static constexpr const double def_balance = 0.0;
+    static constexpr double def_balance = 0.0;
 
   protected:
     std::string name;

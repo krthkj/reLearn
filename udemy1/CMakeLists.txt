@@ -46,6 +46,7 @@ link_directories(
 
 # Define the CXX sources
 set ( CXX_SRCS
+    ${CMAKE_CURRENT_LIST_DIR}/src/s16c.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/movies.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/mystring.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/s15c_account.cpp
@@ -60,6 +61,7 @@ set ( CXX_SRCS
     ${CMAKE_CURRENT_LIST_DIR}/src/e15.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/e16.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/s13c.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/src/s16c_class.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/a10.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/s8c.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/e12.cpp
