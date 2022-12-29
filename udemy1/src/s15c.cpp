@@ -3,8 +3,8 @@
  * All Rights Reserved.
  * Using MIT licence, refer the license file supplied with the project.
  *
- * File : s14c.cpp
- * Desc : Section 14: Operator overloading
+ * File : s15c.cpp
+ * Desc : Section 15: Inheritance
  *        Testing operator overloading
  *
  * Author : Karthik Jain <krthkj.public@gmail.com>

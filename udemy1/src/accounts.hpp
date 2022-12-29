@@ -17,7 +17,7 @@ class Account
 
   public:
     Account();
-    ~Account();
+    ~Account() = default;
 
     void deposit(double amt);
     void withdraw(double amt);
@@ -30,7 +30,7 @@ class Savings_Account : public Account
 
   public:
     Savings_Account();
-    ~Savings_Account();
+    ~Savings_Account() = default;
 
     void deposit(double amt);
     void withdraw(double amt);
@@ -54,7 +54,7 @@ class Account
 
   public:
     Account();
-    ~Account();
+    ~Account() = default;
     Account(double bal);
 
     void deposit(double amt);
@@ -75,7 +75,7 @@ class Savings_Account : public Account
 
   public:
     Savings_Account();
-    ~Savings_Account();
+    ~Savings_Account() = default;
     Savings_Account(double balance, double int_rate);
 
     void deposit(double amt);

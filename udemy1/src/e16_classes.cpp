@@ -121,27 +121,7 @@ void Trust::withdraw(double amount)
 
 namespace udemy1::e16::ex6
 {
-// Abstract classes related
-Shape::~Shape()
-{
-}
-Open_Shape::~Open_Shape()
-{
-}
-Closed_Shape::~Closed_Shape()
-{
-}
-
 // concrete classes related
-Line::~Line()
-{
-}
-Circle::~Circle()
-{
-}
-Square::~Square()
-{
-}
 void Square::draw()
 {
     std::cout << "Drawing a Square" << std::endl;
@@ -171,24 +151,6 @@ void Line::rotate()
 
 namespace udemy1::e16::ex7_1
 {
-
-Account::~Account()
-{
-    // std::cout << "Account::destructor" << std::endl;
-}
-Checking::~Checking()
-{
-    // std::cout << "Checking::destructor" << std::endl;
-}
-Savings::~Savings()
-{
-    // std::cout << "Savings::destructor" << std::endl;
-}
-Trust::~Trust()
-{
-    // std::cout << "Trust::destructor" << std::endl;
-}
-
 void Account::withdraw(double amount)
 {
     std::cout << "In Account::withdraw " << amount << std::endl;
@@ -251,27 +213,6 @@ Trust::Trust(std::string n)
 
 namespace udemy1::e16::ex7_2
 {
-
-Account::~Account()
-{
-    // std::cout << "Account::destructor" << std::endl;
-}
-Checking::~Checking()
-{
-    // std::cout << "Checking::destructor" << std::endl;
-}
-Savings::~Savings()
-{
-    // std::cout << "Savings::destructor" << std::endl;
-}
-Trust::~Trust()
-{
-    // std::cout << "Trust::destructor" << std::endl;
-}
-Dog::~Dog()
-{
-}
-
 Account::Account(std::string n)
     : name{n}
 {

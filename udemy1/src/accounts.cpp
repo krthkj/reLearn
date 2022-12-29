@@ -15,9 +15,6 @@ Account::Account()
     , name{"An Account"}
 {
 }
-Account::~Account()
-{
-}
 void Account::deposit(double amt)
 {
     cout << "Account deposit called with " << amt << endl;
@@ -30,9 +27,6 @@ void Account::withdraw(double amt)
 // derived class
 Savings_Account::Savings_Account()
     : int_rate{3.0}
-{
-}
-Savings_Account::~Savings_Account()
 {
 }
 void Savings_Account::deposit(double amt)
@@ -62,9 +56,6 @@ Account::Account(double bal)
 {
 }
 
-Account::~Account()
-{
-}
 void Account::deposit(double amt)
 {
     balance += amt;
@@ -81,9 +72,6 @@ void Account::withdraw(double amt)
 
 Savings_Account::Savings_Account()
     : Savings_Account{0.0, 0.0}
-{
-}
-Savings_Account::~Savings_Account()
 {
 }
 Savings_Account::Savings_Account(double bal, double rate)

@@ -95,17 +95,17 @@ class Shape // abstract class
   public:
     virtual void draw() = 0;   // pure virtual functions
     virtual void rotate() = 0; // pure virtual functions
-    virtual ~Shape();
+    virtual ~Shape() = default;
 };
 class Open_Shape : public Shape // abstract class
 {
   public:
-    virtual ~Open_Shape();
+    virtual ~Open_Shape() = default;
 };
 class Closed_Shape : public Shape // abstract class
 {
   public:
-    virtual ~Closed_Shape();
+    virtual ~Closed_Shape() = default;
 };
 
 class Line : public Open_Shape // comcrete class
@@ -113,21 +113,21 @@ class Line : public Open_Shape // comcrete class
   public:
     virtual void draw() override;
     virtual void rotate() override;
-    virtual ~Line();
+    virtual ~Line() = default;
 };
 class Circle : public Closed_Shape // comcrete class
 {
   public:
     virtual void draw() override;
     virtual void rotate() override;
-    virtual ~Circle();
+    virtual ~Circle() = default;
 };
 class Square : public Closed_Shape // comcrete class
 {
   public:
     virtual void draw() override;
     virtual void rotate() override;
-    virtual ~Square();
+    virtual ~Square() = default;
 };
 
 } // namespace udemy1::e16::ex6
@@ -146,7 +146,7 @@ class Account
     std::string name;
     virtual void withdraw(double amount);
     Account(std::string n = "Unnamed Account");
-    virtual ~Account();
+    virtual ~Account() = default;
 };
 
 class Checking : public Account
@@ -156,7 +156,7 @@ class Checking : public Account
   public:
     virtual void withdraw(double amount);
     Checking(std::string n = "Unnamed Checking Account");
-    virtual ~Checking();
+    virtual ~Checking() = default;
 };
 
 class Savings : public Account
@@ -166,7 +166,7 @@ class Savings : public Account
   public:
     virtual void withdraw(double amount);
     Savings(std::string n = "Unnamed Savings Account");
-    virtual ~Savings();
+    virtual ~Savings() = default;
 };
 
 class Trust : public Account
@@ -176,7 +176,7 @@ class Trust : public Account
   public:
     virtual void withdraw(double amount);
     Trust(std::string n = "Unnamed Trust Account");
-    virtual ~Trust();
+    virtual ~Trust() = default;
 };
 } // namespace udemy1::e16::ex7_1
 
@@ -209,7 +209,7 @@ class Account : public I_Printable
     virtual void withdraw(double amount);
     virtual void print(std::ostream& os) const override;
     Account(std::string n = "Unnamed Savings Account");
-    virtual ~Account();
+    virtual ~Account() = default;
 };
 
 class Checking : public Account
@@ -217,7 +217,7 @@ class Checking : public Account
   public:
     virtual void withdraw(double amount) override;
     virtual void print(std::ostream& os) const override;
-    virtual ~Checking();
+    virtual ~Checking() = default;
     Checking(std::string n = "Unnamed Checking Account");
 };
 
@@ -227,7 +227,7 @@ class Savings : public Account
   public:
     virtual void withdraw(double amount) override;
     virtual void print(std::ostream& os) const override;
-    virtual ~Savings();
+    virtual ~Savings() = default;
     Savings(std::string n = "Unnamed Savings Account");
 };
 
@@ -237,7 +237,7 @@ class Trust : public Account
     virtual void withdraw(double amount) override;
     virtual void print(std::ostream& os) const override;
     Trust(std::string n = "Unnamed Trust Account");
-    virtual ~Trust();
+    virtual ~Trust() = default;
 };
 
 class Dog : public I_Printable
@@ -245,7 +245,7 @@ class Dog : public I_Printable
   public:
     std::string name;
     virtual void print(std::ostream& os) const override;
-    virtual ~Dog();
+    virtual ~Dog() = default;
     Dog(std::string n = "Unnamed Dog");
 };
 } // namespace udemy1::e16::ex7_2
