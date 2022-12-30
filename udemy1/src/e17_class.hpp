@@ -2,10 +2,11 @@
 #define E17_CLASS_HPP
 
 #include <iostream>
+#include <memory>
 #include <vector>
 
 /**
- * @brief Example of Smart pointer
+ * @brief Example of Smart pointer test class
  */
 namespace udemy1::e17::ex1
 {
@@ -21,9 +22,11 @@ class Test
     ~Test();
     int get_data() const;
 };
-
 } // namespace udemy1::e17::ex1
 
+/**
+ * @brief Example of Common Account related classes
+ */
 namespace udemy1::e17::ex2
 {
 class I_Printable
@@ -118,4 +121,54 @@ void deposit(std::vector<Account*>& accounts, double amount);
 void withdraw(std::vector<Account*>& accounts, double amount);
 } // namespace udemy1::e17::ex2
 
+/**
+ * @brief Test class for weak pointer or cyclic reference
+ */
+namespace udemy1::e17::ex4
+{
+
+// Problem: Strong circular reference
+class B; // forward decleration
+class A
+{
+  private:
+    std::shared_ptr<B> b_ptr; // Strong circular reference
+  public:
+    void set_B(std::shared_ptr<B>& b){b_ptr = b;}
+    A(){ std::cout << "A Constructor" << std::endl;}
+    ~A(){std::cout << "A Destructor" << std::endl;}
+};
+class B
+{
+  private:
+    std::shared_ptr<A> a_ptr; // Strong circular reference
+  public:
+    void set_A(std::shared_ptr<A>& a){a_ptr = a;}
+    B(){std::cout << "B Constructor" << std::endl;}
+    ~B(){std::cout << "B Destructor" << std::endl;}
+};
+
+
+// Solution: makeing weak circular reference
+class B_weak;// forward decleration
+class A_weak
+{
+  private:
+    std::shared_ptr<B_weak> b_ptr; // Strong reference
+  public:
+    void set_B(std::shared_ptr<B_weak>& b){b_ptr = b;}
+    A_weak(){ std::cout << "A_weak Constructor" << std::endl;}
+    ~A_weak(){std::cout << "A_weak Destructor" << std::endl;}
+};
+
+class B_weak
+{
+  private:
+    std::weak_ptr<A_weak> a_ptr; // make weak to break the strong circular reference
+  public:
+    void set_A(std::shared_ptr<A_weak>& a){a_ptr = a;}
+    B_weak(){std::cout << "B_weak Constructor" << std::endl;}
+    ~B_weak(){std::cout << "B_weak Destructor" << std::endl;}
+};
+} // namespace udemy1::e17::ex4
 #endif // E17_CLASS_HPP

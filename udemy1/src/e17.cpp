@@ -73,7 +73,7 @@
  *   }
  * // Pointer will be destroyed automatically when no longer needed
  *******************************************************************************
- * Unique pointers:
+ * Unique pointers:  (Introduced in C++11)
  * - simple smart pointer - very effecient
  * - uniqe_ptr<T>
  *    - Points to an object of the type T on the heap
@@ -85,7 +85,7 @@
  *
  * make_unique - introduced in C++14
  *******************************************************************************
- * Shared pointers:
+ * Shared pointers:  (Introduced in C++11)
  * - Provides shared ownership of heap objects
  * - shared_ptr<T>
  *    - Points to an object of the type T on the heap
@@ -95,7 +95,46 @@
  *    - CAN be moved
  *    - desn't support managing array by default
  *    - When the use count is zero, the managed object on the heap is deatroyed
- * make_unique - introduced in C++11
+ *    - increment or decrement reference use count to keep track of the shared ownerships
+ * make_shared - introduced in C++11
+ * deleteing shared pointer, by keeping count of
+ *******************************************************************************
+ * Weak pointers: (Introduced in C++11)
+ * - Provides a non-owning "weak" reference
+ * - weak_ptr<T>
+ *    - Points to an object of the type T on the heap
+ *    - Doesnt participate in owning relatopship
+ *    - Always created from shared_ptr
+ *    - Does NOT increment or decrement reference use count
+ *    - Used to prevent strong reference cycles which could prevent objects from being deleted
+ *******************************************************************************
+ * Problem with shared_ptr:
+ * - A refers to B
+ * - B refers to A
+ * - Shared strong ownership prevents heap deallocation
+ *
+ * Solution using weak_ptr:
+ * - make one of the pointers non-owning or 'weak'
+ * - now heap storage is deallocated properly
+ *******************************************************************************
+ * custom deleters
+ * - Sometimes when we destroy a smart pointer we need more than to just destory the object on the heap
+ * - These are special use-case
+ * - C++ smart pointer allow you to provide custom deleters
+ * - lots of ways to achieve this
+ *    - Functions
+ *    - Lambdas
+ *    - Others
+ *
+ * Example using functions:
+ *   void my_deleter( Some_Class* raw_pointer){
+ *     // your custom deleter code
+ *     delete raw_pointer;
+ *   }
+ *   shared_ptr<Some_Class> ptr{new Some_Class{}, my_deleter};
+ *
+ *
+ *
  *******************************************************************************
  */
 
@@ -148,6 +187,9 @@ void run_unique_ptr_test(void)
 }
 } // namespace udemy1::e17::ex1
 
+/**
+ * @brief Example of Unique pointer
+ */
 namespace udemy1::e17::ex2
 {
 void run_unique_ptr_account(void)
@@ -169,12 +211,139 @@ void run_unique_ptr_account(void)
 
 } // namespace udemy1::e17::ex2
 
+/**
+ * @brief Example of Shared pointer
+ */
 namespace udemy1::e17::ex3
 {
+void func(std::shared_ptr<udemy1::e17::ex1::Test> p)
+{
+    std::cout << "Use count: " << p.use_count() << std::endl;
+}
+
 void run_shared_ptr(void)
 {
+    {
+        std::cout << "\n==========================================" << std::endl;
+        std::shared_ptr<int> ptr1{new int{100}};
+        std::cout << "ptr1 Created" << std::endl;
+        std::cout << "ptr1 Use count: " << ptr1.use_count() << std::endl;
+
+        std::shared_ptr<int> ptr2{ptr1};
+        std::cout << "ptr2{ptr1} Created" << std::endl;
+        std::cout << "ptr1 Use count: " << ptr1.use_count() << std::endl;
+        std::cout << "ptr2 Use count: " << ptr2.use_count() << std::endl;
+
+        ptr1.reset();
+        std::cout << "ptr1.reset()" << std::endl;
+        std::cout << "ptr1 Use count: " << ptr1.use_count() << std::endl;
+        std::cout << "ptr2 Use count: " << ptr2.use_count() << std::endl;
+    }
+    {
+        std::cout << "\n==========================================" << std::endl;
+        using udemy1::e17::ex1::Test;
+        std::shared_ptr<Test> ptr = std::make_shared<Test>(100);
+        func(ptr);
+        std::cout << "ptr Use count: " << ptr.use_count() << std::endl;
+
+        {
+            std::shared_ptr<Test> ptr1 = ptr;
+            std::cout << "ptr Use count: " << ptr.use_count() << std::endl;
+            {
+                std::shared_ptr<Test> ptr2 = ptr;
+                std::cout << "ptr Use count: " << ptr.use_count() << std::endl;
+                ptr.reset();
+            }
+            std::cout << "ptr Use count: " << ptr.use_count() << std::endl;
+        }
+        std::cout << "ptr Use count: " << ptr.use_count() << std::endl;
+    }
+    {
+        using udemy1::e17::ex2::Account;
+        using udemy1::e17::ex2::Checking_Account;
+        using udemy1::e17::ex2::Savings_Account;
+        using udemy1::e17::ex2::Trust_Account;
+        std::cout << "\n==========================================" << std::endl;
+        std::vector<std::shared_ptr<Account>> accounts;
+        {
+
+            std::shared_ptr<Account> acc1 = std::make_shared<Trust_Account>("Larry", 10000, 3.1);
+            std::shared_ptr<Account> acc2 = std::make_shared<Checking_Account>("Moe", 5000);
+            std::shared_ptr<Account> acc3 = std::make_shared<Savings_Account>("Curly", 6000);
+
+            // std::vector<std::shared_ptr<Account>> accounts;
+            accounts.push_back(acc1);
+            accounts.push_back(acc2);
+            accounts.push_back(acc3);
+
+            for(const auto& acc : accounts) {
+                std::cout << *acc << std::endl;
+                std::cout << "Use count: " << acc.use_count() << std::endl;
+            }
+            std::cout << "==========================================" << std::endl;
+        }
+
+        for(const auto& acc : accounts) {
+            std::cout << *acc << std::endl;
+            std::cout << "Use count: " << acc.use_count() << std::endl;
+        }
+        std::cout << "==========================================" << std::endl;
+    }
 }
 } // namespace udemy1::e17::ex3
+
+/**
+ * @brief Example of Weak pointer
+ */
+namespace udemy1::e17::ex4
+{
+void run_weak_ptr()
+{
+    std::cout << "==========================================" << std::endl;
+    std::cout << "Problem: Strong cirular reference" << std::endl;
+    {
+        // This Block will create (strong) circular reference
+        // this can not be deallocated
+        std::shared_ptr<A> a = std::make_shared<A>();
+        std::shared_ptr<B> b = std::make_shared<B>();
+        a->set_B(b);
+        b->set_A(a);
+        std::cout << "Results: Memory leak, no destructor called " << std::endl;
+    }
+    std::cout << "==========================================" << std::endl;
+    std::cout << "Solution: Weak cirular reference" << std::endl;
+    {
+        // This Block will create (weak) circular reference
+        // this can not be deallocated
+        std::shared_ptr<A_weak> a = std::make_shared<A_weak>();
+        std::shared_ptr<B_weak> b = std::make_shared<B_weak>();
+        a->set_B(b);
+        b->set_A(a);
+        std::cout << "Results: No Memory leak, destructor are called for cleanup" << std::endl;
+    }
+}
+} // namespace udemy1::e17::ex4
+
+/**
+ * @brief Example of Weak pointer
+ */
+namespace udemy1::e17::ex4
+{
+
+void my_delete(udemy1::e17::ex1::Test* ptr)
+{
+    std::cout << "In my custom deleter" << std::endl;
+    delete ptr;
+}
+
+void run_custom_deleter(void)
+{
+    // custom delete using function
+    using udemy1::e17::ex1::Test;
+    // std::unique_ptr<Test> ptr_u{new Test{}}; // TODO: not sure how to use unique pointer with custom deleter
+    std::shared_ptr<Test> ptr_s{new Test{}, my_delete};
+}
+}; // namespace udemy1::e17::ex4
 
 /**
  * @brief main function to run all the underlying examples
@@ -183,5 +352,7 @@ void udemy1::e17_run(void)
 {
     // e17::ex1::run_unique_ptr_test();
     // e17::ex2::run_unique_ptr_account();
-    e17::ex3::run_shared_ptr();
+    // e17::ex3::run_shared_ptr();
+    // e17::ex4::run_weak_ptr();
+    e17::ex4::run_custom_deleter();
 }
