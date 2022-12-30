@@ -34,7 +34,7 @@ void test_run_udemy1(void)
     // s13c_run();
     // s14c_run();
     // s15c_run();
-    s16c_run();
+    // s16c_run();
 
     /**
      * @brief Running Section exercises
@@ -46,6 +46,7 @@ void test_run_udemy1(void)
     // e14_run();
     // e15_run();
     // e16_run();
+    e17_run();
 
     /**
      * @brief Running Section Assignments

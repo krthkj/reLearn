@@ -10,6 +10,11 @@
       <File Name="src/a10.cpp"/>
     </VirtualDirectory>
     <VirtualDirectory Name="exercise">
+      <VirtualDirectory Name="e17">
+        <File Name="src/e17_class.cpp"/>
+        <File Name="src/e17_class.hpp"/>
+      </VirtualDirectory>
+      <File Name="src/e17.cpp"/>
       <VirtualDirectory Name="e16">
         <File Name="src/e16_classes.cpp"/>
         <File Name="src/e16_classes.hpp"/>
