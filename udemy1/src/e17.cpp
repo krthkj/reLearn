@@ -297,6 +297,40 @@ void run_shared_ptr(void)
  */
 namespace udemy1::e17::ex4
 {
+
+struct Person;
+
+struct Team {
+    std::shared_ptr<Person> goalKeeper; // Team.goalKeeper is an owner, hence increments shared_ptr.count()
+    Team()
+    {
+        std::cout << "Team Created." << std::endl;
+    }
+    ~Team()
+    {
+        std::cout << "Team destructed." << std::endl;
+    }
+};
+struct Person {
+    std::weak_ptr<Team> team; // Person.team is an observer and has no ownership, doesnt increments shared_ptr.count()
+    Person()
+    {
+        std::cout << "Person Created." << std::endl;
+    }
+    ~Person()
+    {
+        std::cout << "Person destructed." << std::endl;
+    }
+};
+
+void run_weak_ptr_cyclic_dep_2(void)
+{
+    auto Barca = std::make_shared<Team>();
+    auto Valdes = std::make_shared<Person>();
+    Barca->goalKeeper = Valdes;
+    Valdes->team = Barca;
+}
+
 void run_weak_ptr_cyclic_dep()
 {
     std::cout << "==========================================" << std::endl;
@@ -459,7 +493,8 @@ void run_custom_deleter(void)
 
     // custom lamda deleter for shared pointer
     std::shared_ptr<Test> ptr_s_lamds{new Test{200}, [](Test* ptr) {
-                                          std::cout << "\tUsing custom deleter lamda " << (*ptr).get_data() << std::endl;
+                                          std::cout << "\tUsing custom deleter lamda " << (*ptr).get_data()
+                                                    << std::endl;
                                           delete ptr;
                                       }};
 }
@@ -474,7 +509,8 @@ void udemy1::e17_run(void)
     // e17::ex2::run_unique_ptr_account();
     // e17::ex3::run_shared_ptr();
     // e17::ex4::run_weak_ptr_cyclic_dep();
+    e17::ex4::run_weak_ptr_cyclic_dep_2();
     // e17::ex4::run_weak_ptr_2();
     // e17::ex4::run_weak_ptr_3();
-    e17::ex4::run_custom_deleter();
+    // e17::ex4::run_custom_deleter();
 }
