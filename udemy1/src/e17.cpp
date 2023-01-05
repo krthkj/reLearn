@@ -103,8 +103,8 @@
  * - Provides a non-owning "weak" reference
  * - weak_ptr<T>
  *    - Points to an object of the type T on the heap
- *    - Doesnt participate in owning relatopship
- *    - Always created from shared_ptr
+ *    - Doesnt participate in owning relatopship (no ownership)
+ *    - Always created from shared_ptr (reference to an object manages by shared_ptr)
  *    - Does NOT increment or decrement reference use count
  *    - Used to prevent strong reference cycles which could prevent objects from being deleted
  *******************************************************************************
@@ -297,7 +297,7 @@ void run_shared_ptr(void)
  */
 namespace udemy1::e17::ex4
 {
-void run_weak_ptr()
+void run_weak_ptr_cyclic_dep()
 {
     std::cout << "==========================================" << std::endl;
     std::cout << "Problem: Strong cirular reference" << std::endl;
@@ -322,6 +322,116 @@ void run_weak_ptr()
         std::cout << "Results: No Memory leak, destructor are called for cleanup" << std::endl;
     }
 }
+
+//---------------------------------------------------------------------
+
+std::weak_ptr<int> gw;
+std::shared_ptr<int> gw_2;
+
+void observe()
+{
+    std::cout << "gw.use_count() == " << gw.use_count() << "; ";
+    // we have to make a copy of shared pointer before usage:
+    if(std::shared_ptr<int> spt = gw.lock()) {
+        std::cout << "*spt == " << *spt << '\n';
+    } else {
+        std::cout << "gw is expired\n";
+    }
+}
+void observe_2()
+{
+    std::cout << "gw_2.use_count() == " << gw_2.use_count() << "; ";
+    // we have to make a copy of shared pointer before usage:
+    if(std::shared_ptr<int> spt = gw_2) {
+        std::cout << "*spt == " << *spt << '\n';
+    } else {
+        std::cout << "gw_2 is expired\n";
+    }
+}
+
+void run_weak_ptr_2(void)
+{
+    {
+        {
+            auto sp = std::make_shared<int>(42);
+            std::cout << "sp.use_count() == " << sp.use_count() << "; " << std::endl;
+            gw = sp;
+            observe();
+        }
+        observe();
+    }
+    {
+        {
+            auto sp = std::make_shared<int>(42);
+            gw_2 = sp;
+            observe_2();
+        }
+        observe_2();
+    }
+}
+
+//---------------------------------------------------------------------
+
+// std::shared_ptr<int> myfunc(void)
+//{
+//
+// }
+
+void run_weak_ptr_3(void)
+{
+
+    {
+        auto shared_Ptr = std::make_shared<int>(100);
+        std::cout << "shared_Ptr.use_count() == " << shared_Ptr.use_count() << "; " << std::endl;
+        std::cout << std::endl;
+
+        std::weak_ptr<int> weak_ptr_1(shared_Ptr);
+        std::cout << "shared_Ptr.use_count() == " << shared_Ptr.use_count() << "; " << std::endl;
+        std::cout << "weak_ptr_1.use_count() == " << weak_ptr_1.use_count() << "; " << std::endl;
+        std::cout << "weak_ptr_1.expired()   == " << weak_ptr_1.expired() << "; " << std::endl;
+        std::cout << std::endl;
+
+        std::weak_ptr<int> weak_ptr_2 = shared_Ptr;
+        std::cout << "shared_Ptr.use_count() == " << shared_Ptr.use_count() << "; " << std::endl;
+        std::cout << "weak_ptr_2.use_count() == " << weak_ptr_2.use_count() << "; " << std::endl;
+        std::cout << "weak_ptr_2.expired()   == " << weak_ptr_2.expired() << "; " << std::endl;
+
+        std::cout << std::endl;
+        std::shared_ptr<int> shared_ptr_2 = shared_Ptr;
+        std::cout << "shared_Ptr.use_count() == " << shared_Ptr.use_count() << "; " << std::endl;
+        std::cout << "shared_ptr_2.use_count() == " << shared_ptr_2.use_count() << "; " << std::endl;
+        std::cout << "weak_ptr_2.use_count() == " << weak_ptr_2.use_count() << "; " << std::endl;
+        std::cout << "weak_ptr_2.expired()   == " << weak_ptr_2.expired() << "; " << std::endl;
+
+        std::cout << std::endl;
+        if(std::shared_ptr<int> sp = weak_ptr_1.lock()) {
+
+            std::cout << "*sp = " << *sp << "; " << std::endl;
+            std::cout << "sp.use_count() == " << sp.use_count() << "; " << std::endl;
+        } else
+            std::cout << "Didnt get the resource " << std::endl;
+        std::cout << std::endl;
+
+        std::cout << "Before weak_ptr_2.reset();" << std::endl;
+        std::cout << "shared_Ptr.use_count() == " << shared_Ptr.use_count() << "; " << std::endl;
+        std::cout << "weak_ptr_2.use_count() == " << weak_ptr_2.use_count() << "; " << std::endl;
+        std::cout << "weak_ptr_2.expired()   == " << weak_ptr_2.expired() << "; " << std::endl;
+        weak_ptr_2.reset();
+        std::cout << "after weak_ptr_2.reset();" << std::endl;
+        std::cout << "shared_Ptr.use_count() == " << shared_Ptr.use_count() << "; " << std::endl;
+        std::cout << "weak_ptr_2.use_count() == " << weak_ptr_2.use_count() << "; " << std::endl;
+        std::cout << "weak_ptr_2.expired()   == " << weak_ptr_2.expired() << "; " << std::endl;
+
+        std::cout << std::endl;
+        if(std::shared_ptr<int> sp = weak_ptr_1.lock()) {
+
+            std::cout << "*sp = " << *sp << "; " << std::endl;
+            std::cout << "sp.use_count() == " << sp.use_count() << "; " << std::endl;
+        } else
+            std::cout << "Didnt get the resource " << std::endl;
+    }
+}
+
 } // namespace udemy1::e17::ex4
 
 /**
@@ -330,9 +440,9 @@ void run_weak_ptr()
 namespace udemy1::e17::ex4
 {
 
-void my_delete(udemy1::e17::ex1::Test* ptr)
+void my_deleter(udemy1::e17::ex1::Test* ptr)
 {
-    std::cout << "In my custom deleter" << std::endl;
+    std::cout << "In my custom deleter: " << (*ptr).get_data() << std::endl;
     delete ptr;
 }
 
@@ -340,8 +450,18 @@ void run_custom_deleter(void)
 {
     // custom delete using function
     using udemy1::e17::ex1::Test;
-    // std::unique_ptr<Test> ptr_u{new Test{}}; // TODO: not sure how to use unique pointer with custom deleter
-    std::shared_ptr<Test> ptr_s{new Test{}, my_delete};
+
+    // custom deleter for unique pointer
+    std::unique_ptr<Test, decltype(&my_deleter)> ptr_u{new Test{12}, &my_deleter};
+
+    // custom deleter for shared pointer
+    std::shared_ptr<Test> ptr_s{new Test{100}, &my_deleter};
+
+    // custom lamda deleter for shared pointer
+    std::shared_ptr<Test> ptr_s_lamds{new Test{200}, [](Test* ptr) {
+                                          std::cout << "\tUsing custom deleter lamda " << (*ptr).get_data() << std::endl;
+                                          delete ptr;
+                                      }};
 }
 }; // namespace udemy1::e17::ex4
 
@@ -353,6 +473,8 @@ void udemy1::e17_run(void)
     // e17::ex1::run_unique_ptr_test();
     // e17::ex2::run_unique_ptr_account();
     // e17::ex3::run_shared_ptr();
-    // e17::ex4::run_weak_ptr();
+    // e17::ex4::run_weak_ptr_cyclic_dep();
+    // e17::ex4::run_weak_ptr_2();
+    // e17::ex4::run_weak_ptr_3();
     e17::ex4::run_custom_deleter();
 }
