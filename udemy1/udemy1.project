@@ -43,6 +43,7 @@
       <File Name="src/testing_ground.cpp"/>
     </VirtualDirectory>
     <VirtualDirectory Name="challenge">
+      <File Name="src/s17c.cpp"/>
       <File Name="src/s16c.cpp"/>
       <VirtualDirectory Name="s16c">
         <File Name="src/s16c_class.cpp"/>

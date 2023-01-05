@@ -54,6 +54,7 @@ set ( CXX_SRCS
     ${CMAKE_CURRENT_LIST_DIR}/src/account.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/accounts.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/basederived.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/src/s17c.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/e11.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/e14.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/e15.cpp
