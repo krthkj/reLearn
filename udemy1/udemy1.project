@@ -48,6 +48,11 @@
       <File Name="src/testing_ground.cpp"/>
     </VirtualDirectory>
     <VirtualDirectory Name="challenge">
+      <VirtualDirectory Name="s18c">
+        <File Name="src/s18c_class.cpp"/>
+        <File Name="src/s18c_class.hpp"/>
+      </VirtualDirectory>
+      <File Name="src/s18c.cpp"/>
       <File Name="src/s17c.cpp"/>
       <File Name="src/s16c.cpp"/>
       <VirtualDirectory Name="s16c">
