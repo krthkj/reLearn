@@ -48,6 +48,7 @@ void test_run_udemy1(void)
     // e15_run();
     // e16_run();
     // e17_run();
+    e18_run();
 
     /**
      * @brief Running Section Assignments
