@@ -39,9 +39,11 @@ void s19c1_run(void);
 void s19c2_run(void);
 void s19c3_run(void);
 void s19c4_run(void);
-void s20c_run(void);
+void s20c1_run(void);
+void s20c2_run(void);
+void s20c3_run(void);
+void s20c4_run(void);
 void s21c_run(void);
-void s22c_run(void);
 void s23c_run(void);
 
 /**
@@ -57,8 +59,8 @@ void e16_run(void);
 void e17_run(void);
 void e18_run(void);
 void e19_run(void);
+void e20_run(void);
 void e21_run(void);
-void e22_run(void);
 void e23_run(void);
 
 /**
