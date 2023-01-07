@@ -102,18 +102,98 @@
  *|(C++14)       |                        |                                                                            |
  *+--------------+------------------------+----------------------------------------------------------------------------+
  *******************************************************************************
+ * File stream
+ * ============
+ *
+ * Reading from file
+ * -----------------
+ * fstream and ifstream are commonly used for input files
+ * 1. #include <fstream>
+ * 2. declare fstream or ifstream object
+ * 3. connect it to a file on your file system (open for reading)
+ * 4. Read data from file via the stream
+ * 5. clost the stream
+ *
+ * Syntax:
+ *   std::fstream in_file {"../myfile.txt", std::iso::in }; // open in read mode
+ *   std::fstream in_file {"../myfile.txt", std::iso::in | std::iso::binary }; // open file in read and binary mode
+ *
+ *   std::ifstream in_file {"../myfile.txt"}; // 'std::iso::in' is set by default
+ *   std::ifstream in_file {"../myfile.txt", std::iso::in }; // explicitly mentioning read more
+ *   std::ifstream in_file {"../myfile.txt", std::iso::binary }; // open file in read and binary mode
+ *
+ *   std::ifstream in_file;
+ *   std::string file_name;
+ *   std::cin >> file_name;
+ *   in_file.open(file_name);
+ *   in_file.open(file_name, std::ios::binary);
+ *
+ * Check if file open is success:
+ *
+ *   if(in_file.is_open()) { .. }
+ *   else { ... }
+ *
+ *   if(in_file) { .. }
+ *   else { ... }
+ *
+ * Closing the file : in_file.close();
+ *******************************************************************************
+ * Writing to file
+ * ---------------
+ * fstream and ofstream are commonly used for input files
+ * 1. #include <fstream>
+ * 2. declare fstream or ofstream object
+ * 3. connect it to a file on your file system (open for writing)
+ * 4. Write data from file via the stream
+ * 5. close the stream
+ *
+ * Notes:
+ * - output files will be created if they dont exist
+ * - output files will be overwitten (truncated) by default
+ * - can be opened with append mode
+ * - can open text and binay mode
+ *
+ * Syntax:
+ *   std::fstream out_file {"../myfile.txt", std::ios::out}; // open in write more, default in text mode
+ *   std::fstream out_file {"../myfile.txt", std::ios::out | std::ios::binary};  // writing in binary mode
+ *
+ *   std::ofstream out_file {"../myfile.txt", std::ios::out};
+ *   std::ofstream out_file {"../myfile.txt"}; // std::ios::out is optional, because it default
+ *   std::ofstream out_file {"../myfile.txt", std::ios::binary};  // writing in binary mode
+ *
+ *   std::ofstream out_file {"../myfile.txt", std::ios::trunc};// Truncate contents when opening
+ *   std::ofstream out_file {"../myfile.txt", std::ios::app};  // append on each write
+ *   std::ofstream out_file {"../myfile.txt", std::ios::ate};  // seek to end of stream when openning
+ *
+ *******************************************************************************
+ * String stream  (stringstream, istringstream and ostringstream)
+ * =============
+ * fstream and ofstream are commonly used for input files
+ * 1. #include <sstream>
+ * 2. declare stringstream, istringstream or ostringstream object
+ * 3. connect it to std::string
+ * 4. Read/Write data from/to string stream usinf formattied I/O
+ *
+ * Syntax:
+ *   std::istringstream iss{};
+ *   std::ostringstream oss{};
  */
 
 //#include "s19c_class.hpp"
 #include "udemy1.hpp"
 
+#include <fstream> // used for file I/O
 #include <iomanip> // for I/O manipulators
 #include <iostream>
-//#include <memory>
+#include <limits>  // for using limit values
+#include <sstream> // for String stream
 
 namespace udemy1::e19::iomanip
 {
 
+/**
+ * @brief Boolean io-manipulator examples
+ */
 void run_boolean_test(void)
 {
 
@@ -140,6 +220,9 @@ void run_boolean_test(void)
     std::cout << "Default (10 == 20): " << (10 == 20) << std::endl;
 }
 
+/**
+ * @brief Integer io-manipulator examples
+ */
 void run_integer_test(void)
 {
     int num{255};
@@ -188,6 +271,9 @@ void run_integer_test(void)
     std::cout << "number in base 0: " << std::setbase(0) << num << std::endl;
 }
 
+/**
+ * @brief Floating io-manipulator examples
+ */
 void run_float_test(void)
 {
     double num1{123456789.987654321};
@@ -268,6 +354,9 @@ void ruler(void)
     std::cout << "1234567890123456789012345678901234567890123456789012345678901234567890" << std::endl;
 }
 
+/**
+ * @brief text related io-manipulator examples
+ */
 void run_field_test(void)
 {
     int num1{1234};
@@ -280,9 +369,9 @@ void run_field_test(void)
 
     std::cout << "\n-default one per line ---------------------------------------------------" << std::endl;
     ruler();
-    std::cout << num1 << std::endl;
-    std::cout << num2 << std::endl;
-    std::cout << hello << std::endl;
+    std::cout << num1 << std::endl
+              << num2 << std::endl
+              << hello << std::endl;
 
     std::cout << "\n-width 10 for num1 ------------------------------------------------------" << std::endl;
     ruler();
@@ -324,10 +413,324 @@ void run_field_test(void)
 
 } // namespace udemy1::e19::iomanip
 
+/**
+ * @brief File I/O using fstream
+ */
+namespace udemy1::e19::fstream
+{
+
+void run_read_from_file_1(std::string file_name)
+{
+    std::cout << file_name << std::endl;
+    std::ifstream in_file{file_name};
+    if(!in_file) { // check if file is open
+        std::cerr << "File open error" << std::endl;
+        return; // exit the program
+    }
+
+    std::string line{};
+    while(!in_file.eof()) {             // while not at the end
+                                        // using eof() may not work as expected across OS
+        std::getline(in_file, line);    // read the line
+        std::cout << line << std::endl; // display the line
+    }
+    in_file.close(); // close the file
+}
+
+void run_read_from_file_2(std::string file_name)
+{
+    std::ifstream in_file{file_name};
+    if(!in_file) { // check if file is open
+        std::cerr << "File open error" << std::endl;
+        return; // exit the program
+    }
+
+    std::string line{};
+    while(std::getline(in_file, line))  // read line
+        std::cout << line << std::endl; // display the line
+
+    in_file.close(); // close the file
+}
+
+// reading in unformatted manner ( one characte at a time )
+void run_read_from_file_3(std::string file_name)
+{
+    std::ifstream in_file{file_name};
+    if(!in_file) { // check if file is open
+        std::cerr << "File open error" << std::endl;
+        return; // exit the program
+    }
+
+    char c{};
+    while(in_file.get(c)) // read a character
+        std::cout << c;   // display the character
+
+    in_file.close(); // close the file
+}
+
+void run_read_from_file_4(std::string file_name)
+{
+
+    std::ifstream in_file;
+    in_file.open(file_name);
+    if(!in_file) { // check if file is open
+        std::cerr << "File open error" << std::endl;
+        return; // exit the program
+    }
+
+    std::string word;
+    int num;
+    double total;
+
+    in_file >> word >> num >> total;
+    std::cout << word << std::endl;
+    std::cout << num << std::endl;
+    std::cout << total << std::endl;
+    in_file.close(); // close the file
+}
+
+void run_read_from_file_5(std::string file_name)
+{
+    std::ifstream in_file;
+    in_file.open(file_name);
+    if(!in_file) { // check if file is open
+        std::cerr << "File open error" << std::endl;
+        return; // exit the program
+    }
+
+    std::string name;
+    int num;
+    double total;
+    while(!in_file.eof()) { // checking for end of file
+                            // using eof() may not work as expected across OS
+        in_file >> name >> num >> total;
+        std::cout << std::setw(10) << std::left << name;
+        std::cout << std::setw(10) << num;
+        std::cout << std::setw(10) << total << std::endl;
+    }
+    in_file.close(); // close the file
+}
+
+void run_read_from_file_6(std::string file_name)
+{
+    std::ifstream in_file;
+    in_file.open(file_name);
+    if(!in_file) { // check if file is open
+        std::cerr << "File open error" << std::endl;
+        return; // exit the program
+    }
+
+    std::string name;
+    int num;
+    double total;
+    while(in_file >> name >> num >> total) { // this is the best practice
+        std::cout << std::setw(10) << std::left << name;
+        std::cout << std::setw(10) << num;
+        std::cout << std::setw(10) << total << std::endl;
+    }
+    in_file.close(); // close the file
+}
+
+// Formatted input..
+// will handle new line, eof and etc...
+void run_read_poem_1(std::string file_name)
+{
+    std::fstream in_file;
+    in_file.open(file_name);
+    if(!in_file) { // check if file is open
+        std::cerr << "Prolem opening file" << std::endl;
+        return; // exit the program
+    }
+
+    std::string line{};
+    while(std::getline(in_file, line))
+        std::cout << line << std::endl;
+    std::cout << std::endl;
+    in_file.close(); // close the file
+}
+
+// unformatted input..
+// no need to worry about eof, new line and other things
+// will read exactly as its in the file
+void run_read_poem_2(std::string file_name)
+{
+    std::fstream in_file;
+    in_file.open(file_name);
+    if(!in_file) { // check if file is open
+        std::cerr << "Prolem opening file" << std::endl;
+        return; // exit the program
+    }
+
+    char c{};
+    while(in_file.get(c))
+        std::cout << c;
+    std::cout << std::endl;
+    in_file.close(); // close the file
+}
+
+void run_write_to_file_1(std::string file_name)
+{
+    std::ofstream ofs{file_name}; // overwite to a file
+    if(!ofs)
+        std::cerr << " Error creating file" << std::endl;
+    else {
+        std::string line{};
+        std::cout << "Enter someing to write to file: ";
+        std::getline(std::cin, line);
+        ofs << line << std::endl;
+        ofs.close();
+    }
+}
+
+void run_write_to_file_2(std::string file_name)
+{
+    std::ofstream ofs{file_name, std::ios::app}; // append to file
+    if(!ofs)
+        std::cerr << " Error creating file" << std::endl;
+    else {
+        std::string line{};
+        std::cout << "Enter someing to write to file: ";
+        std::getline(std::cin, line);
+        ofs << line << std::endl;
+        ofs.close();
+    }
+}
+
+// formatted file copy
+void run_copy_files_1(std::string file_name, std::string target_file_name)
+{
+    std::ifstream ifs{file_name};
+    std::ofstream ofs{target_file_name};
+
+    if(!ifs) {
+        std::cerr << " Error opening file" << std::endl;
+        return;
+    }
+    if(!ofs) {
+        std::cerr << " Error creating file" << std::endl;
+        ifs.close();
+        return;
+    }
+
+    std::string line{};
+    while(std::getline(ifs, line))
+        ofs << line << std::endl;
+    ifs.close();
+    ofs.close();
+    std::cout << "File copied." << std::endl;
+}
+
+// unformatted file copy
+void run_copy_files_2(std::string file_name, std::string target_file_name)
+{
+    std::ifstream ifs{file_name};
+    std::ofstream ofs{target_file_name};
+
+    if(!ifs) {
+        std::cerr << " Error opening file" << std::endl;
+        return;
+    }
+    if(!ofs) {
+        std::cerr << " Error creating file" << std::endl;
+        ifs.close();
+        return;
+    }
+
+    char c{};
+    while(ifs.get(c))
+        ofs.put(c);
+    ifs.close();
+    ofs.close();
+    std::cout << "File copied." << std::endl;
+}
+
+} // namespace udemy1::e19::fstream
+
+/**
+ * @brief String Stream manipulation
+ */
+namespace udemy1::e19::sstream
+{
+void run_input_sstream_1(void)
+{
+    int num{};
+    double total{};
+    std::string name{};
+
+    std::string info{"Moe 100 1234.56"};
+    std::istringstream iss{info};
+    iss >> name >> num >> total;
+
+    std::cout << std::setw(10) << std::left << name;
+    std::cout << std::setw(5) << num;
+    std::cout << std::setw(10) << total << std::endl;
+}
+
+void run_ouput_sstream_2(void)
+{
+    int num{100};
+    double total{1234.56};
+    std::string name{"Moe"};
+
+    std::ostringstream oss{};
+    oss << std::setw(10) << std::left << name;
+    oss << std::setw(5) << num;
+    oss << std::setw(10) << total << std::endl;
+
+    std::cout << oss.str() << std::endl;
+}
+
+void run_data_validation_1(void)
+{
+    int value{};
+    std::string entry{};
+    bool done{false};
+    do {
+        std::cout << "Please enter a integer: ";
+        std::cin >> entry;
+        std::istringstream iss_validator{entry};
+        if(iss_validator >> value)
+            done = true;
+        else
+            std::cout << "Sorry, thats not an integer" << std::endl;
+        // discard the input buffer
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+    } while(!done);
+
+    std::cout << "You entered the integer: " << value << std::endl;
+}
+
+} // namespace udemy1::e19::sstream
+
 void udemy1::e19_run(void)
 {
     // e19::iomanip::run_boolean_test();
     // e19::iomanip::run_integer_test();
     // e19::iomanip::run_float_test();
-    e19::iomanip::run_field_test();
+    // e19::iomanip::run_field_test();
+
+    // e19::fstream::run_read_from_file_1("../../data/sample.txt");
+    //  e19::fstream::run_read_from_file_2("../../data/sample.txt");
+    //  e19::fstream::run_read_from_file_3("../../data/sample.txt");
+
+    // e19::fstream::run_read_from_file_4("../../data/sample1.txt");
+    // e19::fstream::run_read_from_file_4("../../data/sample2.txt");
+
+    // e19::fstream::run_read_from_file_5("../../data/sample3_unix.txt");
+    // e19::fstream::run_read_from_file_5("../../data/sample3_dos.txt");
+    // e19::fstream::run_read_from_file_5("../../data/sample3_mac.txt");
+    // e19::fstream::run_read_from_file_6("../../data/sample3_unix.txt");
+
+    // e19::fstream::run_read_poem_1("../../data/poem.txt");
+    // e19::fstream::run_read_poem_2("../../data/poem.txt");
+
+    // e19::fstream::run_write_to_file_1("../../data/sample_write_1.txt");
+    // e19::fstream::run_write_to_file_2("../../data/sample_write_2.txt");
+
+    // e19::fstream::run_copy_files_1("../../data/poem.txt", "../../data/poem(copy_1).txt");
+    // e19::fstream::run_copy_files_2("../../data/poem.txt", "../../data/poem(copy_2).txt");
+
+    // e19::sstream::run_input_sstream_1();
+    // e19::sstream::run_ouput_sstream_2();
+    e19::sstream::run_data_validation_1();
 }

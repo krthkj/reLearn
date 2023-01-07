@@ -49,6 +49,9 @@
       <File Name="src/testing_ground.cpp"/>
     </VirtualDirectory>
     <VirtualDirectory Name="challenge">
+      <File Name="src/s19c4.cpp"/>
+      <File Name="src/s19c3.cpp"/>
+      <File Name="src/s19c2.cpp"/>
       <File Name="src/s19c1.cpp"/>
       <VirtualDirectory Name="s18c">
         <File Name="src/s18c_class.cpp"/>
