@@ -53,7 +53,7 @@ add_definitions(-O0)
 add_definitions(-pedantic)
 add_definitions(-W)
 add_definitions(-fopenmp)
-add_definitions(-std=c++17)
+add_definitions(-std=c++20)
 add_definitions(-Wall)
 
 # Linker options
@@ -77,7 +77,7 @@ set ( CXX_SRCS
 
 set_source_files_properties(
     ${CXX_SRCS} PROPERTIES COMPILE_FLAGS 
-    " -Wmain -pedantic-errors -g -O0 -pedantic -W -fopenmp -std=c++17 -Wall")
+    " -Wmain -pedantic-errors -g -O0 -pedantic -W -fopenmp -std=c++20 -Wall")
 
 if(WIN32)
     enable_language(RC)
