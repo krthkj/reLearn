@@ -4,7 +4,7 @@
  * Using MIT licence, refer the license file supplied with the project.
  *
  * File : e14.cpp
- * Desc : Section 14: Ooperator Overloading
+ * Desc : Section 14: Operator Overloading
  *
  * Author : Karthik Jain <krthkj.public@gmail.com>
  * Date : 2022-12-22
@@ -15,7 +15,7 @@
  * Operator Overloading
  * ====================
  * - traditional operator : +, =, *, etc
- * - Allows user defined tpyes to behave similar to built-in types
+ * - Allows user defined types to behave similar to built-in types
  * - can make code more readable and writable
  * - not done automatically ( except for assignment operator)
  *
@@ -43,20 +43,20 @@
  *
  * Rules:
  * ======
- * - Precedence and associativity cannot be changed
- * - 'arity'  cannot be changed (i.e, cannt make the divion operator unary)
- * - cannt overload operators for primitive types
+ * - Precedence and associations cannot be changed
+ * - 'arity'  cannot be changed (i.e, cannot make the division operator unary)
+ * - cannot overload operators for primitive types
  * - cannot create new operators
  * - [], (), -> and assignment operator(=) must be declares as member methods
- * - Other operatos can be declared as member mehtods or global functions
+ * - Other operators can be declared as member methods or global functions
  *
  *******************************************************************************
  * Copy assignment operator (=) overloading
  * ----------------------------------------
- * - C++ provides adefault assignment operator used for assinging ove object to another
+ * - C++ provides a default assignment operator used for assigning ove object to another
  * - default is member wise assignment (shallow copy)
- *   - if member data doesnt contain raw pointers then default assignment operator overloading is good enough.
- *   - if member data has raw pointers the we need to explicitely create assignment operator overloading method.
+ *   - if member data doesn't contain raw pointers then default assignment operator overloading is good enough.
+ *   - if member data has raw pointers the we need to explicitly create assignment operator overloading method.
  * Example:
  *   Type& Type::operator=(const Type& rhs);
  *
@@ -64,7 +64,7 @@
  * Move assignment operator (=) overloading
  * ----------------------------------------
  * - You can choose to overload the move assignment operator
- * - if we have raw pointer we shuld overload the move assignment operator for effeciency
+ * - if we have raw pointer we should overload the move assignment operator for efficiency
  * Example:
  *   Type& Type::operator=(Type &&lhs);
  *
@@ -95,9 +95,9 @@
  *   bool Type::operator>(const Type& rhs) const;
  *
  *******************************************************************************
- * implimenting operator overloading usign non member functions or global func
- * - if impliment as friend functinos of class, can access class member data
- * - if implimented as normal functinos then we need to use getter methods for class data
+ * implementing operator overloading usign non member functions or global func
+ * - if implement as friend functions of class, can access class member data
+ * - if implement as normal functions then we need to use getter methods for class data
  * - ideally written in .cpp file
  *
  * Example:
@@ -111,15 +111,15 @@
  *          < member functions >
  *  }
  *******************************************************************************
- * overloading stream operators: insertiion(<<) & extraction (>>)
+ * overloading stream operators: insertion(<<) & extraction (>>)
  * ==============================================================
- * This cannot be implimented as member functions
+ * This cannot be implemented as member functions
  * Reason: 1. left operand must be user-defined class
  *         2. no the way we normally use these operators
  *
- * Stream insertrion operator (<<):
+ * Stream insertion operator (<<):
  * - return a reference to the ostream so we can keep inserting
- * - dont return ostream by value
+ * - don't return ostream by value
  * Syntax:
  *    std::ostream& operator<< (std::ostream& os, const Type& objType){
  *      os << obj.member_data;       // if friend functions
@@ -147,7 +147,7 @@
 #include <iostream>
 
 /**
- * @brief Comprenshive example of all operator overloading as member functions
+ * @brief Comprehensive example of all operator overloading as member functions
  */
 namespace udemy1::ex1
 {
@@ -171,11 +171,11 @@ class Mystring
     Mystring operator-() const; // unary negative operator
 
     // binay operator
-    Mystring operator+(const Mystring& rhs) const; // bianry plus operator
-    bool operator==(const Mystring& rhs) const;    // bianry euqals operator
-    bool operator!=(const Mystring& rhs) const;    // bianry not equals operator
-    bool operator<(const Mystring& rhs) const;     // bianry less than operator
-    bool operator>(const Mystring& rhs) const;     // bianry greater than operator
+    Mystring operator+(const Mystring& rhs) const; // binary plus operator
+    bool operator==(const Mystring& rhs) const;    // binary equals operator
+    bool operator!=(const Mystring& rhs) const;    // binary not equals operator
+    bool operator<(const Mystring& rhs) const;     // binary less than operator
+    bool operator>(const Mystring& rhs) const;     // binary greater than operator
 
     // other func
     void display() const;
@@ -219,7 +219,7 @@ Mystring::Mystring(const char* s)
 Mystring::Mystring(const Mystring& source)
 {
     std::cout << "Copy Constructor" << std::endl;
-    // deep copy remainig data
+    // deep copy remaining data
     this->str = new char[std::strlen(source.str) + 1]; // create in heap
     std::strcpy(this->str, source.str);                // copy data
 }
@@ -236,7 +236,7 @@ Mystring::Mystring(Mystring&& source) noexcept
 }
 
 /**************************************************
- * destructor
+ * Destructor
  **************************************************/
 Mystring::~Mystring(void) // destructor
 {
@@ -254,7 +254,7 @@ Mystring& Mystring::operator=(const Mystring& rhs)
     if(this == &rhs)
         return *this;
 
-    // deallocate storage for this->str for overwriting
+    // De-allocate storage for this->str for overwriting
     delete[] this->str;
 
     // allocate storage and deep copy
@@ -275,7 +275,7 @@ Mystring& Mystring::operator=(Mystring&& rhs)
     if(this == &rhs)
         return *this;
 
-    // deallocate storage for this->str for overwriting
+    // de-allocate storage for this->str for overwriting
     delete[] this->str;
 
     // steal the pointer
@@ -289,9 +289,9 @@ Mystring& Mystring::operator=(Mystring&& rhs)
 }
 
 /**************************************************
- * Unary oprator overloading (-)
+ * Unary operator overloading (-)
  **************************************************/
-Mystring Mystring::operator-() const // unary minus oprator
+Mystring Mystring::operator-() const // unary minus operator
 {
     std::cout << "Unary - " << std::endl;
     // we are making the string to lower case.
@@ -306,12 +306,12 @@ Mystring Mystring::operator-() const // unary minus oprator
 }
 
 /**************************************************
- * Binary oprator overloading (+)
+ * Binary operator overloading (+)
  **************************************************/
-Mystring Mystring::operator+(const Mystring& rhs) const // binary plus oprator
+Mystring Mystring::operator+(const Mystring& rhs) const // binary plus operator
 {
     std::cout << "Binary + " << std::endl;
-    // alocate buffer
+    // allocate buffer
     char* buffer = new char[(std::strlen(str) + std::strlen(str) + 1)];
     std::strcpy(buffer, str);
     std::strcat(buffer, rhs.str);
@@ -322,32 +322,32 @@ Mystring Mystring::operator+(const Mystring& rhs) const // binary plus oprator
     return tmp;
 }
 
-bool Mystring::operator==(const Mystring& rhs) const // binary euqals oprator
+bool Mystring::operator==(const Mystring& rhs) const // binary equals operator
 {
     std::cout << "Binary == " << std::endl;
     return (std::strcmp(str, rhs.str) == 0);
 }
 
-bool Mystring::operator!=(const Mystring& rhs) const // binary not euqals oprator
+bool Mystring::operator!=(const Mystring& rhs) const // binary not equals operator
 {
     std::cout << "Binary != " << std::endl;
     return !(rhs == *this);
 }
 
-bool Mystring::operator<(const Mystring& rhs) const // binary euqals oprator
+bool Mystring::operator<(const Mystring& rhs) const // binary equals operator
 {
     std::cout << "Binary <" << std::endl;
     return (std::strcmp(str, rhs.str) < 0);
 }
 
-bool Mystring::operator>(const Mystring& rhs) const // binary euqals oprator
+bool Mystring::operator>(const Mystring& rhs) const // binary equals operator
 {
     std::cout << "Binary >" << std::endl;
     return (std::strcmp(str, rhs.str) > 0);
 }
 
 /**************************************************
- * Other member finctions
+ * Other member functions
  **************************************************/
 void Mystring::display() const
 {
@@ -374,7 +374,7 @@ void run_operator_overloading(void)
 {
     {
         Mystring a{"Hello"};  // overloaded constructor
-        Mystring b;           // no-args contructor
+        Mystring b;           // no-args constructor
         Mystring c{a};        // copy constructor
         b = a;                // copy assignment: b.operator=(a)
         a = Mystring{"Hola"}; // move assignment operator-overloading: a.operator=("Holla")
@@ -479,7 +479,7 @@ Mystring::Mystring(const char* s)
 Mystring::Mystring(const Mystring& source)
 {
     std::cout << "Copy Constructor" << std::endl;
-    // deep copy remainig data
+    // deep copy remaining data
     this->str = new char[std::strlen(source.str) + 1]; // create in heap
     std::strcpy(this->str, source.str);                // copy data
 }
@@ -490,7 +490,7 @@ Mystring::Mystring(const Mystring& source)
 Mystring::Mystring(Mystring&& source)
 {
     std::cout << "Move Constructor" << std::endl;
-    // steal pointers from srouce
+    // steal pointers from source
     this->str = source.str;
     source.str = nullptr;
 }
@@ -514,7 +514,7 @@ Mystring& Mystring::operator=(const Mystring& rhs)
     if(this == &rhs)
         return *this;
 
-    // deallocate storage for this->str for overwriting
+    // de-allocate storage for this->str for overwriting
     delete[] this->str;
 
     // allocate storage and deep copy
@@ -535,7 +535,7 @@ Mystring& Mystring::operator=(Mystring&& rhs)
     if(this == &rhs)
         return *this;
 
-    // deallocate storage for this->str for overwriting
+    // de-allocate storage for this->str for overwriting
     delete[] this->str;
 
     // steal the pointer
@@ -549,7 +549,7 @@ Mystring& Mystring::operator=(Mystring&& rhs)
 }
 
 /**************************************************
- * Other member finctions
+ * Other member functions
  **************************************************/
 void Mystring::display() const
 {
@@ -573,10 +573,10 @@ void Mystring::setStr(char* str)
 }
 
 /***************************************************************
- * Impliment operator overloading functions
+ * Implement operator overloading functions
  *=========================================
  *
- * Binary euqal operator overloading non-member functions
+ * Binary equal operator overloading non-member functions
  ***************************************************************/
 bool operator==(const Mystring& lhs, const Mystring& rhs)
 {
@@ -587,7 +587,7 @@ bool operator==(const Mystring& lhs, const Mystring& rhs)
  * Unary Minus operator overloading non-member functions
  ***************************************************************/
 Mystring operator-(const Mystring& src)
-{ // conver string to lower
+{ // convert string to lower
     char* buff = new char[std::strlen(src.str) + 1];
     for(size_t i{0}; i < std::strlen(src.str); ++i)
         buff[i] = std::tolower(src.str[i]);
@@ -645,7 +645,7 @@ void run_global_operator_overloading(void)
  */
 
 /***************************************************************
- * stream Insertion operator overloading as non freind function
+ * stream Insertion operator overloading as non friend function
  ***************************************************************/
 std::ostream& operator<<(std::ostream& os, const Mystring& rhs)
 {
@@ -656,14 +656,21 @@ std::ostream& operator<<(std::ostream& os, const Mystring& rhs)
 } // namespace udemy1::ex2
 
 /***************************************************************
- * stream extraction operator overloading as non freind function
+ * stream extraction operator overloading as non friend function
  ***************************************************************/
 std::istream& operator>>(std::istream& is, udemy1::ex2::Mystring& rhs)
 {
-    char* buff = new char[1000];
+    /*
+    // This block of code has trouble compiling with C++ 20 flag both on GCC and Clang char* buff = new char[1000];
     is >> buff;
     rhs = udemy1::ex2::Mystring{buff};
     delete[] buff;
+    return is;
+    */
+
+    std::string buffer{};
+    is >> buffer;
+    rhs = udemy1::ex2::Mystring{buffer.c_str()};
     return is;
 }
 
@@ -678,7 +685,7 @@ void run_stream_operator_overloading(void)
 
     std::cout << "The three stooges are " << larry << ", " << moe << ", " << curly << std::endl;
 
-    std::cout << std::endl << "Enter the stooges names seperated by space: ";
+    std::cout << std::endl << "Enter the stooges names separated by space: ";
     std::cin >> larry >> moe >> curly;
 
     std::cout << "The three stooges are " << larry << ", " << moe << ", " << curly << std::endl;
@@ -691,5 +698,5 @@ void udemy1::e14_run(void)
 {
     // udemy1::ex1::run_operator_overloading();        // operator-overloading usign member func
     // udemy1::ex2::run_global_operator_overloading(); // operator-overloading using non member func
-    // run_stream_operator_overloading();              // operator-overloading for stream operators
+    run_stream_operator_overloading(); // operator-overloading for stream operators
 }
