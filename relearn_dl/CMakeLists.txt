@@ -32,7 +32,8 @@ add_definitions(-std=c++20)
 add_definitions(-Wall)
 
 # Linker options
-set(LINK_OPTIONS -O0)
+set(LINK_OPTIONS -fopenmp)
+set(LINK_OPTIONS ${LINK_OPTIONS} -O0)
 
 
 if(WIN32)

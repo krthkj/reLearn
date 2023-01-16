@@ -32,7 +32,7 @@
         <IncludePath Value="../relearn_sl/include/"/>
         <IncludePath Value="../udemy1/include/"/>
       </Compiler>
-      <Linker Options="-O0" Required="yes">
+      <Linker Options="-fopenmp;-O0" Required="yes">
         <LibraryPath Value="$(WorkspacePath)/cmake-build-$(WorkspaceConfiguration)/output/"/>
         <Library Value="librelearn_dl.so"/>
         <Library Value="librelearn_sl.a"/>

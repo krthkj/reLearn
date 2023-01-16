@@ -14,12 +14,5 @@
       <Project Name="relearn_sl" ConfigName="Debug"/>
       <Project Name="udemy1" ConfigName="Debug"/>
     </WorkspaceConfiguration>
-    <WorkspaceConfiguration Name="Release">
-      <Environment/>
-      <Project Name="relearn" ConfigName="Debug"/>
-      <Project Name="relearn_dl" ConfigName="Release"/>
-      <Project Name="relearn_sl" ConfigName="Release"/>
-      <Project Name="udemy1" ConfigName="Release"/>
-    </WorkspaceConfiguration>
   </BuildMatrix>
 </CodeLite_Workspace>
