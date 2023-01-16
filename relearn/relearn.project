@@ -27,7 +27,7 @@
         <IncludePath Value="../relearn_dl/include/"/>
         <IncludePath Value="../relearn_sl/include/"/>
       </Compiler>
-      <Linker Options="-fopenmp;-O0" Required="yes">
+      <Linker Options="-fopenmp" Required="yes">
         <LibraryPath Value="$(WorkspacePath)/cmake-build-$(WorkspaceConfiguration)/output/"/>
         <Library Value="librelearn_dl.so"/>
         <Library Value="librelearn_sl.a"/>

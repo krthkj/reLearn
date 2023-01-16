@@ -172,6 +172,7 @@ _deps
 # codelite project files
 .codelite
 .cache
+.ctagsd
 
 # Build folders
 build-Debug
