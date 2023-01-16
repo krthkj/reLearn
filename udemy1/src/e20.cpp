@@ -273,7 +273,34 @@
  * Undefined behavior - our iterator are pointing to invalid locations
  *
  *******************************************************************************
+ * std::find( begin, end, object )
+ *  - Need to define operator== overloading
+ *
+ * std::for_each( begin, end, object)
+ *
  *******************************************************************************
+ * STL  Sequence containers
+ * std::array
+ * - Fixed size
+ * - direct element access
+ * - provides access to the underlying raw array
+ * - use instead of raw array when possible
+ * - all iterators available and don't invalidate
+ *
+ * methods provides by array
+ * - .size()      - gets size of array
+ * - .at()  or [] - access elements
+ * - .front() back() - refers to element at front and back
+ * - .empty()        - is the array empty ?
+ * - .max_size()
+ * - arr1.swap(arr2) - swap 2 arrays
+ * - .data()         - get raw array address
+ *
+ * Example
+ *   std::array<int, 5> arr1 {{1,2,3,4,5}}; // C++11 format
+ *   std::array<int, 5> arr1 {1,2,3,4,5}; // C++14 format
+ *
+ *
  *******************************************************************************
  *******************************************************************************
  *******************************************************************************
@@ -284,6 +311,7 @@
 #include "udemy1.hpp"
 
 #include <algorithm>
+#include <cctype> // handling c-style functions
 #include <iomanip>
 #include <iostream>
 #include <list>
@@ -585,11 +613,122 @@ void run_iterators_test_5(void)
 namespace udemy1::e20::algo
 {
 
-void run_test_1(void)
+class Person
 {
-}
-} // namespace udemy1::e20::algo
+    std::string name;
+    unsigned age;
 
+  public:
+    Person() = default;
+    Person(std::string s, unsigned a)
+        : name{s}
+        , age{a}
+    {
+    }
+    bool operator<(const Person& rhs) const
+    {
+        return (this->age < rhs.age);
+    }
+    bool operator==(const Person& rhs) const
+    {
+        return (this->age == rhs.age && this->name == rhs.name);
+    }
+};
+
+void run_algo_find(void)
+{
+    std::cout << "\n=== Algo - Find ==============================================================" << std::endl;
+
+    std::vector<int> vec{1, 5, 6, 2, 3, 4, 7, 8};
+    auto loc = std::find(std::begin(vec), std::end(vec), 3);
+    if(loc != std::end(vec))
+        std::cout << "Found the number: " << *loc << "\tat position: " << loc - std::begin(vec) << std::endl;
+    else
+        std::cout << "Unable to find the number." << std::endl;
+
+    std::list<Person> player{{"Larry", 45}, {"Moe", 32}, {"Sam", 25}, {"Joe", 70}};
+    auto loc1 = std::find(std::begin(player), std::end(player), Person{"Sam", 25});
+    if(loc1 != std::end(player)) {
+        std::cout << "Found Sam" << std::endl;
+    } else
+        std::cout << "Unable to find Sam." << std::endl;
+}
+
+void run_algo_count(void)
+{
+    std::cout << "\n=== Algo - Count =============================================================" << std::endl;
+    std::vector<int> vec{1, 2, 6, 2, 3, 2, 1, 4, 1, 2};
+    int num = std::count(vec.begin(), vec.end(), 2);
+    std::cout << num << " occurrences found." << std::endl;
+}
+
+void run_algo_countif(void)
+{
+    std::cout << "\n=== Algo - count_if ==========================================================" << std::endl;
+    std::vector<int> vec{1, 2, 6, 2, 3, 2, 1, 8, 1, 12, 10, 8, 7, 2};
+
+    // count only if even
+    int num = std::count_if(vec.begin(), vec.end(), [](int x) { return x % 2 == 0; });
+    std::cout << num << " even number found." << std::endl;
+
+    // count only if odd
+    num = std::count_if(vec.begin(), vec.end(), [](int x) { return x % 2 != 0; });
+    std::cout << num << " odd number found." << std::endl;
+
+    // count only value greater than 5
+    const int great_num = 5;
+    num = std::count_if(vec.begin(), vec.end(), [great_num](int x) { return x > great_num; });
+    std::cout << num << " numbers are greater than " << great_num << std::endl;
+}
+
+void run_algo_replace(void)
+{
+    std::cout << "\n=== Algo - replace ===========================================================" << std::endl;
+    std::vector<int> vec{1, 2, 6, 2, 3, 2, 1, 8, 1, 12, 10, 8, 7, 2};
+
+    // display vector elements
+    for(auto& i : vec)
+        std::cout << i << " ";
+    std::cout << std::endl;
+
+    // replace element
+    std::replace(vec.begin(), vec.end(), 2, 20);
+
+    // display vector elements
+    for(auto& i : vec)
+        std::cout << i << " ";
+    std::cout << std::endl;
+}
+
+void run_algo_allof(void)
+{
+    std::cout << "\n=== Algo - all_of ============================================================" << std::endl;
+    std::vector<int> vec{1, 2, 6, 2, 3, 2, 1, 8, 1, 12, 10, 8, 7, 2};
+
+    if(std::all_of(vec.begin(), vec.end(), [](int x) { return x > 10; }))
+        std::cout << "All elements are > 10" << std::endl;
+    else
+        std::cout << "No All elements are > 10" << std::endl;
+
+    if(std::all_of(vec.begin(), vec.end(), [](int x) { return x < 20; }))
+        std::cout << "All elements are < 20" << std::endl;
+    else
+        std::cout << "Np All elements are < 20" << std::endl;
+}
+void run_algo_transform(void)
+{
+    std::cout << "\n=== Algo - string  transform =================================================" << std::endl;
+    std::string str1{"This is a test case"};
+
+    std::cout << "Before transform: " << str1 << std::endl;
+    std::transform(str1.cbegin(), str1.cend(), str1.begin(), ::toupper);
+    std::cout << "After transform: " << str1 << std::endl;
+
+    // std::transform(str1.cbegin(),str1.cend(),str1.begin(),::toupper);
+    // std::cout << "After 2nd transform: " << str2 << std::endl;
+}
+
+} // namespace udemy1::e20::algo
 /**
  * @brief Run all examples of STL
  */
@@ -600,11 +739,18 @@ void udemy1::e20_run(void)
     // e20::ArrayClass::run_template_class_array_int();
     // e20::ArrayClass::run_template_class_array_generic();
 
-    e20::itr::run_iterators_test_1();
-    e20::itr::run_iterators_test_2();
-    e20::itr::run_iterators_test_3();
-    e20::itr::run_iterators_test_4();
-    e20::itr::run_iterators_test_5();
+    // e20::itr::run_iterators_test_1();
+    // e20::itr::run_iterators_test_2();
+    // e20::itr::run_iterators_test_3();
+    // e20::itr::run_iterators_test_4();
+    // e20::itr::run_iterators_test_5();
 
-    e20::algo::run_test_1();
+    // e20::algo::run_algo_find();
+    // e20::algo::run_algo_count();
+    // e20::algo::run_algo_countif();
+    // e20::algo::run_algo_replace();
+    // e20::algo::run_algo_allof();
+    e20::algo::run_algo_transform();
+
+    // e20::algo::array
 }
