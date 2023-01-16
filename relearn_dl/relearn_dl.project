@@ -21,11 +21,11 @@
       </Linker>
       <ResourceCompiler Options=""/>
     </GlobalSettings>
-    <Configuration Name="Debug" CompilerType="CLANG" DebuggerType="LLDB Debugger" Type="Dynamic Library" BuildCmpWithGlobalSettings="append" BuildLnkWithGlobalSettings="append" BuildResWithGlobalSettings="append">
+    <Configuration Name="Debug" CompilerType="CLANG" DebuggerType="GNU gdb debugger" Type="Dynamic Library" BuildCmpWithGlobalSettings="append" BuildLnkWithGlobalSettings="append" BuildResWithGlobalSettings="append">
       <Compiler Options="-pedantic-errors;-g;-O0;-pedantic;-W;-fopenmp;-std=c++20;-Wall" C_Options="-pedantic-errors;-g;-O0;-pedantic;-W;-fopenmp;-std=c++20;-Wall" Assembler="" Required="yes" PreCompiledHeader="" PCHInCommandLine="no" PCHFlags="" PCHFlagsPolicy="1">
         <IncludePath Value="./include"/>
       </Compiler>
-      <Linker Options="-fopenmp;-O0" Required="yes"/>
+      <Linker Options="-fopenmp" Required="yes"/>
       <ResourceCompiler Options="" Required="no"/>
       <General OutputFile="lib$(ProjectName).so" IntermediateDirectory="" Command="$(WorkspacePath)/cmake-build-$(WorkspaceConfiguration)/output/$(ProjectName)" CommandArguments="" UseSeparateDebugArgs="no" DebugArguments="" WorkingDirectory="$(WorkspacePath)/cmake-build-$(WorkspaceConfiguration)/output" PauseExecWhenProcTerminates="yes" IsGUIProgram="no" IsEnabled="yes"/>
       <BuildSystem Name="CMake"/>
