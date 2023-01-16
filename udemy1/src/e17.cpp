@@ -168,20 +168,20 @@ void run_unique_ptr_test(void)
     {
         std::cout << "### smart pointer variable on Heap using make_ptr" << std::endl;
         std::unique_ptr<Test> t1 = std::make_unique<Test>(1000);
-        auto t2 = std::make_unique<Test>(2000);
+        auto t2                  = std::make_unique<Test>(2000);
 
         std::unique_ptr<Test> t3;
-        if(!t1)
+        if (!t1)
             std::cout << "T1 is nullptr" << std::endl;
-        if(!t3)
+        if (!t3)
             std::cout << "T3 is nullptr" << std::endl;
 
         std::cout << "### Performing move on smart pointer" << std::endl;
         // t3 = t1; // ERROR - Copy/Assigment Not defined
         t3 = std::move(t1);
-        if(!t1)
+        if (!t1)
             std::cout << "T1 is nullptr" << std::endl;
-        if(!t3)
+        if (!t3)
             std::cout << "T3 is nullptr" << std::endl;
     }
 }
@@ -205,7 +205,7 @@ void run_unique_ptr_account(void)
     accounts.push_back(std::make_unique<Trust_Account>("Boby", 5000, 4.5));
 
     // for(auto acc : accounts) // ERROR: call to deleted constructor of 'std::unique_ptr<>'
-    for(const auto& acc : accounts)
+    for (const auto& acc : accounts)
         std::cout << *acc << std::endl;
 }
 
@@ -276,14 +276,14 @@ void run_shared_ptr(void)
             accounts.push_back(acc2);
             accounts.push_back(acc3);
 
-            for(const auto& acc : accounts) {
+            for (const auto& acc : accounts) {
                 std::cout << *acc << std::endl;
                 std::cout << "Use count: " << acc.use_count() << std::endl;
             }
             std::cout << "==========================================" << std::endl;
         }
 
-        for(const auto& acc : accounts) {
+        for (const auto& acc : accounts) {
             std::cout << *acc << std::endl;
             std::cout << "Use count: " << acc.use_count() << std::endl;
         }
@@ -302,21 +302,26 @@ struct Person;
 
 struct Team {
     std::shared_ptr<Person> goalKeeper; // Team.goalKeeper is an owner, hence increments shared_ptr.count()
+
     Team()
     {
         std::cout << "Team Created." << std::endl;
     }
+
     ~Team()
     {
         std::cout << "Team destructed." << std::endl;
     }
 };
+
 struct Person {
     std::weak_ptr<Team> team; // Person.team is an observer and has no ownership, doesnt increments shared_ptr.count()
+
     Person()
     {
         std::cout << "Person Created." << std::endl;
     }
+
     ~Person()
     {
         std::cout << "Person destructed." << std::endl;
@@ -325,10 +330,10 @@ struct Person {
 
 void run_weak_ptr_cyclic_dep_2(void)
 {
-    auto Barca = std::make_shared<Team>();
-    auto Valdes = std::make_shared<Person>();
+    auto Barca        = std::make_shared<Team>();
+    auto Valdes       = std::make_shared<Person>();
     Barca->goalKeeper = Valdes;
-    Valdes->team = Barca;
+    Valdes->team      = Barca;
 }
 
 void run_weak_ptr_cyclic_dep()
@@ -366,17 +371,18 @@ void observe()
 {
     std::cout << "gw.use_count() == " << gw.use_count() << "; ";
     // we have to make a copy of shared pointer before usage:
-    if(std::shared_ptr<int> spt = gw.lock()) {
+    if (std::shared_ptr<int> spt = gw.lock()) {
         std::cout << "*spt == " << *spt << '\n';
     } else {
         std::cout << "gw is expired\n";
     }
 }
+
 void observe_2()
 {
     std::cout << "gw_2.use_count() == " << gw_2.use_count() << "; ";
     // we have to make a copy of shared pointer before usage:
-    if(std::shared_ptr<int> spt = gw_2) {
+    if (std::shared_ptr<int> spt = gw_2) {
         std::cout << "*spt == " << *spt << '\n';
     } else {
         std::cout << "gw_2 is expired\n";
@@ -397,7 +403,7 @@ void run_weak_ptr_2(void)
     {
         {
             auto sp = std::make_shared<int>(42);
-            gw_2 = sp;
+            gw_2    = sp;
             observe_2();
         }
         observe_2();
@@ -438,7 +444,7 @@ void run_weak_ptr_3(void)
         std::cout << "weak_ptr_2.expired()   == " << weak_ptr_2.expired() << "; " << std::endl;
 
         std::cout << std::endl;
-        if(std::shared_ptr<int> sp = weak_ptr_1.lock()) {
+        if (std::shared_ptr<int> sp = weak_ptr_1.lock()) {
 
             std::cout << "*sp = " << *sp << "; " << std::endl;
             std::cout << "sp.use_count() == " << sp.use_count() << "; " << std::endl;
@@ -457,7 +463,7 @@ void run_weak_ptr_3(void)
         std::cout << "weak_ptr_2.expired()   == " << weak_ptr_2.expired() << "; " << std::endl;
 
         std::cout << std::endl;
-        if(std::shared_ptr<int> sp = weak_ptr_1.lock()) {
+        if (std::shared_ptr<int> sp = weak_ptr_1.lock()) {
 
             std::cout << "*sp = " << *sp << "; " << std::endl;
             std::cout << "sp.use_count() == " << sp.use_count() << "; " << std::endl;

@@ -123,7 +123,7 @@ void s15c_run(void)
 
     // Withdraw 5 times from each trust account
     // All withdrawals should fail if there are too many withdrawals or if the withdrawl is > 20% of the balance
-    for(int i = 1; i <= 5; i++)
+    for (int i = 1; i <= 5; i++)
         withdraw(trust_accounts, 1000);
 }
 } // namespace udemy1

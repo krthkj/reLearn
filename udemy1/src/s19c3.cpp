@@ -64,14 +64,14 @@ int find_word_count(std::string file_name, std::string target_word)
 {
     int match_count{0};
     std::ifstream ifs{file_name};
-    if(!ifs)
+    if (!ifs)
         std::cerr << "File open error." << std::endl;
     else {
         int wc{0};
         std::string word_read{};
-        while(ifs >> word_read) {
+        while (ifs >> word_read) {
             ++wc;
-            if(find_substring(word_read, target_word))
+            if (find_substring(word_read, target_word))
                 ++match_count;
         }
         std::cout << wc << " words were searched..." << std::endl;

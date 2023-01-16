@@ -13,6 +13,7 @@
 #define MOVIE_HPP
 
 #include <string>
+
 namespace udemy1::s13c
 {
 class Movie
@@ -36,22 +37,27 @@ class Movie
     {
         this->name = name;
     }
+
     void setRating(const std::string& rating)
     {
         this->rating = rating;
     }
+
     void setWatched(const int watched)
     {
         this->watched = watched;
     }
+
     const std::string& getName() const
     {
         return name;
     }
+
     const std::string& getRating() const
     {
         return rating;
     }
+
     int getWatched() const
     {
         return watched;

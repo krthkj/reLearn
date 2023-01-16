@@ -14,6 +14,7 @@
 
 #include "account.hpp"
 #include "udemy1.hpp"
+
 #include <iostream>
 #include <vector>
 
@@ -420,7 +421,7 @@ class Player
 
     bool is_dead(void)
     {
-        if(health > 0)
+        if (health > 0)
             return true;
         return false;
     }
@@ -437,6 +438,7 @@ class Account
         balance += amt;
         std::cout << "in deposit" << std::endl;
     }
+
     void withdraw(double amt)
     {
         balance -= amt;
@@ -452,9 +454,9 @@ void run_class_example(void)
     Player frank;
     Player hero;
 
-    frank.name = "Frank";
+    frank.name   = "Frank";
     frank.health = 80;
-    frank.xp = 15;
+    frank.xp     = 15;
     frank.talk("Hi there..!");
 
     Player player[]{frank, hero};
@@ -464,9 +466,9 @@ void run_class_example(void)
     Player* enemy{nullptr};
     enemy = new ex1::Player();
 
-    (*enemy).name = "Enemy";
+    (*enemy).name   = "Enemy";
     (*enemy).health = 200;
-    enemy->xp = 20;
+    enemy->xp       = 20;
 
     enemy->talk("I will destroy you!!");
     delete enemy;
@@ -474,7 +476,7 @@ void run_class_example(void)
     //----------------------------------------
     Account frank_account;
 
-    frank_account.name = "Frank's account";
+    frank_account.name    = "Frank's account";
     frank_account.balance = 5000;
 
     frank_account.deposit(1000);
@@ -504,10 +506,11 @@ class Player
 
     bool is_dead(void)
     {
-        if(health > 0)
+        if (health > 0)
             return true;
         return false;
     }
+
     void display(void);
 };
 
@@ -547,6 +550,7 @@ void Account::SetBalance(double bal)
 {
     balance = bal;
 }
+
 double Account::GetBalance()
 {
     return balance;
@@ -602,6 +606,7 @@ void Account::set_balance(double bal)
 {
     balance = bal;
 }
+
 double Account::get_balance()
 {
     return balance;
@@ -611,6 +616,7 @@ void Account::set_name(std::string n)
 {
     name = n;
 }
+
 std::string Account::get_name()
 {
     return name;
@@ -624,7 +630,7 @@ bool Account::deposit(double amt)
 
 bool Account::withdraw(double amt)
 {
-    if(balance - amt >= 0) {
+    if (balance - amt >= 0) {
         balance -= amt;
         return true;
     }
@@ -639,17 +645,17 @@ void run_test_class(void)
     frank_account.set_name("Frank's account");
     frank_account.set_balance(1000.0);
 
-    if(frank_account.deposit(200.0))
+    if (frank_account.deposit(200.0))
         std::cout << "Deposit OK" << std::endl;
     else
         std::cout << "Deposit not allowed" << std::endl;
 
-    if(frank_account.withdraw(200.0))
+    if (frank_account.withdraw(200.0))
         std::cout << "Withdraw OK" << std::endl;
     else
         std::cout << "Insufficient funds" << std::endl;
 
-    if(frank_account.withdraw(1500.0))
+    if (frank_account.withdraw(1500.0))
         std::cout << "Withdraw OK" << std::endl;
     else
         std::cout << "Insufficient funds" << std::endl;
@@ -667,17 +673,17 @@ void run_test_classfile(void)
     frank_account.set_name("Frank's account");
     frank_account.set_balance(1000.0);
 
-    if(frank_account.deposit(200.0))
+    if (frank_account.deposit(200.0))
         std::cout << "Deposit OK" << std::endl;
     else
         std::cout << "Deposit not allowed" << std::endl;
 
-    if(frank_account.withdraw(200.0))
+    if (frank_account.withdraw(200.0))
         std::cout << "Withdraw OK" << std::endl;
     else
         std::cout << "Insufficient funds" << std::endl;
 
-    if(frank_account.withdraw(1500.0))
+    if (frank_account.withdraw(1500.0))
         std::cout << "Withdraw OK" << std::endl;
     else
         std::cout << "Insufficient funds" << std::endl;
@@ -716,7 +722,7 @@ Player::Player()
     set_name("Player");
     std::cout << "No args Constructor called" << std::endl;
     health = 100;
-    xp = 1;
+    xp     = 1;
 }
 
 Player::Player(std::string n)
@@ -726,6 +732,7 @@ Player::Player(std::string n)
     set_health(100);
     set_xp(1);
 }
+
 Player::Player(std::string n, int h, int x)
 {
     set_name(n);
@@ -733,6 +740,7 @@ Player::Player(std::string n, int h, int x)
     set_health(h);
     set_xp(x);
 }
+
 Player::~Player()
 {
     std::cout << "Destructor called for : " << get_name() << std::endl;
@@ -741,18 +749,20 @@ Player::~Player()
 // setters
 void Player::set_health(int val)
 {
-    if(val < 0)
+    if (val < 0)
         health = 0;
     else
         health = val;
 }
+
 void Player::set_xp(int val)
 {
-    if(val < 0)
+    if (val < 0)
         xp = 0;
     else
         xp = val;
 }
+
 void Player::set_name(std::string val)
 {
     name = val;
@@ -789,7 +799,7 @@ void run_construct_destruct(void)
         Player hero{"Hero"};
         Player villain{"Villain", 100, 12};
     }
-    Player* enemy = new Player("Enemy");
+    Player* enemy      = new Player("Enemy");
     Player* level_boss = new Player("Level Boss", 1000, 0);
 
     delete enemy;
@@ -821,6 +831,7 @@ class Player1
     {
         std::cout << "No args conctructor called: " << name << std::endl;
     }
+
     Player1(std::string n) // string args constructor
         : name{n}
         , health{0}
@@ -828,6 +839,7 @@ class Player1
     {
         std::cout << "String args conctructor called: " << name << std::endl;
     }
+
     Player1(std::string n, int h, int x) // three args constructor
         : name{n}
         , health{h}
@@ -835,10 +847,12 @@ class Player1
     {
         std::cout << "three args conctructor called: " << name << std::endl;
     }
+
     ~Player1()
     {
         std::cout << "Destructor called: " << name << std::endl;
     }
+
     void display(void)
     {
         std::cout << "Name: " << name << ", Health: " << health << " ,XP: " << xp << std::endl;
@@ -931,6 +945,7 @@ Player3::~Player3() // destructor
 {
     std::cout << "Destructor called: " << name << std::endl;
 }
+
 /***********************************************************/
 
 void run_construct_variations(void)
@@ -1008,10 +1023,12 @@ std::string Player::get_name(void)
 {
     return name;
 }
+
 int Player::get_health(void)
 {
     return health;
 }
+
 int Player::get_xp(void)
 {
     return xp;
@@ -1071,7 +1088,7 @@ Test_Shallow::Test_Shallow()
 Test_Shallow::Test_Shallow(int d)
     : data{nullptr}
 {
-    data = new int;
+    data  = new int;
     *data = d;
     std::cout << "Constructor : " << *data << std::endl;
 }
@@ -1086,7 +1103,7 @@ Test_Shallow::Test_Shallow(const Test_Shallow& src)
 // destructor
 Test_Shallow::~Test_Shallow()
 {
-    if(data != nullptr)
+    if (data != nullptr)
         delete data;
     std::cout << "Destructor freeing data:  " << *data << std::endl;
 }
@@ -1096,6 +1113,7 @@ void Test_Shallow::set_data(int d)
 {
     *data = d;
 }
+
 int Test_Shallow::get_data(void)
 {
     return *data;
@@ -1129,7 +1147,7 @@ Test_Deep::Test_Deep()
 // Constructor
 Test_Deep::Test_Deep(int d)
 {
-    data = new int;
+    data  = new int;
     *data = d;
     std::cout << "Constructor: " << *data << std::endl;
 }
@@ -1160,6 +1178,7 @@ void Test_Deep::set_data(int d)
 {
     *data = d;
 }
+
 int Test_Deep::get_data(void)
 {
     return *data;
@@ -1226,7 +1245,7 @@ class Move_Test_1
 // Constructor
 Move_Test_1::Move_Test_1(int d)
 {
-    data = new int;
+    data  = new int;
     *data = d;
     std::cout << "Constructor for: " << d << std::endl;
 }
@@ -1241,7 +1260,7 @@ Move_Test_1::Move_Test_1(const Move_Test_1& source)
 // Destructor
 Move_Test_1::~Move_Test_1()
 {
-    if(data != nullptr)
+    if (data != nullptr)
         std::cout << "Destructor freeing data for: " << *data << std::endl;
     else
         std::cout << "Destructor freeing data for nullptr" << std::endl;
@@ -1253,6 +1272,7 @@ void Move_Test_1::set_data_value(int d)
 {
     *data = d;
 }
+
 int Move_Test_1::get_data_value()
 {
     return *data;
@@ -1279,7 +1299,7 @@ class Move_Test_2
 // Constructor
 Move_Test_2::Move_Test_2(int d)
 {
-    data = new int;
+    data  = new int;
     *data = d;
     std::cout << "Constructor for: " << d << std::endl;
 }
@@ -1302,7 +1322,7 @@ Move_Test_2::Move_Test_2(Move_Test_2&& source) noexcept
 // Destructor
 Move_Test_2::~Move_Test_2()
 {
-    if(data != nullptr)
+    if (data != nullptr)
         std::cout << "Destructor freeing data for: " << *data << std::endl;
     else
         std::cout << "Destructor freeing data for nullptr" << std::endl;
@@ -1314,6 +1334,7 @@ void Move_Test_2::set_data_value(int d)
 {
     *data = d;
 }
+
 int Move_Test_2::get_data_value()
 {
     return *data;
@@ -1393,11 +1414,13 @@ Player::~Player()
 {
     std::cout << "Destructor called: " << name << std::endl;
 }
+
 // Getters
 std::string Player::get_name(void) const
 {
     return name;
 }
+
 int Player::get_health(void) const
 {
     return health;
@@ -1408,6 +1431,7 @@ void Player::set_name(std::string n)
 {
     name = n;
 }
+
 void Player::set_health(int h)
 {
     health = h;
@@ -1480,6 +1504,7 @@ Player::Player(std::string n, int h, int x)
     ++num_players;
     std::cout << "Conctructor called: " << name << std::endl;
 }
+
 // Copy Constructor
 Player::Player(const Player& src)
     : Player{src.name, src.health, src.xp}
@@ -1499,10 +1524,12 @@ int Player::get_num_player()
 {
     return num_players;
 }
+
 std::string Player::get_name(void)
 {
     return name;
 }
+
 void Player::set_name(std::string n)
 {
     name = n;
@@ -1651,11 +1678,12 @@ class Rectangle
         , width{b}
     {
     }
+
     // following constructors are disabled
-    Rectangle(float, float) = delete;
+    Rectangle(float, float)         = delete;
     Rectangle(short int, short int) = delete;
-    Rectangle(char, char) = delete;
-    Rectangle(double, double) = delete;
+    Rectangle(char, char)           = delete;
+    Rectangle(double, double)       = delete;
 
     void display_area(void)
     {
@@ -1663,19 +1691,23 @@ class Rectangle
     }
 
     double CalcArea(int, int) = delete; // prevents automatic type promotion from int to double
+
     double CalcArea(double l, double b) // if float is passed as parameter, auto type promotion occurs
     {
         return b + l;
     }
 };
+
 class Data
 {
   public:
     int value;
+
     Data(int set_val)
     {
         value = set_val;
     }
+
     Data() = default; // explicitely generate constructor
 };
 
@@ -1686,17 +1718,19 @@ class Unique
 
   public:
     static int next_id;
+
     Unique()
     {
         id = next_id;
         ++next_id;
     }
+
     int getID()
     {
         return id;
     }
 
-    Unique(const Unique&) = delete;
+    Unique(const Unique&)            = delete;
     Unique& operator=(const Unique&) = delete;
 };
 
@@ -1744,6 +1778,7 @@ void run_delete_default_class(void)
 }
 
 } // namespace udemy1::spl1
+
 void udemy1::e13_run(void)
 {
     // udemy1::ex1::run_class_example();

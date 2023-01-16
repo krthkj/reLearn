@@ -34,6 +34,7 @@
  */
 
 #include "udemy1.hpp"
+
 #include <iostream>
 
 namespace udemy1
@@ -48,20 +49,20 @@ void s6c_run(void)
     do {
         std::cout << "How many small rooms would you like cleaned? ";
         std::cin >> room_s;
-        if(room_s < 0)
+        if (room_s < 0)
             loop_val = true;
         else
             loop_val = false;
-    } while(loop_val);
+    } while (loop_val);
 
     do {
         std::cout << "How many large rooms would you like cleaned? ";
         std::cin >> room_l;
-        if(room_l < 0)
+        if (room_l < 0)
             loop_val = true;
         else
             loop_val = false;
-    } while(loop_val);
+    } while (loop_val);
 
     float price_s{25}, price_l{35}, tax{6};
     int valid_days{30};

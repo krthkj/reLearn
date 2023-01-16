@@ -89,7 +89,7 @@ auto make()
 void fill(std::vector<std::shared_ptr<Test>>& vec, int num)
 {
     int tmp;
-    for(int i{0}; i < num;) {
+    for (int i{0}; i < num;) {
         std::cout << "Enter data point [" << ++i << "] : ";
         std::cin >> tmp;
         vec.push_back(std::make_shared<Test>(tmp));
@@ -99,7 +99,7 @@ void fill(std::vector<std::shared_ptr<Test>>& vec, int num)
 void display(const std::vector<std::shared_ptr<Test>>& vec)
 {
     std::cout << "Displaying vector data" << std::endl << "=======================" << std::endl;
-    for(const auto& v : vec) {
+    for (const auto& v : vec) {
         std::cout << v->get_data() << std::endl;
         // std::cout << "Use count: " << v.use_count() << std::endl;
     }
@@ -123,10 +123,12 @@ Test::Test(int x)
 {
     std::cout << "\tTest Constructor (" << data << ")" << std::endl;
 }
+
 Test::~Test()
 {
     std::cout << "\tTest Destructor (" << data << ")" << std::endl;
 }
+
 int Test::get_data() const
 {
     return data;

@@ -93,15 +93,17 @@ namespace udemy1::e16::ex6
 class Shape // abstract class
 {
   public:
-    virtual void draw() = 0;   // pure virtual functions
+    virtual void draw()   = 0; // pure virtual functions
     virtual void rotate() = 0; // pure virtual functions
-    virtual ~Shape() = default;
+    virtual ~Shape()      = default;
 };
+
 class Open_Shape : public Shape // abstract class
 {
   public:
     virtual ~Open_Shape() = default;
 };
+
 class Closed_Shape : public Shape // abstract class
 {
   public:
@@ -115,6 +117,7 @@ class Line : public Open_Shape // comcrete class
     virtual void rotate() override;
     virtual ~Line() = default;
 };
+
 class Circle : public Closed_Shape // comcrete class
 {
   public:
@@ -122,6 +125,7 @@ class Circle : public Closed_Shape // comcrete class
     virtual void rotate() override;
     virtual ~Circle() = default;
 };
+
 class Square : public Closed_Shape // comcrete class
 {
   public:

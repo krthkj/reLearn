@@ -8,9 +8,9 @@ Savings_Account::Savings_Account(std::string n, double b, double r)
     , int_rate{r}
 {
 }
-Savings_Account::~Savings_Account()
-{
-}
+
+Savings_Account::~Savings_Account() {}
+
 bool Savings_Account::deposit(double amt)
 {
     amt += (amt * int_rate / 100);

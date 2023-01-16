@@ -6,6 +6,7 @@
  *
  ******************************************************************/
 #include "movies.hpp"
+
 #include <iostream>
 
 namespace udemy1::s13c
@@ -24,9 +25,9 @@ namespace udemy1::s13c
 bool Movies::add_movie(std::string name, std::string rating, int watched)
 {
 
-    for(const Movie& movie : movieObject)
+    for (const Movie& movie : movieObject)
 
-        if(movie.getName() == name)
+        if (movie.getName() == name)
             return false;
 
     Movie tmp{name, rating, watched};
@@ -52,8 +53,8 @@ bool Movies::add_movie(std::string name, std::string rating, int watched)
  */
 bool Movies::increment_watched(std::string name)
 {
-    for(Movie& movie : movieObject)
-        if(movie.getName() == name) {
+    for (Movie& movie : movieObject)
+        if (movie.getName() == name) {
             movie.increment_watched();
             return true;
         }
@@ -75,11 +76,11 @@ bool Movies::increment_watched(std::string name)
  */
 void Movies::display(void) const
 {
-    if(movieObject.empty())
+    if (movieObject.empty())
         std::cout << "Sorry, no movies to display" << std::endl << std::endl;
     else {
         std::cout << std::endl << "===================================" << std::endl;
-        for(const Movie& i : movieObject)
+        for (const Movie& i : movieObject)
             i.display();
 
         // for(auto i : movieObject)
@@ -89,9 +90,7 @@ void Movies::display(void) const
 }
 
 // constructor
-Movies::Movies()
-{
-}
+Movies::Movies() {}
 
 // destructor
 Movies::~Movies()

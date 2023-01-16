@@ -12,6 +12,7 @@
  */
 
 #include "udemy1.hpp"
+
 #include <iostream>
 #include <vector>
 
@@ -85,36 +86,18 @@ void s11c_run(void)
     do {
         display_menu();
         selection = get_selection();
-        switch(selection) {
-        case 'p':
-            handle_display(mylist);
-            break;
-        case 'a':
-            handle_add(mylist);
-            break;
-        case 'c':
-            handle_clear(mylist);
-            break;
-        case 'm':
-            handle_mean(mylist);
-            break;
-        case 's':
-            handle_smallest(mylist);
-            break;
-        case 'f':
-            handle_find(mylist);
-            break;
-        case 'l':
-            handle_largest(mylist);
-            break;
-        case 'q':
-            handle_quit();
-            break;
-        default:
-            handle_unknown();
-            break;
+        switch (selection) {
+        case 'p': handle_display(mylist); break;
+        case 'a': handle_add(mylist); break;
+        case 'c': handle_clear(mylist); break;
+        case 'm': handle_mean(mylist); break;
+        case 's': handle_smallest(mylist); break;
+        case 'f': handle_find(mylist); break;
+        case 'l': handle_largest(mylist); break;
+        case 'q': handle_quit(); break;
+        default: handle_unknown(); break;
         }
-    } while(selection != 'q');
+    } while (selection != 'q');
 }
 
 void display_menu(void)
@@ -142,7 +125,7 @@ char get_selection(void)
 
 void handle_mean(const std::vector<int>& v)
 {
-    if(v.empty())
+    if (v.empty())
         std::cout << "Unable to calculate the mean - no data" << std::endl;
     else
         std::cout << "The mean is " << calc_mean(v) << std::endl;
@@ -150,7 +133,7 @@ void handle_mean(const std::vector<int>& v)
 
 void handle_smallest(const std::vector<int>& v)
 {
-    if(v.empty())
+    if (v.empty())
         std::cout << "Unable to determint the smallest number - list is empty" << std::endl;
     else
         std::cout << "The smallest number is " << get_smallest(v) << std::endl;
@@ -158,7 +141,7 @@ void handle_smallest(const std::vector<int>& v)
 
 void handle_largest(const std::vector<int>& v)
 {
-    if(v.empty())
+    if (v.empty())
         std::cout << "Unable to determint the largest number - list is empty" << std::endl;
     else
         std::cout << "The largest number is " << get_largest(v) << std::endl;
@@ -176,7 +159,7 @@ void handle_quit(void)
 
 void handle_display(const std::vector<int>& v)
 {
-    if(v.empty())
+    if (v.empty())
         std::cout << "[] - the list is empty" << std::endl;
     else
         display_list(v);
@@ -187,13 +170,13 @@ void handle_add(std::vector<int>& v)
     int n{};
     std::cout << "Enter an integer to add to the list: ";
     std::cin >> n;
-    if(!v.empty()) {
+    if (!v.empty()) {
         int count{0};
-        for(auto i : v) {
-            if(n == i)
+        for (auto i : v) {
+            if (n == i)
                 count++;
         }
-        if(count > 0)
+        if (count > 0)
             std::cout << n << " is a duplicate entry, it occurs " << count << " times" << std::endl;
     }
     v.push_back(n);
@@ -205,7 +188,7 @@ void handle_find(const std::vector<int>& v)
     int target{0};
     std::cout << "Enter the number to find: ";
     std::cin >> target;
-    if(find(v, target))
+    if (find(v, target))
         std::cout << target << " was found" << std::endl;
     else
         std::cout << target << " was not found" << std::endl;
@@ -213,7 +196,7 @@ void handle_find(const std::vector<int>& v)
 
 void handle_clear(std::vector<int>& v)
 {
-    if(v.empty())
+    if (v.empty())
         std::cout << "[] - the list is already empty" << std::endl;
     else {
         v.clear();
@@ -224,7 +207,7 @@ void handle_clear(std::vector<int>& v)
 void display_list(const std::vector<int>& v)
 {
     std::cout << "[ ";
-    for(auto i : v)
+    for (auto i : v)
         std::cout << i << " ";
     std::cout << "]" << std::endl;
 }
@@ -232,7 +215,7 @@ void display_list(const std::vector<int>& v)
 double calc_mean(const std::vector<int>& v)
 {
     int val{0};
-    for(auto i : v)
+    for (auto i : v)
         val += i;
     return static_cast<double>(val) / v.size();
 }
@@ -240,7 +223,7 @@ double calc_mean(const std::vector<int>& v)
 int get_smallest(const std::vector<int>& v)
 {
     int val{v.at(0)};
-    for(auto i : v)
+    for (auto i : v)
         val = (i < val) ? i : val;
     return val;
 }
@@ -248,15 +231,15 @@ int get_smallest(const std::vector<int>& v)
 int get_largest(const std::vector<int>& v)
 {
     int val{v.at(0)};
-    for(auto i : v)
+    for (auto i : v)
         val = (i > val) ? i : val;
     return val;
 }
 
 bool find(const std::vector<int>& v, int t)
 {
-    for(auto i : v)
-        if(i == t)
+    for (auto i : v)
+        if (i == t)
             return true;
     return false;
 }

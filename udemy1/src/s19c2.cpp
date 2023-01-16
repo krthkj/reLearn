@@ -91,10 +91,10 @@ void footer(double average)
 int auto_grader(std::string ans_key, std::string resp)
 {
     int val{0};
-    if((ans_key.length() != resp.length()) || resp.length() == 0 || ans_key.length() == 0)
+    if ((ans_key.length() != resp.length()) || resp.length() == 0 || ans_key.length() == 0)
         return val;
-    for(size_t i{0}; i < ans_key.length(); ++i)
-        if(ans_key.at(i) == resp.at(i))
+    for (size_t i{0}; i < ans_key.length(); ++i)
+        if (ans_key.at(i) == resp.at(i))
             ++val;
     // std::cout << ans_key << " == " << resp << " Score:" << val << std::endl;
     return val;
@@ -123,7 +123,7 @@ double average_grade(std::vector<std::shared_ptr<StudentData>> vec);
 void process_file(std::string file_name)
 {
     std::ifstream ifs{file_name};
-    if(!ifs)
+    if (!ifs)
         std::cerr << "File Open Error" << std::endl;
     else {
         header(); // Header
@@ -132,7 +132,7 @@ void process_file(std::string file_name)
         std::string answer_key{};
         auto s_data = std::make_unique<std::vector<std::shared_ptr<StudentData>>>();
         ifs >> answer_key;
-        while(ifs >> name >> grade)
+        while (ifs >> name >> grade)
             (*s_data).push_back(std::make_shared<StudentData>(name, auto_grader(answer_key, grade)));
         display_grade(*s_data);
         footer(average_grade(*s_data)); // footer
@@ -143,17 +143,18 @@ void process_file(std::string file_name)
 
 void display_grade(std::vector<std::shared_ptr<StudentData>> vec)
 {
-    for(const auto& v : vec) {
+    for (const auto& v : vec) {
         std::cout << std::setw(15) << std::left << (*v).name;
         std::cout << std::setw(5) << std::right << std::setprecision(1) << std::fixed << (*v).score << std::endl;
     }
 }
+
 double average_grade(std::vector<std::shared_ptr<StudentData>> vec)
 {
     double val{0.0};
-    if(vec.size() == 0)
+    if (vec.size() == 0)
         return 0;
-    for(const auto& v : vec)
+    for (const auto& v : vec)
         val += (*v).score;
     return val / vec.size();
 }
@@ -174,7 +175,7 @@ void display_grade(std::string name, int score)
 void process_file(std::string file_name)
 {
     std::ifstream ifs{file_name};
-    if(!ifs)
+    if (!ifs)
         std::cerr << "File Open Error" << std::endl;
     else {
         header(); // Header
@@ -183,13 +184,13 @@ void process_file(std::string file_name)
         std::string answer_key{};
         int students{0}, sum_score{0};
         ifs >> answer_key;
-        while(ifs >> name >> grade) {
+        while (ifs >> name >> grade) {
             int score{auto_grader(answer_key, grade)};
             display_grade(name, score);
             sum_score += score;
             ++students;
         }
-        if(students != 0)
+        if (students != 0)
             footer(static_cast<double>(sum_score) / students); // footer
         std::cout << std::endl;
         ifs.close();

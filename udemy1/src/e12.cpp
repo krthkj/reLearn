@@ -13,6 +13,7 @@
  */
 
 #include "udemy1.hpp"
+
 #include <iostream>
 #include <vector>
 
@@ -37,7 +38,7 @@ void run_test_ptrs(void)
 
     p = nullptr;
     std::cout << "reinitilaized Value of p is: " << p << std::endl << std::endl;
-    if(p != nullptr)
+    if (p != nullptr)
         std::cout << "dereferenced Value of p is: " << *p << std::endl << std::endl;
 
     int q{0};
@@ -51,7 +52,7 @@ void run_test_ptrs(void)
     p = &q;
     std::cout << "Value of p is: " << p << std::endl;
     std::cout << "Address of p is: " << &p << std::endl;
-    if(p != nullptr)
+    if (p != nullptr)
         std::cout << "dereferenced Value of p is: " << *p << std::endl << std::endl;
 
     std::cout << "value of  'q'  is: " << q << std::endl;
@@ -94,7 +95,7 @@ void run_test_ptrs(void)
 
     std::cout << "First stooges: " << (*vector_ptr).at(0) << std::endl;
     std::cout << "Stooges: ";
-    for(auto stoogge : *vector_ptr)
+    for (auto stoogge : *vector_ptr)
         std::cout << stoogge << " ";
     std::cout << std::endl;
 }
@@ -115,7 +116,7 @@ void run_dynamic_mem(void)
     std::cout << "value: " << *int_ptr << std::endl;
     *int_ptr = 100;
     std::cout << "value: " << *int_ptr << std::endl;
-    if(int_ptr != nullptr)
+    if (int_ptr != nullptr)
         delete int_ptr;
 
     //--------------------------
@@ -125,11 +126,11 @@ void run_dynamic_mem(void)
     std::cout << "How big do your want the array ? ";
     std::cin >> size;
     array_ptr = new int[size];
-    for(size_t i{0}; i < size; ++i) {
+    for (size_t i{0}; i < size; ++i) {
         array_ptr[i] = i;
         std::cout << array_ptr[i] << " ";
     }
-    if(array_ptr != nullptr)
+    if (array_ptr != nullptr)
         delete[] array_ptr;
 
     std::cout << std::endl;
@@ -169,27 +170,27 @@ void run_pointer_array(void)
     std::cout << "Size of array: " << size << std::endl;
 
     std::cout << "Address of array: " << size << std::endl;
-    for(size_t i{0}; i < size; ++i)
+    for (size_t i{0}; i < size; ++i)
         std::cout << score_ptr + i << std::endl;
     std::cout << std::endl;
 
     std::cout << "Array subscript notation:   ";
-    for(size_t i{0}; i < size; ++i)
+    for (size_t i{0}; i < size; ++i)
         std::cout << scores[i] << " ";
     std::cout << std::endl;
 
     std::cout << "Pointer subscript notation: ";
-    for(size_t i{0}; i < size; ++i)
+    for (size_t i{0}; i < size; ++i)
         std::cout << score_ptr[i] << " ";
     std::cout << std::endl;
 
     std::cout << "Array offset notation:      ";
-    for(size_t i{0}; i < size; ++i)
+    for (size_t i{0}; i < size; ++i)
         std::cout << *(scores + i) << " ";
     std::cout << std::endl;
 
     std::cout << "Pointer offset notation:    ";
-    for(size_t i{0}; i < size; ++i)
+    for (size_t i{0}; i < size; ++i)
         std::cout << *(score_ptr + i) << " ";
     std::cout << std::endl;
 }
@@ -232,14 +233,14 @@ void run_pointer_arithmetic(void)
     int scores[]{100, 98, 89, 68, -1};
     int* score_ptr{scores};
 
-    while(*score_ptr != -1) {
+    while (*score_ptr != -1) {
         std::cout << *score_ptr << std::endl;
         score_ptr++;
     }
     std::cout << std::endl;
 
     score_ptr = scores;
-    while(*score_ptr != -1)
+    while (*score_ptr != -1)
         // *score_ptr++  === *(score_ptr++)
         // dereference pointer first and then increment pointer
         std::cout << *score_ptr++ << std::endl;
@@ -343,14 +344,14 @@ void double_data(int* int_ptr)
 void my_swap(int* a, int* b)
 {
     int tmp = *a;
-    *a = *b;
-    *b = tmp;
+    *a      = *b;
+    *b      = tmp;
 }
 
 void display1(std::vector<std::string>* v)
 {
     (*v).at(0) = "Funny"; // can modify const value
-    for(auto str : *v)
+    for (auto str : *v)
         std::cout << str << " ";
     std::cout << std::endl;
     v = nullptr; // can modify const value
@@ -359,7 +360,7 @@ void display1(std::vector<std::string>* v)
 void display2(const std::vector<std::string>* v)
 {
     // (*v).at(0) = "Funny"; // cant modify const value, read-only
-    for(auto str : *v)
+    for (auto str : *v)
         std::cout << str << " ";
     std::cout << std::endl;
     v = nullptr;
@@ -368,7 +369,7 @@ void display2(const std::vector<std::string>* v)
 void display3(const std::vector<std::string>* const v)
 {
     // (*v).at(0) = "Funny"; // cant modify, read-only
-    for(auto str : *v)
+    for (auto str : *v)
         std::cout << str << " ";
     std::cout << std::endl;
     // v = nullptr; // cannot modify pointer, read-only
@@ -377,7 +378,7 @@ void display3(const std::vector<std::string>* const v)
 void display(int* array, int sentinal)
 {
     // Cannot use any kind of constant pointer in this function
-    while(*array != sentinal)
+    while (*array != sentinal)
         std::cout << *array++ << " ";
     std::cout << std::endl;
 }
@@ -386,7 +387,7 @@ void display(int* array, int sentinal)
 
 int* largest_int(int* int_ptr_1, int* int_ptr_2)
 {
-    if(*int_ptr_1 > *int_ptr_2)
+    if (*int_ptr_1 > *int_ptr_2)
         return int_ptr_1;
     else
         return int_ptr_2;
@@ -396,14 +397,14 @@ int* create_array(size_t size, int init_value = 0)
 {
     int* new_storage{nullptr};
     new_storage = new int[size];
-    for(size_t i{0}; i < size; ++i)
+    for (size_t i{0}; i < size; ++i)
         *(new_storage + i) = init_value;
     return new_storage;
 }
 
 void display_array(const int* const array, size_t size)
 {
-    for(size_t i{0}; i < size; ++i)
+    for (size_t i{0}; i < size; ++i)
         std::cout << array[i] << " ";
     std::cout << std::endl;
 }
@@ -446,19 +447,19 @@ void run_reference(void)
 
     //----------------------------------------------------
     // references in range-based loop
-    for(auto str : stooges) // 'str' is a copy
-        str = "FUnny";      // changes the copy not the original value
+    for (auto str : stooges) // 'str' is a copy
+        str = "FUnny";       // changes the copy not the original value
 
-    for(auto str : stooges)
+    for (auto str : stooges)
         std::cout << str << " ";
     std::cout << std::endl;
 
     //----------------------------------------------------
     // Using a referenece as loop variable
-    for(auto& str : stooges) // 'str' is an alias, reference to the 'stooges'
-        str = "FUnny";       // changes the original value
+    for (auto& str : stooges) // 'str' is an alias, reference to the 'stooges'
+        str = "FUnny";        // changes the original value
 
-    for(auto str : stooges) // here 'str' is creating copy, its unnecessary
+    for (auto str : stooges) // here 'str' is creating copy, its unnecessary
         std::cout << str << " ";
     std::cout << std::endl;
 
@@ -468,8 +469,8 @@ void run_reference(void)
     //     str = "FUnny"; // compiler error
 
     // This range-based loop is space effecient, as it doesnt make copies.
-    for(auto const& str : stooges) // 'str' is reference; 'const' makes it read-only
-        std::cout << str << " ";   // no error
+    for (auto const& str : stooges) // 'str' is reference; 'const' makes it read-only
+        std::cout << str << " ";    // no error
     std::cout << std::endl;
     std::cout << std::endl;
 
@@ -514,10 +515,10 @@ int square(int& n)
 void run_l_r_value(void)
 {
     //---------------------------------
-    int x{100};      // 100 is r-value
-    x = 1000;        // 'x' is l-value
-    x = 100 + 22;    // 'x' is l-value
-    int y = x + 200; // '(x+200)' is an r-vaue
+    int x{100};       // 100 is r-value
+    x     = 1000;     // 'x' is l-value
+    x     = 100 + 22; // 'x' is l-value
+    int y = x + 200;  // '(x+200)' is an r-vaue
 
     std::string name; // 'name' is l-value
     name = "Frank";   // 'Frank' is r-value
@@ -529,7 +530,7 @@ void run_l_r_value(void)
 
     //---------------------------------
     int& ref1 = x; // ref1 is reference to l-value
-    ref1 = 1000;
+    ref1      = 1000;
     // int &ref2=100; // compiler error: 100 is an r-value
 
     //---------------------------------

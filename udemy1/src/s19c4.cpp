@@ -44,11 +44,11 @@ void copy_file_with_lineno(std::string src, std::string dest, bool empty_line_nu
 {
     std::ifstream ifs{src};
     std::ofstream ofs{dest};
-    if(!ifs) {
+    if (!ifs) {
         std::cerr << " Error opening file" << std::endl;
         return;
     }
-    if(!ifs) {
+    if (!ifs) {
         std::cerr << " Error creating file" << std::endl;
         ifs.close();
         return;
@@ -57,10 +57,10 @@ void copy_file_with_lineno(std::string src, std::string dest, bool empty_line_nu
     std::string line{""};
     unsigned int line_number{0};
 
-    while(std::getline(ifs, line)) {
-        if((line == "\r")     // mac and dos
-           || (line == "")) { // unix
-            if(empty_line_number)
+    while (std::getline(ifs, line)) {
+        if ((line == "\r")     // mac and dos
+            || (line == "")) { // unix
+            if (empty_line_number)
                 ofs << std::setw(7) << std::left << ++line_number;
             ofs << std::endl;
         } else
@@ -73,19 +73,15 @@ void copy_file_with_lineno(std::string src, std::string dest, bool empty_line_nu
 
 bool process_choice(std::string choice)
 {
-    if(choice.length() == 0)
+    if (choice.length() == 0)
         return false;
 
     bool retVal{true};
     char c{choice.at(0)};
-    switch(c) {
+    switch (c) {
     case 'Y':
-    case 'y':
-        retVal = true;
-        break;
-    default:
-        retVal = false;
-        break;
+    case 'y': retVal = true; break;
+    default: retVal = false; break;
     }
 
     return retVal;

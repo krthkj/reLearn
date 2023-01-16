@@ -12,6 +12,7 @@
  */
 
 #include "udemy1.hpp"
+
 #include <iostream>
 #include <numeric> // std::iota
 #include <vector>
@@ -26,7 +27,7 @@ namespace udemy1
 void assignment_test(void)
 {
     float val = 7.9;
-    int val2 = 15;
+    int val2  = 15;
 
     int x2 = val; // if val==7.9, x2 becomes 7 (bad)
     std::cout << val << std::endl;
@@ -73,7 +74,7 @@ void test_pass_value(int a)
 
 void test_pass_ptr(int* a)
 {
-    if(a == nullptr) {
+    if (a == nullptr) {
         std::cout << "nullptr param success" << std::endl;
         return;
     }
@@ -89,7 +90,7 @@ void test_pass_ptr(int* a)
 
 void test_pass_ptr_const(const int* a)
 {
-    if(a == nullptr) {
+    if (a == nullptr) {
         std::cout << "nullptr param success" << std::endl;
         return;
     }
@@ -105,7 +106,7 @@ void test_pass_ptr_const(const int* a)
 
 void test_pass_const_ptr(int* const a)
 {
-    if(a == nullptr) {
+    if (a == nullptr) {
         std::cout << "nullptr param success" << std::endl;
         return;
     }
@@ -121,7 +122,7 @@ void test_pass_const_ptr(int* const a)
 
 void test_pass_const_ptr_const(const int* const a)
 {
-    if(a == nullptr) {
+    if (a == nullptr) {
         std::cout << "nullptr param success" << std::endl;
         return;
     }
@@ -236,11 +237,11 @@ void vector_play(void)
     std::vector<float> b;
     std::cout << "size of a : " << sizeof(a) << std::endl;
     std::cout << "size of b : " << sizeof(b) << std::endl;
-    for(int i{0}; i < 10; ++i)
+    for (int i{0}; i < 10; ++i)
         a.push_back(i + 1);
 
     std::cout << "size of a : " << sizeof(a) << std::endl;
-    for(int i{0}; i < 10; ++i)
+    for (int i{0}; i < 10; ++i)
         std::cout << a.at(i) << ", ";
     std::cout << std::endl;
 }
@@ -260,7 +261,7 @@ void test_iota(void)
     strr = string_literal_lifetimes();
     std::cout << "Elemelnts are : ";
     std::iota(num, num + 10, st);
-    for(auto i : num)
+    for (auto i : num)
         std::cout << " " << i;
     std::cout << std::endl;
     std::cout << strr << std::endl;

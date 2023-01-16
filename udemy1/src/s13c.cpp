@@ -105,6 +105,7 @@
 
 #include "movies.hpp"
 #include "udemy1.hpp"
+
 #include <iostream>
 
 namespace udemy1::s13c
@@ -155,7 +156,7 @@ void s13c_run(void)
 
 void increment_watched(Movies& movies, std::string name)
 {
-    if(movies.increment_watched(name)) {
+    if (movies.increment_watched(name)) {
         std::cout << name << " watch incremented" << std::endl;
     } else {
         std::cout << name << " not found" << std::endl;
@@ -173,7 +174,7 @@ void increment_watched(Movies& movies, std::string name)
  */
 void add_movie(Movies& movies, std::string name, std::string rating, int watched)
 {
-    if(movies.add_movie(name, rating, watched)) {
+    if (movies.add_movie(name, rating, watched)) {
         std::cout << name << " added" << std::endl;
     } else {
         std::cout << name << " already exists" << std::endl;

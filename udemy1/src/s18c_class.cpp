@@ -7,6 +7,7 @@ const char* IllegalBalanceException::what() const noexcept
 {
     return "Illegal Balance Exception";
 }
+
 const char* InsufficentFundsException::what() const noexcept
 {
     return "Insufficient Funds Exception";
@@ -22,13 +23,13 @@ Account::Account(std::string name, double balance)
     : name{name}
     , balance{balance}
 {
-    if(balance < 0.0)
+    if (balance < 0.0)
         throw IllegalBalanceException();
 }
 
 bool Account::deposit(double amount)
 {
-    if(amount < 0)
+    if (amount < 0)
         return false;
     else {
         balance += amount;
@@ -38,7 +39,7 @@ bool Account::deposit(double amount)
 
 bool Account::withdraw(double amount)
 {
-    if(balance - amount >= 0) {
+    if (balance - amount >= 0) {
         balance -= amount;
         return true;
     } else
@@ -55,7 +56,7 @@ void Account::print(std::ostream& os) const
 Checking_Account::Checking_Account(std::string name, double balance)
 try : Account{name, balance} {
 
-} catch(...) {
+} catch (...) {
     ;
 }
 
@@ -114,7 +115,7 @@ Trust_Account::Trust_Account(std::string name, double balance, double int_rate)
 // Deposit additional $50 bonus when amount >= $5000
 bool Trust_Account::deposit(double amount)
 {
-    if(amount >= bonus_threshold)
+    if (amount >= bonus_threshold)
         amount += bonus_amount;
     return Savings_Account::deposit(amount);
 }
@@ -122,7 +123,7 @@ bool Trust_Account::deposit(double amount)
 // Only allowed 3 withdrawals, each can be up to a maximum of 20% of the account's value
 bool Trust_Account::withdraw(double amount)
 {
-    if(num_withdrawals >= max_withdrawals || (amount > balance * max_withdraw_percent))
+    if (num_withdrawals >= max_withdrawals || (amount > balance * max_withdraw_percent))
         return false;
     else {
         ++num_withdrawals;
@@ -142,7 +143,7 @@ void Trust_Account::print(std::ostream& os) const
 void display(const std::vector<Account*>& accounts)
 {
     std::cout << "\n=== Accounts===========================================" << std::endl;
-    for(const auto acc : accounts)
+    for (const auto acc : accounts)
         std::cout << *acc << std::endl;
 }
 
@@ -150,8 +151,8 @@ void display(const std::vector<Account*>& accounts)
 void deposit(std::vector<Account*>& accounts, double amount)
 {
     std::cout << "\n=== Depositing to Accounts =================================" << std::endl;
-    for(auto acc : accounts) {
-        if(acc->deposit(amount))
+    for (auto acc : accounts) {
+        if (acc->deposit(amount))
             std::cout << "Deposited " << amount << " to " << *acc << std::endl;
         else
             std::cout << "Failed Deposit of " << amount << " to " << *acc << std::endl;
@@ -162,8 +163,8 @@ void deposit(std::vector<Account*>& accounts, double amount)
 void withdraw(std::vector<Account*>& accounts, double amount)
 {
     std::cout << "\n=== Withdrawing from Accounts ==============================" << std::endl;
-    for(auto acc : accounts) {
-        if(acc->withdraw(amount))
+    for (auto acc : accounts) {
+        if (acc->withdraw(amount))
             std::cout << "Withdrew " << amount << " from " << *acc << std::endl;
         else
             std::cout << "Failed Withdrawal of " << amount << " from " << *acc << std::endl;

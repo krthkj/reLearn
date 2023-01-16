@@ -13,6 +13,7 @@
  */
 
 #include "udemy1.hpp"
+
 #include <iostream>
 
 namespace udemy1
@@ -20,15 +21,15 @@ namespace udemy1
 void swap(int* a, int* b)
 {
     int temp = *a;
-    *a = *b;
-    *b = temp;
+    *a       = *b;
+    *b       = temp;
 }
 
 void s12_test_debugger(void)
 {
 
     int i{5};
-    while(i > 0) {
+    while (i > 0) {
         std::cout << i << std::endl;
         i--;
     }

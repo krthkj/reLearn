@@ -7,18 +7,19 @@ Trust_Account::Trust_Account(std::string n, double b, double r)
     , num_withdraw{0}
 {
 }
-Trust_Account::~Trust_Account()
-{
-}
+
+Trust_Account::~Trust_Account() {}
+
 bool Trust_Account::deposit(double amt)
 {
-    if(amt >= bonus_low_limit)
+    if (amt >= bonus_low_limit)
         amt += bonus_amt;
     return Savings_Account::deposit(amt);
 }
+
 bool Trust_Account::withdraw(double amt)
 {
-    if(num_withdraw >= max_withdraw_limit || (amt > balance * max_withdraw_percentage))
+    if (num_withdraw >= max_withdraw_limit || (amt > balance * max_withdraw_percentage))
         return false;
     else {
         ++num_withdraw;

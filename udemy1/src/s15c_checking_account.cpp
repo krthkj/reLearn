@@ -6,9 +6,9 @@ Checking_Account::Checking_Account(std::string n, double b)
     : Account{n, b}
 {
 }
-Checking_Account::~Checking_Account()
-{
-}
+
+Checking_Account::~Checking_Account() {}
+
 bool Checking_Account::withdraw(double amt)
 {
     amt += per_withdraw_fee;

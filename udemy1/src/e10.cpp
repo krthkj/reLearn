@@ -13,14 +13,12 @@
 
 #include "udemy1.hpp"
 
-#include <cctype>  // for character-based functions
-#include <cstring> // for c-style string functions
-
+#include <cctype> // for character-based functions
 #include <cstdlib>
-#include <string>
-
+#include <cstring> // for c-style string functions
 #include <iomanip>
 #include <iostream>
+#include <string>
 
 namespace udemy1
 {
@@ -85,7 +83,7 @@ void c_style_string()
     {
         std::cout << "-------------------------------" << std::endl;
         strcpy(temp, full_name);
-        if(strcmp(temp, full_name) == 0)
+        if (strcmp(temp, full_name) == 0)
             std::cout << temp << " and " << full_name << " are the same" << std::endl;
         else
             std::cout << temp << " and " << full_name << " are different" << std::endl;
@@ -93,8 +91,8 @@ void c_style_string()
         std::cout << "-------------------------------" << std::endl;
     }
     {
-        for(size_t i{0}; i < strlen(full_name); ++i) {
-            if(isalpha(full_name[i]))
+        for (size_t i{0}; i < strlen(full_name); ++i) {
+            if (isalpha(full_name[i]))
                 full_name[i] = toupper(full_name[i]);
         }
         std::cout << "Your full name is " << full_name << std::endl;
@@ -102,7 +100,7 @@ void c_style_string()
     {
         std::cout << "-------------------------------" << std::endl;
 
-        if(strcmp(temp, full_name) == 0)
+        if (strcmp(temp, full_name) == 0)
             std::cout << temp << " and " << full_name << " are the same" << std::endl;
         else
             std::cout << temp << " and " << full_name << " are different" << std::endl;
@@ -146,7 +144,7 @@ void strings_and_functions()
     char whole_name[22]{};
 
     size_t first_name_length = strlen(first_name);
-    size_t last_name_length = strlen(last_name);
+    size_t last_name_length  = strlen(last_name);
 
     strcpy(whole_name, first_name);
     // strcat(whole_name," ");
@@ -205,7 +203,7 @@ void cpp_string()
     std::cout << "s3.at(1) = 'y' output: " << s3 << std::endl;
 
     std::cout << std::endl << "ASCII code for the strings literals" << std::endl;
-    for(int c : s1)
+    for (int c : s1)
         std::cout << c << std::endl;
 
     // reading Strings
@@ -298,12 +296,12 @@ void working_with_cpp_string(void)
     std::cout << std::endl << "Looping" << std::endl << "------------------------------------------" << std::endl;
 
     s1 = "Apple";
-    for(size_t i{0}; i < s1.length(); ++i)
+    for (size_t i{0}; i < s1.length(); ++i)
         std::cout << s1.at(i); //  or s1[i]    Apple
     std::cout << std::endl;
 
     //// Range-based for loop
-    for(char c : s1)
+    for (char c : s1)
         std::cout << c; // Apple
     std::cout << std::endl;
 
@@ -342,7 +340,7 @@ void working_with_cpp_string(void)
     std::cin >> word;
 
     size_t position = s1.find(word);
-    if(position != std::string::npos)
+    if (position != std::string::npos)
         std::cout << "Found " << word << " at position: " << position << std::endl;
     else
         std::cout << "Sorry, " << word << " not found" << std::endl;

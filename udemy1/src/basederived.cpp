@@ -1,4 +1,5 @@
 #include "basederived.hpp"
+
 #include <iostream>
 
 using std::cout, std::endl;
@@ -38,10 +39,12 @@ Base::Base()
 {
     cout << "Base no-args Constructor" << endl;
 }
+
 Base::~Base()
 {
     cout << "Base Destructor" << endl;
 }
+
 Base::Base(int val)
     : value{val}
 {
@@ -53,10 +56,12 @@ Derived_Public::Derived_Public()
 {
     cout << "Derived_Public no-args Constructor" << endl;
 }
+
 Derived_Public::~Derived_Public()
 {
     cout << "Derived_Public Destructor" << endl;
 }
+
 Derived_Public::Derived_Public(int x)
     : doubled_value{x * 2}
 {
@@ -67,6 +72,7 @@ void Base::display(void) // simply defined to prevent compiler warning
 {
     cout << value << endl;
 }
+
 void Derived_Public::display(void) // simply defined to prevent compiler warning
 {
     cout << doubled_value << endl;
@@ -84,10 +90,12 @@ Base::Base()
 {
     cout << "Base no-args Constructor" << endl;
 }
+
 Base::~Base()
 {
     cout << "Base Destructor" << endl;
 }
+
 Base::Base(int val)
     : value{val}
 {
@@ -100,10 +108,12 @@ Derived_Public::Derived_Public()
 {
     cout << "Derived_Public no-args Constructor" << endl;
 }
+
 Derived_Public::~Derived_Public()
 {
     cout << "Derived_Public Destructor" << endl;
 }
+
 Derived_Public::Derived_Public(int x)
     : Base{x}
     , doubled_value{x * 2}
@@ -123,9 +133,10 @@ Base::Base(const Base& src)
 {
     cout << "Base Copy constructor" << endl;
 }
+
 Base& Base::operator=(const Base& src)
 {
-    if(this != &src)
+    if (this != &src)
         value = src.value; // Assign Base part
     return *this;
 }
@@ -136,9 +147,10 @@ Derived_Public::Derived_Public(const Derived_Public& src)
 {
     cout << "Derived_Public Copy constructor" << endl;
 }
+
 Derived_Public& Derived_Public::operator=(const Derived_Public& src)
 {
-    if(this != &src) {
+    if (this != &src) {
         Base::operator=(src);              // Assign Base part
         doubled_value = src.doubled_value; // Assign Derived part
     }

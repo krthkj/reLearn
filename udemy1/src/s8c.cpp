@@ -12,6 +12,7 @@
  */
 
 #include "udemy1.hpp"
+
 #include <iostream>
 
 namespace udemy1
@@ -52,11 +53,11 @@ void s8c_run(void)
     do {
         std::cout << "Enter an amount in cents: ";
         std::cin >> cents;
-        if(cents < 0)
+        if (cents < 0)
             loop_val = true;
         else
             loop_val = false;
-    } while(loop_val);
+    } while (loop_val);
 
     int n_dollar{cents / 100};
     cents = cents % 100;

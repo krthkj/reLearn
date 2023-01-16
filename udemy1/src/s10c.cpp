@@ -12,6 +12,7 @@
  */
 
 #include "udemy1.hpp"
+
 #include <iostream>
 #include <string>
 
@@ -24,9 +25,9 @@ namespace udemy1
 std::string chipher_encode_string(std::string& src, std::string& letters, std::string& key)
 {
     std::string dest{};
-    for(char c : src) {
+    for (char c : src) {
         size_t pos = letters.find(c);
-        if(pos == std::string::npos)
+        if (pos == std::string::npos)
             dest += c;
         else
             dest += key.at(pos);

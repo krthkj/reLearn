@@ -12,6 +12,7 @@
  */
 
 #include "udemy1.hpp"
+
 #include <cstdlib>
 #include <ctime>
 #include <iomanip>
@@ -44,7 +45,7 @@ void random_nums(void)
     // std::srand needs <cstdlib>
     std::srand(std::time(nullptr));
 
-    for(size_t i{1}; i <= count; ++i) {
+    for (size_t i{1}; i <= count; ++i) {
         random_number = std::rand() % max + min; // generate a random number [min, max]
         std::cout << random_number << std::endl;
     }
@@ -108,7 +109,7 @@ void print(std::string s, std::string t)
 void print(std::vector<std::string> v)
 {
     std::cout << "Printing vector of strings: ";
-    for(auto s : v)
+    for (auto s : v)
         std::cout << s + " ";
     std::cout << std::endl;
 }
@@ -146,7 +147,7 @@ void set_array(int arr[], size_t size, int value);
 void print_array(const int arr[], size_t size) // const
 {
 
-    for(size_t i{0}; i < size; ++i)
+    for (size_t i{0}; i < size; ++i)
         std::cout << arr[i] << " ";
     std::cout << std::endl;
     //     arr[0] = 50000; // bug
@@ -155,7 +156,7 @@ void print_array(const int arr[], size_t size) // const
 // set each array element to value
 void set_array(int arr[], size_t size, int value)
 {
-    for(size_t i{0}; i < size; ++i)
+    for (size_t i{0}; i < size; ++i)
         arr[i] = value;
 }
 
@@ -194,7 +195,7 @@ void event_guest_list(void)
 std::string print_guest_list(const std::string guest_list[], size_t guest_list_size)
 {
 
-    for(size_t i{0}; i < guest_list_size; ++i)
+    for (size_t i{0}; i < guest_list_size; ++i)
         std::cout << guest_list[i] << std::endl;
 
     return typeid(guest_list).name();
@@ -202,7 +203,7 @@ std::string print_guest_list(const std::string guest_list[], size_t guest_list_s
 
 void clear_guest_list(std::string guest_list[], size_t value)
 {
-    for(size_t i{0}; i < value; ++i)
+    for (size_t i{0}; i < value; ++i)
         guest_list[i] = " ";
 }
 
@@ -233,7 +234,7 @@ void pass_by_ref3(std::vector<std::string>& v)
 
 void print_vector(const std::vector<std::string>& v)
 {
-    for(auto s : v)
+    for (auto s : v)
         std::cout << s << " ";
     std::cout << std::endl;
 }
@@ -436,14 +437,14 @@ inline int add_num(int a, int b)
 
 unsigned long long my_factorial(unsigned long long n)
 {
-    if(n == 0)
+    if (n == 0)
         return 1;
     return n * my_factorial(n - 1);
 }
 
 unsigned long long my_fibonacci(unsigned long long n)
 {
-    if(n <= 1)
+    if (n <= 1)
         return n;
     return my_fibonacci(n - 1) + my_fibonacci(n - 2);
 }
@@ -481,7 +482,7 @@ void run_amount_accumulated(void)
 double a_penny_doubled_everyday(int n, double amount)
 {
     function_activation_count++;
-    if(n <= 1)
+    if (n <= 1)
         return amount;
     return a_penny_doubled_everyday(--n, amount * 2);
 }

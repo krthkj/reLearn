@@ -13,14 +13,14 @@ class I_Printable
 
   public:
     virtual void print(std::ostream& os) const = 0;
-    virtual ~I_Printable() = default;
+    virtual ~I_Printable()                     = default;
 };
 
 class Account : public I_Printable
 {
   private:
     static constexpr const char* def_name = "Unnamed Account";
-    static constexpr double def_balance = 0.0;
+    static constexpr double def_balance   = 0.0;
 
   protected:
     std::string name;
@@ -28,7 +28,7 @@ class Account : public I_Printable
 
   public:
     Account(std::string name = def_name, double balance = def_balance);
-    virtual bool deposit(double amount) = 0;
+    virtual bool deposit(double amount)  = 0;
     virtual bool withdraw(double amount) = 0;
     virtual void print(std::ostream& os) const override;
     virtual ~Account() = default;
@@ -38,7 +38,7 @@ class Checking_Account : public Account
 {
   private:
     static constexpr const char* def_name = "Unnamed Checking Account";
-    static constexpr double def_balance = 0.0;
+    static constexpr double def_balance   = 0.0;
     static constexpr double per_check_fee = 1.5;
 
   public:
@@ -54,8 +54,8 @@ class Savings_Account : public Account
 {
   private:
     static constexpr const char* def_name = "Unnamed Savings Account";
-    static constexpr double def_balance = 0.0;
-    static constexpr double def_int_rate = 0.0;
+    static constexpr double def_balance   = 0.0;
+    static constexpr double def_int_rate  = 0.0;
 
   protected:
     double int_rate;
@@ -72,12 +72,12 @@ class Savings_Account : public Account
 class Trust_Account : public Savings_Account
 {
   private:
-    static constexpr const char* def_name = "Unnamed Trust Account";
-    static constexpr double def_balance = 0.0;
-    static constexpr double def_int_rate = 0.0;
-    static constexpr double bonus_amount = 50.0;
-    static constexpr double bonus_threshold = 5000.0;
-    static constexpr int max_withdrawals = 3;
+    static constexpr const char* def_name        = "Unnamed Trust Account";
+    static constexpr double def_balance          = 0.0;
+    static constexpr double def_int_rate         = 0.0;
+    static constexpr double bonus_amount         = 50.0;
+    static constexpr double bonus_threshold      = 5000.0;
+    static constexpr int max_withdrawals         = 3;
     static constexpr double max_withdraw_percent = 0.2;
 
   protected:
@@ -110,14 +110,14 @@ class I_Printable
 
   public:
     virtual void print(std::ostream& os) const = 0;
-    virtual ~I_Printable() = default;
+    virtual ~I_Printable()                     = default;
 };
 
 class Account : public I_Printable
 {
   private:
     static constexpr const char* def_name = "Unnamed Account";
-    static constexpr double def_balance = 0.0;
+    static constexpr double def_balance   = 0.0;
 
   protected:
     std::string name;
@@ -125,7 +125,7 @@ class Account : public I_Printable
 
   public:
     Account(std::string name = def_name, double balance = def_balance);
-    virtual bool deposit(double amount) = 0;
+    virtual bool deposit(double amount)  = 0;
     virtual bool withdraw(double amount) = 0;
     virtual void print(std::ostream& os) const override;
     virtual ~Account() = default;
@@ -135,7 +135,7 @@ class Checking_Account : public Account
 {
   private:
     static constexpr const char* def_name = "Unnamed Checking Account";
-    static constexpr double def_balance = 0.0;
+    static constexpr double def_balance   = 0.0;
     static constexpr double per_check_fee = 1.5;
 
   public:
@@ -151,8 +151,8 @@ class Savings_Account : public Account
 {
   private:
     static constexpr const char* def_name = "Unnamed Savings Account";
-    static constexpr double def_balance = 0.0;
-    static constexpr double def_int_rate = 0.0;
+    static constexpr double def_balance   = 0.0;
+    static constexpr double def_int_rate  = 0.0;
 
   protected:
     double int_rate;
@@ -169,12 +169,12 @@ class Savings_Account : public Account
 class Trust_Account : public Savings_Account
 {
   private:
-    static constexpr const char* def_name = "Unnamed Trust Account";
-    static constexpr double def_balance = 0.0;
-    static constexpr double def_int_rate = 0.0;
-    static constexpr double bonus_amount = 50.0;
-    static constexpr double bonus_threshold = 5000.0;
-    static constexpr int max_withdrawals = 3;
+    static constexpr const char* def_name        = "Unnamed Trust Account";
+    static constexpr double def_balance          = 0.0;
+    static constexpr double def_int_rate         = 0.0;
+    static constexpr double bonus_amount         = 50.0;
+    static constexpr double bonus_threshold      = 5000.0;
+    static constexpr int max_withdrawals         = 3;
     static constexpr double max_withdraw_percent = 0.2;
 
   protected:

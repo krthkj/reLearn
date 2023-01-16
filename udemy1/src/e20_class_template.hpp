@@ -16,7 +16,8 @@ namespace udemy1::e20::functions
  * @param a
  * @param b
  */
-template <typename T> T min(T a, T b)
+template <typename T>
+T min(T a, T b)
 {
     return (a < b) ? a : b;
 }
@@ -26,7 +27,8 @@ template <typename T> T min(T a, T b)
  * @param a
  * @param b
  */
-template <typename T1, typename T2> void func(T1 a, T2 b)
+template <typename T1, typename T2>
+void func(T1 a, T2 b)
 {
     std::cout << a << " " << b << std::endl;
 }
@@ -50,11 +52,12 @@ struct Person {
  * @param a
  * @param b
  */
-template <typename T> void my_swap(T& a, T& b)
+template <typename T>
+void my_swap(T& a, T& b)
 {
     T temp = a;
-    a = b;
-    b = temp;
+    a      = b;
+    b      = temp;
 }
 } // namespace udemy1::e20::functions
 
@@ -64,7 +67,8 @@ template <typename T> void my_swap(T& a, T& b)
 namespace udemy1::e20::classes
 {
 
-template <typename T> class Item
+template <typename T>
+class Item
 {
     // friend std::ostream& operator<<(std::ostream& os, const Item<T>& obj);
   private:
@@ -77,28 +81,33 @@ template <typename T> class Item
         , value{v}
     {
     }
+
     std::string get_name() const
     {
         return name;
     }
+
     T get_value() const
     {
         return value;
     }
 };
 
-template <typename T> std::ostream& operator<<(std::ostream& os, const Item<T>& obj)
+template <typename T>
+std::ostream& operator<<(std::ostream& os, const Item<T>& obj)
 {
     os << obj.get_name() << " " << obj.get_value();
     return os;
 }
 
-template <typename T1, typename T2> struct My_Pair {
+template <typename T1, typename T2>
+struct My_Pair {
     T1 first;
     T2 second;
 };
 
-template <typename T1, typename T2> std::ostream& operator<<(std::ostream& os, const My_Pair<T1, T2>& obj)
+template <typename T1, typename T2>
+std::ostream& operator<<(std::ostream& os, const My_Pair<T1, T2>& obj)
 {
     os << obj.first << ", " << obj.second;
     return os;
@@ -120,12 +129,13 @@ namespace udemy1::e20::ArrayClass
  * @file e20_class_template.hpp
  * @brief This is a template class for for arry with specific data type (int)
  */
-template <int N> class My_Array
+template <int N>
+class My_Array
 {
     friend std::ostream& operator<<(std::ostream& os, const My_Array& arr)
     {
         os << "[";
-        for(const auto& a : arr.value)
+        for (const auto& a : arr.value)
             os << a << " ";
         os << "]" << std::endl;
         return os;
@@ -135,22 +145,26 @@ template <int N> class My_Array
     int size{N};  // TODO: how to get the value of N?
     int value[N]; // the N needs to know at compiler-time
   public:
-    My_Array() = default;
+    My_Array()  = default;
     ~My_Array() = default;
+
     My_Array(int init_val)
     {
-        for(auto& item : this->value)
+        for (auto& item : this->value)
             item = init_val;
     }
+
     void fill(int val)
     {
-        for(auto& item : this->value)
+        for (auto& item : this->value)
             item = val;
     }
+
     int get_size() const
     {
         return size;
     }
+
     // overloaded subscript operator for easy use
     int& operator[](int idx)
     {
@@ -165,12 +179,13 @@ template <int N> class My_Array
  * @file e20_class_template.hpp
  * @brief This is a generic template class for array
  */
-template <typename T, int N> class My_Array_Generic
+template <typename T, int N>
+class My_Array_Generic
 {
     friend std::ostream& operator<<(std::ostream& os, const My_Array_Generic<T, N>& arr)
     {
         os << "[";
-        for(const auto& a : arr.value)
+        for (const auto& a : arr.value)
             os << a << " ";
         os << "]" << std::endl;
         return os;
@@ -180,22 +195,26 @@ template <typename T, int N> class My_Array_Generic
     int size{N}; // TODO: how to get the value of N?
     T value[N];  // the N needs to know at compiler-time
   public:
-    My_Array_Generic() = default;
+    My_Array_Generic()  = default;
     ~My_Array_Generic() = default;
+
     My_Array_Generic(T init_val)
     {
-        for(auto& item : this->value)
+        for (auto& item : this->value)
             item = init_val;
     }
+
     void fill(T val)
     {
-        for(auto& item : this->value)
+        for (auto& item : this->value)
             item = val;
     }
+
     int get_size() const
     {
         return size;
     }
+
     // overloaded subscript operator for easy use
     T& operator[](int idx)
     {

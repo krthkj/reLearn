@@ -369,46 +369,35 @@ void run_field_test(void)
 
     std::cout << "\n-default one per line ---------------------------------------------------" << std::endl;
     ruler();
-    std::cout << num1 << std::endl
-              << num2 << std::endl
-              << hello << std::endl;
+    std::cout << num1 << std::endl << num2 << std::endl << hello << std::endl;
 
     std::cout << "\n-width 10 for num1 ------------------------------------------------------" << std::endl;
     ruler();
-    std::cout << std::setw(10) << num1
-              << num2
-              << hello << std::endl;
+    std::cout << std::setw(10) << num1 << num2 << hello << std::endl;
 
     std::cout << "\n-width 10 for num1 and num2 ---------------------------------------------" << std::endl;
     ruler();
-    std::cout << std::setw(10) << num1
-              << std::setw(10) << num2
-              << hello << std::endl;
+    std::cout << std::setw(10) << num1 << std::setw(10) << num2 << hello << std::endl;
 
     std::cout << "\n-width 10 for num1, numb2 and hello -------------------------------------" << std::endl;
     ruler();
-    std::cout << std::setw(10) << num1
-              << std::setw(10) << num2
-              << std::setw(10) << hello << std::endl;
+    std::cout << std::setw(10) << num1 << std::setw(10) << num2 << std::setw(10) << hello << std::endl;
 
     std::cout << "\n-width 10 for num1, numb2 and hello. and all are left justified ---------" << std::endl;
     ruler();
-    std::cout << std::setw(10) << std::left << num1
-              << std::setw(10) << std::left << num2
-              << std::setw(10) << std::left << hello << std::endl;
+    std::cout << std::setw(10) << std::left << num1 << std::setw(10) << std::left << num2 << std::setw(10) << std::left
+              << hello << std::endl;
 
     std::cout << "\n-width 10 for num1, numb2 and hello. Left for all and setfill to dash ---" << std::endl;
     ruler();
     std::cout << std::setfill('-');
-    std::cout << std::setw(10) << std::left << num1
-              << std::setw(10) << std::left << num2
-              << std::setw(10) << std::left << hello << std::endl;
+    std::cout << std::setw(10) << std::left << num1 << std::setw(10) << std::left << num2 << std::setw(10) << std::left
+              << hello << std::endl;
 
     std::cout << "\n-width 10 for num1, numb2 and hello. Left for all and setfill varies ----" << std::endl;
     ruler();
-    std::cout << std::setw(10) << std::left << std::setfill('*') << num1
-              << std::setw(10) << std::left << std::setfill('#') << num2
-              << std::setw(10) << std::left << std::setfill('-') << hello << std::endl;
+    std::cout << std::setw(10) << std::left << std::setfill('*') << num1 << std::setw(10) << std::left
+              << std::setfill('#') << num2 << std::setw(10) << std::left << std::setfill('-') << hello << std::endl;
 }
 
 } // namespace udemy1::e19::iomanip
@@ -423,13 +412,13 @@ void run_read_from_file_1(std::string file_name)
 {
     std::cout << file_name << std::endl;
     std::ifstream in_file{file_name};
-    if(!in_file) { // check if file is open
+    if (!in_file) { // check if file is open
         std::cerr << "File open error" << std::endl;
         return; // exit the program
     }
 
     std::string line{};
-    while(!in_file.eof()) {             // while not at the end
+    while (!in_file.eof()) {            // while not at the end
                                         // using eof() may not work as expected across OS
         std::getline(in_file, line);    // read the line
         std::cout << line << std::endl; // display the line
@@ -440,13 +429,13 @@ void run_read_from_file_1(std::string file_name)
 void run_read_from_file_2(std::string file_name)
 {
     std::ifstream in_file{file_name};
-    if(!in_file) { // check if file is open
+    if (!in_file) { // check if file is open
         std::cerr << "File open error" << std::endl;
         return; // exit the program
     }
 
     std::string line{};
-    while(std::getline(in_file, line))  // read line
+    while (std::getline(in_file, line)) // read line
         std::cout << line << std::endl; // display the line
 
     in_file.close(); // close the file
@@ -456,14 +445,14 @@ void run_read_from_file_2(std::string file_name)
 void run_read_from_file_3(std::string file_name)
 {
     std::ifstream in_file{file_name};
-    if(!in_file) { // check if file is open
+    if (!in_file) { // check if file is open
         std::cerr << "File open error" << std::endl;
         return; // exit the program
     }
 
     char c{};
-    while(in_file.get(c)) // read a character
-        std::cout << c;   // display the character
+    while (in_file.get(c)) // read a character
+        std::cout << c;    // display the character
 
     in_file.close(); // close the file
 }
@@ -473,7 +462,7 @@ void run_read_from_file_4(std::string file_name)
 
     std::ifstream in_file;
     in_file.open(file_name);
-    if(!in_file) { // check if file is open
+    if (!in_file) { // check if file is open
         std::cerr << "File open error" << std::endl;
         return; // exit the program
     }
@@ -493,7 +482,7 @@ void run_read_from_file_5(std::string file_name)
 {
     std::ifstream in_file;
     in_file.open(file_name);
-    if(!in_file) { // check if file is open
+    if (!in_file) { // check if file is open
         std::cerr << "File open error" << std::endl;
         return; // exit the program
     }
@@ -501,8 +490,8 @@ void run_read_from_file_5(std::string file_name)
     std::string name;
     int num;
     double total;
-    while(!in_file.eof()) { // checking for end of file
-                            // using eof() may not work as expected across OS
+    while (!in_file.eof()) { // checking for end of file
+                             // using eof() may not work as expected across OS
         in_file >> name >> num >> total;
         std::cout << std::setw(10) << std::left << name;
         std::cout << std::setw(10) << num;
@@ -515,7 +504,7 @@ void run_read_from_file_6(std::string file_name)
 {
     std::ifstream in_file;
     in_file.open(file_name);
-    if(!in_file) { // check if file is open
+    if (!in_file) { // check if file is open
         std::cerr << "File open error" << std::endl;
         return; // exit the program
     }
@@ -523,7 +512,7 @@ void run_read_from_file_6(std::string file_name)
     std::string name;
     int num;
     double total;
-    while(in_file >> name >> num >> total) { // this is the best practice
+    while (in_file >> name >> num >> total) { // this is the best practice
         std::cout << std::setw(10) << std::left << name;
         std::cout << std::setw(10) << num;
         std::cout << std::setw(10) << total << std::endl;
@@ -537,13 +526,13 @@ void run_read_poem_1(std::string file_name)
 {
     std::fstream in_file;
     in_file.open(file_name);
-    if(!in_file) { // check if file is open
+    if (!in_file) { // check if file is open
         std::cerr << "Prolem opening file" << std::endl;
         return; // exit the program
     }
 
     std::string line{};
-    while(std::getline(in_file, line))
+    while (std::getline(in_file, line))
         std::cout << line << std::endl;
     std::cout << std::endl;
     in_file.close(); // close the file
@@ -556,13 +545,13 @@ void run_read_poem_2(std::string file_name)
 {
     std::fstream in_file;
     in_file.open(file_name);
-    if(!in_file) { // check if file is open
+    if (!in_file) { // check if file is open
         std::cerr << "Prolem opening file" << std::endl;
         return; // exit the program
     }
 
     char c{};
-    while(in_file.get(c))
+    while (in_file.get(c))
         std::cout << c;
     std::cout << std::endl;
     in_file.close(); // close the file
@@ -571,7 +560,7 @@ void run_read_poem_2(std::string file_name)
 void run_write_to_file_1(std::string file_name)
 {
     std::ofstream ofs{file_name}; // overwite to a file
-    if(!ofs)
+    if (!ofs)
         std::cerr << " Error creating file" << std::endl;
     else {
         std::string line{};
@@ -585,7 +574,7 @@ void run_write_to_file_1(std::string file_name)
 void run_write_to_file_2(std::string file_name)
 {
     std::ofstream ofs{file_name, std::ios::app}; // append to file
-    if(!ofs)
+    if (!ofs)
         std::cerr << " Error creating file" << std::endl;
     else {
         std::string line{};
@@ -602,18 +591,18 @@ void run_copy_files_1(std::string file_name, std::string target_file_name)
     std::ifstream ifs{file_name};
     std::ofstream ofs{target_file_name};
 
-    if(!ifs) {
+    if (!ifs) {
         std::cerr << " Error opening file" << std::endl;
         return;
     }
-    if(!ofs) {
+    if (!ofs) {
         std::cerr << " Error creating file" << std::endl;
         ifs.close();
         return;
     }
 
     std::string line{};
-    while(std::getline(ifs, line))
+    while (std::getline(ifs, line))
         ofs << line << std::endl;
     ifs.close();
     ofs.close();
@@ -626,18 +615,18 @@ void run_copy_files_2(std::string file_name, std::string target_file_name)
     std::ifstream ifs{file_name};
     std::ofstream ofs{target_file_name};
 
-    if(!ifs) {
+    if (!ifs) {
         std::cerr << " Error opening file" << std::endl;
         return;
     }
-    if(!ofs) {
+    if (!ofs) {
         std::cerr << " Error creating file" << std::endl;
         ifs.close();
         return;
     }
 
     char c{};
-    while(ifs.get(c))
+    while (ifs.get(c))
         ofs.put(c);
     ifs.close();
     ofs.close();
@@ -689,13 +678,13 @@ void run_data_validation_1(void)
         std::cout << "Please enter a integer: ";
         std::cin >> entry;
         std::istringstream iss_validator{entry};
-        if(iss_validator >> value)
+        if (iss_validator >> value)
             done = true;
         else
             std::cout << "Sorry, thats not an integer" << std::endl;
         // discard the input buffer
         std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-    } while(!done);
+    } while (!done);
 
     std::cout << "You entered the integer: " << value << std::endl;
 }

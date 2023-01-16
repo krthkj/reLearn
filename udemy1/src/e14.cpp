@@ -143,6 +143,7 @@
  */
 
 #include "udemy1.hpp"
+
 #include <cstring>
 #include <iostream>
 
@@ -193,8 +194,8 @@ Mystring::Mystring(void)
     : str{nullptr} // set pointer to null
 {
     std::cout << "Default Constructor" << std::endl;
-    this->str = new char[1]; // allocate on heap
-    *this->str = '\0';       // EOL character
+    this->str  = new char[1]; // allocate on heap
+    *this->str = '\0';        // EOL character
 }
 
 /**************************************************
@@ -204,9 +205,9 @@ Mystring::Mystring(const char* s)
     : str{nullptr} // set to null
 {
     std::cout << "Arg Constructor" << std::endl;
-    if(s == nullptr) {           // if arg is nullptr
-        this->str = new char[1]; // allocate on heap
-        *this->str = '\0';       // EOL character
+    if (s == nullptr) {           // if arg is nullptr
+        this->str  = new char[1]; // allocate on heap
+        *this->str = '\0';        // EOL character
     } else {
         this->str = new char[std::strlen(s) + 1]; // create in heap
         std::strcpy(this->str, s);                // copy arg to member data
@@ -231,7 +232,7 @@ Mystring::Mystring(Mystring&& source) noexcept
 {
     std::cout << "Move Constructor" << std::endl;
     // steal pointers from srouce
-    this->str = source.str;
+    this->str  = source.str;
     source.str = nullptr;
 }
 
@@ -251,7 +252,7 @@ Mystring& Mystring::operator=(const Mystring& rhs)
 {
     std::cout << "Copy assignment" << std::endl;
     // check for self assignment
-    if(this == &rhs)
+    if (this == &rhs)
         return *this;
 
     // De-allocate storage for this->str for overwriting
@@ -272,7 +273,7 @@ Mystring& Mystring::operator=(Mystring&& rhs)
 {
     std::cout << "Move assignment" << std::endl;
     // check for self assignment
-    if(this == &rhs)
+    if (this == &rhs)
         return *this;
 
     // de-allocate storage for this->str for overwriting
@@ -296,7 +297,7 @@ Mystring Mystring::operator-() const // unary minus operator
     std::cout << "Unary - " << std::endl;
     // we are making the string to lower case.
     char* buff = new char[std::strlen(str) + 1];
-    for(size_t i{0}; i < std::strlen(buff); ++i)
+    for (size_t i{0}; i < std::strlen(buff); ++i)
         buff[i] = std::tolower(str[i]);
 
     // create new object and return it
@@ -353,6 +354,7 @@ void Mystring::display() const
 {
     std::cout << this->str << ":" << get_length() << std::endl;
 }
+
 size_t Mystring::get_length() const
 {
     return std::strlen(this->str);
@@ -365,6 +367,7 @@ void Mystring::setStr(char* str)
 {
     this->str = str;
 }
+
 const char* Mystring::getStr() const
 {
     return this->str;
@@ -453,8 +456,8 @@ Mystring::Mystring(void)
     : str{nullptr} // set pointer to null
 {
     // std::cout << "Default Constructor" << std::endl;
-    this->str = new char[1]; // allocate on heap
-    *this->str = '\0';       // EOL character
+    this->str  = new char[1]; // allocate on heap
+    *this->str = '\0';        // EOL character
 }
 
 /**************************************************
@@ -464,9 +467,9 @@ Mystring::Mystring(const char* s)
     : str{nullptr} // set to null
 {
     // std::cout << "Arg Constructor" << std::endl;
-    if(s == nullptr) {           // if arg is nullptr
-        this->str = new char[1]; // allocate on heap
-        *this->str = '\0';       // EOL character
+    if (s == nullptr) {           // if arg is nullptr
+        this->str  = new char[1]; // allocate on heap
+        *this->str = '\0';        // EOL character
     } else {
         this->str = new char[std::strlen(s) + 1]; // create in heap
         std::strcpy(this->str, s);                // copy arg to member data
@@ -491,7 +494,7 @@ Mystring::Mystring(Mystring&& source)
 {
     std::cout << "Move Constructor" << std::endl;
     // steal pointers from source
-    this->str = source.str;
+    this->str  = source.str;
     source.str = nullptr;
 }
 
@@ -511,7 +514,7 @@ Mystring& Mystring::operator=(const Mystring& rhs)
 {
     std::cout << "Copy assignment" << std::endl;
     // check for self assignment
-    if(this == &rhs)
+    if (this == &rhs)
         return *this;
 
     // de-allocate storage for this->str for overwriting
@@ -532,7 +535,7 @@ Mystring& Mystring::operator=(Mystring&& rhs)
 {
     std::cout << "Move assignment" << std::endl;
     // check for self assignment
-    if(this == &rhs)
+    if (this == &rhs)
         return *this;
 
     // de-allocate storage for this->str for overwriting
@@ -555,6 +558,7 @@ void Mystring::display() const
 {
     std::cout << this->str << ":" << get_length() << std::endl;
 }
+
 size_t Mystring::get_length() const
 {
     return std::strlen(this->str);
@@ -567,6 +571,7 @@ const char* Mystring::getStr() const
 {
     return this->str;
 }
+
 void Mystring::setStr(char* str)
 {
     this->str = str;
@@ -589,7 +594,7 @@ bool operator==(const Mystring& lhs, const Mystring& rhs)
 Mystring operator-(const Mystring& src)
 { // convert string to lower
     char* buff = new char[std::strlen(src.str) + 1];
-    for(size_t i{0}; i < std::strlen(src.str); ++i)
+    for (size_t i{0}; i < std::strlen(src.str); ++i)
         buff[i] = std::tolower(src.str[i]);
     Mystring tmp{buff};
     delete[] buff;

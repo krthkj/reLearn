@@ -176,6 +176,7 @@
 
 #include "e16_classes.hpp"
 #include "udemy1.hpp"
+
 #include <iostream>
 #include <memory>
 #include <vector>
@@ -227,7 +228,7 @@ void run_static_binding(void)
         std::make_unique<Derived>(); // create smart pointer to for derived object with base-class pointer
     ptr1->say_hello();               // static binding to Base-class section
 
-    delete(ptr); // remove raw pointer
+    delete (ptr); // remove raw pointer
     // smart pointer get removed automatically
 }
 
@@ -254,24 +255,24 @@ void run_base_ptr(void)
     Account* array[] = {p1, p2, p3, p4};
 
     std::cout << "\n=== Array ==============" << std::endl;
-    for(auto i{0}; i < 4; ++i)
+    for (auto i{0}; i < 4; ++i)
         array[i]->withdraw(1000);
 
     std::cout << "\n=== Array - for each ===" << std::endl;
     array[0] = p4;
-    for(const auto& a : array)
+    for (const auto& a : array)
         a->withdraw(1000);
 
     std::vector<Account*> accounts{p1, p2, p3, p4};
     std::cout << "\n=== Vector =============" << std::endl;
-    for(const auto& pAcc : accounts)
+    for (const auto& pAcc : accounts)
         pAcc->withdraw(1000);
 
     accounts.push_back(p4);
     accounts.push_back(p4);
     accounts.push_back(p4);
     std::cout << "\n=== Vector =============" << std::endl;
-    for(const auto& pAcc : accounts)
+    for (const auto& pAcc : accounts)
         pAcc->withdraw(1000);
 
     std::cout << "\n=== Clean-up ===========" << std::endl;
@@ -306,12 +307,12 @@ void run_virtual_func_dest(void)
     Account* array[] = {p1, p2, p3, p4};
 
     std::cout << "\n=== Array ==============" << std::endl;
-    for(const auto& a : array)
+    for (const auto& a : array)
         a->withdraw(1000);
 
     std::vector<Account*> accounts{p1, p2, p3, p4};
     std::cout << "\n=== Vector =============" << std::endl;
-    for(const auto& pAcc : accounts)
+    for (const auto& pAcc : accounts)
         pAcc->withdraw(1000);
 
     std::cout << "\n=== Clean-up ===========" << std::endl;
@@ -337,10 +338,10 @@ class Base
     {
         std::cout << "Hello - I'm Base class" << std::endl;
     }
-    virtual ~Base()
-    {
-    }
+
+    virtual ~Base() {}
 };
+
 class Derived : public Base
 {
   public:
@@ -351,9 +352,8 @@ class Derived : public Base
     {
         std::cout << "Hello - I'm Derived class" << std::endl;
     }
-    virtual ~Derived()
-    {
-    }
+
+    virtual ~Derived() {}
 };
 
 void run_virtual_override(void)
@@ -379,6 +379,7 @@ void do_withdraw(ex2::Account& account, double amt)
 {
     account.withdraw(amt); // dynamic binding
 }
+
 void run_base_ref(void)
 {
     ex2::Account a;
@@ -416,7 +417,7 @@ namespace udemy1::e16::ex6
 void screen_refresh(const std::vector<Shape*>& shapes)
 {
     std::cout << "Refreshing" << std::endl;
-    for(const auto& p : shapes)
+    for (const auto& p : shapes)
         p->draw();
 }
 

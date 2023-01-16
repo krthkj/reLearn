@@ -1,5 +1,7 @@
 #include "mystring.hpp"
+
 #include <cstring>
+
 namespace udemy1::myclass
 {
 
@@ -9,7 +11,7 @@ namespace udemy1::myclass
 Mystring::Mystring()
     : str{nullptr}
 {
-    this->str = new char[1];
+    this->str  = new char[1];
     *this->str = '\0';
 }
 
@@ -20,8 +22,8 @@ Mystring::Mystring()
 Mystring::Mystring(const char* s)
     : str{nullptr}
 {
-    if(s == nullptr) {
-        this->str = new char[1];
+    if (s == nullptr) {
+        this->str  = new char[1];
         *this->str = '\0';
     } else {
         this->str = new char[std::strlen(s) + 1];
@@ -48,7 +50,7 @@ Mystring::Mystring(Mystring&& src) noexcept
     : str{nullptr}
 {
     this->str = src.str;
-    src.str = nullptr;
+    src.str   = nullptr;
 }
 
 /**
@@ -64,7 +66,7 @@ Mystring::~Mystring()
  */
 Mystring& Mystring::operator=(const Mystring& src)
 {
-    if(this == &src)
+    if (this == &src)
         return *this;
 
     delete[] this->str;
@@ -80,13 +82,13 @@ Mystring& Mystring::operator=(const Mystring& src)
  */
 Mystring& Mystring::operator=(Mystring&& src) noexcept
 {
-    if(this == &src)
+    if (this == &src)
         return *this;
 
     delete[] this->str;
 
     this->str = src.str;
-    src.str = nullptr;
+    src.str   = nullptr;
 
     return *this;
 }
@@ -165,7 +167,7 @@ Mystring Mystring::operator-() const
     Mystring tmp{this->str};
     size_t s = this->getLength();
 
-    for(size_t i{0}; i < s; ++i)
+    for (size_t i{0}; i < s; ++i)
         tmp.str[i] = std::tolower(tmp.str[i]);
 
     return tmp;
@@ -192,7 +194,7 @@ Mystring Mystring::operator+(const Mystring& rhs) const
 Mystring Mystring::operator*(const int n) const
 {
     Mystring tmp;
-    for(int i{1}; i <= n; ++i)
+    for (int i{1}; i <= n; ++i)
         tmp = tmp + *this;
     return tmp;
 }
@@ -203,7 +205,7 @@ Mystring Mystring::operator*(const int n) const
 Mystring& Mystring::operator++()
 {
     size_t s = this->getLength();
-    for(size_t i{0}; i < s; ++i)
+    for (size_t i{0}; i < s; ++i)
         this->str[i] = std::toupper(this->str[i]);
     return *this;
 }

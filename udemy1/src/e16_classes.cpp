@@ -7,6 +7,7 @@ void Account::withdraw(double amount)
     balance -= amount;
     std::cout << "In Account::withdraw" << std::endl;
 }
+
 void Account::deposit(double amount)
 {
     balance += amount;
@@ -17,15 +18,18 @@ Account::Account()
     : balance{0}
 {
 }
+
 Account::~Account()
 {
     std::cout << "Account::destructor" << std::endl;
 }
+
 void Checking::withdraw(double amount)
 {
     balance -= amount;
     std::cout << "In Checking::withdraw" << std::endl;
 }
+
 void Checking::deposit(double amount)
 {
     balance += amount;
@@ -36,15 +40,18 @@ Checking::Checking()
     : Account{}
 {
 }
+
 Checking::~Checking()
 {
     std::cout << "Checking::destructor" << std::endl;
 }
+
 void Savings::withdraw(double amount)
 {
     balance -= amount;
     std::cout << "In Savings::withdraw" << std::endl;
 }
+
 void Savings::deposit(double amount)
 {
     balance += amount;
@@ -55,10 +62,12 @@ Savings::Savings()
     : Account{}
 {
 }
+
 Savings::~Savings()
 {
     std::cout << "Savings::destructor" << std::endl;
 }
+
 void Trust::deposit(double amount)
 {
     balance += amount;
@@ -70,10 +79,12 @@ void Trust::withdraw(double amount)
     balance -= amount;
     std::cout << "In Trust::withdraw" << std::endl;
 }
+
 Trust::Trust()
     : Account{}
 {
 }
+
 Trust::~Trust()
 {
     std::cout << "Trust::destructor" << std::endl;
@@ -87,14 +98,17 @@ Account::~Account()
 {
     std::cout << "Account::destructor" << std::endl;
 }
+
 Checking::~Checking()
 {
     std::cout << "Checking::destructor" << std::endl;
 }
+
 Savings::~Savings()
 {
     std::cout << "Savings::destructor" << std::endl;
 }
+
 Trust::~Trust()
 {
     std::cout << "Trust::destructor" << std::endl;
@@ -104,14 +118,17 @@ void Account::withdraw(double amount)
 {
     std::cout << "In Account::withdraw " << amount << std::endl;
 }
+
 void Checking::withdraw(double amount)
 {
     std::cout << "In Checking::withdraw " << amount << std::endl;
 }
+
 void Savings::withdraw(double amount)
 {
     std::cout << "In Savings::withdraw " << amount << std::endl;
 }
+
 void Trust::withdraw(double amount)
 {
     std::cout << "In Trust::withdraw " << amount << std::endl;
@@ -126,22 +143,27 @@ void Square::draw()
 {
     std::cout << "Drawing a Square" << std::endl;
 }
+
 void Square::rotate()
 {
     std::cout << "Rotating a Square" << std::endl;
 }
+
 void Circle::draw()
 {
     std::cout << "Drawing a Circle" << std::endl;
 }
+
 void Circle::rotate()
 {
     std::cout << "Rotating a Circle" << std::endl;
 }
+
 void Line::draw()
 {
     std::cout << "Drawing a Line" << std::endl;
 }
+
 void Line::rotate()
 {
     std::cout << "Rotating a Line" << std::endl;
@@ -155,14 +177,17 @@ void Account::withdraw(double amount)
 {
     std::cout << "In Account::withdraw " << amount << std::endl;
 }
+
 void Checking::withdraw(double amount)
 {
     std::cout << "In Checking::withdraw " << amount << std::endl;
 }
+
 void Savings::withdraw(double amount)
 {
     std::cout << "In Savings::withdraw " << amount << std::endl;
 }
+
 void Trust::withdraw(double amount)
 {
     std::cout << "In Trust::withdraw " << amount << std::endl;
@@ -173,16 +198,19 @@ std::ostream& operator<<(std::ostream& os, const Account& acc)
     os << "Account display: " << acc.name;
     return os;
 }
+
 std::ostream& operator<<(std::ostream& os, const Checking& acc)
 {
     os << "Checking display: " << acc.name;
     return os;
 }
+
 std::ostream& operator<<(std::ostream& os, const Savings& acc)
 {
     os << "Savings display: " << acc.name;
     return os;
 }
+
 std::ostream& operator<<(std::ostream& os, const Trust& acc)
 {
     os << "Trust display: " << acc.name;
@@ -242,14 +270,17 @@ void Account::withdraw(double amount)
 {
     std::cout << "In Account::withdraw " << amount << std::endl;
 }
+
 void Checking::withdraw(double amount)
 {
     std::cout << "In Checking::withdraw " << amount << std::endl;
 }
+
 void Savings::withdraw(double amount)
 {
     std::cout << "In Savings::withdraw " << amount << std::endl;
 }
+
 void Trust::withdraw(double amount)
 {
     std::cout << "In Trust::withdraw " << amount << std::endl;

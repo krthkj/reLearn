@@ -13,6 +13,7 @@
  */
 
 #include "udemy1.hpp"
+
 #include <iostream>
 
 namespace udemy1
@@ -78,7 +79,7 @@ void s12c_run(void)
     print(results, results_size);
 
     std::cout << std::endl;
-    if(results != nullptr)
+    if (results != nullptr)
         delete results;
 }
 
@@ -87,9 +88,9 @@ int* apply_all(const int* const a1, const size_t s1, const int* const a2, const 
     int* res{nullptr};
     res = new int[s1 * s2];
 
-    if(res != nullptr)
-        for(size_t i{0}; i < s1; ++i)
-            for(size_t j{0}; j < s2; ++j)
+    if (res != nullptr)
+        for (size_t i{0}; i < s1; ++i)
+            for (size_t j{0}; j < s2; ++j)
                 res[(j * s1 + i)] = a2[j] * a1[i];
     return res;
 }
@@ -97,7 +98,7 @@ int* apply_all(const int* const a1, const size_t s1, const int* const a2, const 
 void print(const int* const a, const size_t s)
 {
     std::cout << "[ ";
-    for(size_t i{0}; i < s; ++i)
+    for (size_t i{0}; i < s; ++i)
         std::cout << a[i] << " ";
     std::cout << "]" << std::endl;
 }

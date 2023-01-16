@@ -142,6 +142,7 @@
 namespace udemy1::e23::ex1
 {
 enum Directon { North, South, East, West };
+
 // enum Street {Main, North, Elm};  // error cannot be use North again
 
 } // namespace udemy1::e23::ex1
@@ -156,21 +157,12 @@ enum Directon { North, South, East, West };
 std::string direction_to_string(Directon direction)
 {
     std::string result;
-    switch(direction) {
-    case North:
-        result = "North";
-        break;
-    case West:
-        result = "West";
-        break;
-    case South:
-        result = "South";
-        break;
-    case East:
-        result = "East";
-        break;
-    default:
-        result = "Unknown Direction";
+    switch (direction) {
+    case North: result = "North"; break;
+    case West: result = "West"; break;
+    case South: result = "South"; break;
+    case East: result = "East"; break;
+    default: result = "Unknown Direction";
     }
     return result;
 }
@@ -212,21 +204,12 @@ enum Grocery_Item { Milk, Bread, Apple, Orange };
 // parameter into the output stream
 std::ostream& operator<<(std::ostream& os, Grocery_Item item)
 {
-    switch(item) {
-    case Milk:
-        os << "Milk";
-        break;
-    case Bread:
-        os << "Bread";
-        break;
-    case Apple:
-        os << "Apple";
-        break;
-    case Orange:
-        os << "Orange";
-        break;
-    default:
-        os << "Invalid Item";
+    switch (item) {
+    case Milk: os << "Milk"; break;
+    case Bread: os << "Bread"; break;
+    case Apple: os << "Apple"; break;
+    case Orange: os << "Orange"; break;
+    default: os << "Invalid Item";
     }
     return os;
 }
@@ -235,14 +218,12 @@ std::ostream& operator<<(std::ostream& os, Grocery_Item item)
 // paramter is a valid enumerator or not.
 bool is_valid_grocery_item(Grocery_Item item)
 {
-    switch(item) {
+    switch (item) {
     case Milk:
     case Bread:
     case Apple:
-    case Orange:
-        return true;
-    default:
-        return false;
+    case Orange: return true;
+    default: return false;
     }
 }
 
@@ -258,9 +239,9 @@ void display_grocery_list(const std::vector<Grocery_Item>& list)
     std::cout << "--------------------------------------------------------------" << std::endl;
     int invalid_item_count{0};
     int valid_item_count{0};
-    for(Grocery_Item item : list) {
+    for (Grocery_Item item : list) {
         std::cout << item << std::endl;
-        if(is_valid_grocery_item(item))
+        if (is_valid_grocery_item(item))
             ++valid_item_count;
         else
             ++invalid_item_count;
@@ -296,6 +277,7 @@ void run_enum_unscoped_grocery(void)
 namespace udemy1::e23::ex4
 {
 enum State { Engine_Failure, Inclement_Weather, Nominal, Unknown };
+
 enum Sequence { Abort, Hold, Launch };
 
 // Overloading the stream extraction operator to allow a user
@@ -307,16 +289,12 @@ std::istream& operator>>(std::istream& is, State& state)
     std::underlying_type_t<State> user_input;
     is >> user_input;
 
-    switch(user_input) {
+    switch (user_input) {
     case Engine_Failure:
     case Inclement_Weather:
     case Nominal:
-    case Unknown:
-        state = State(user_input);
-        break;
-    default:
-        std::cout << "User input is not a valid launch state." << std::endl;
-        state = Unknown;
+    case Unknown: state = State(user_input); break;
+    default: std::cout << "User input is not a valid launch state." << std::endl; state = Unknown;
     }
 
     return is;
@@ -327,18 +305,11 @@ std::istream& operator>>(std::istream& is, State& state)
 // parameter into the output stream
 std::ostream& operator<<(std::ostream& os, const Sequence& sequence)
 {
-    switch(sequence) {
-    case Abort:
-        os << "Abort";
-        break;
-    case Hold:
-        os << "Hold";
-        break;
-    case Launch:
-        os << "Launch";
-        break;
-    default:
-        os << "Invalid";
+    switch (sequence) {
+    case Abort: os << "Abort"; break;
+    case Hold: os << "Hold"; break;
+    case Launch: os << "Launch"; break;
+    default: os << "Invalid";
     }
 
     return os;
@@ -362,17 +333,13 @@ void run_rocket_launch_test(void)
     std::cout << "Launch state: ";
     std::cin >> state; // users the overloaded operator>>
 
-    switch(state) {
+    switch (state) {
     case Engine_Failure: // Abort if Engine Failure
     case Unknown:        // or Unknown!
         initiate(Abort);
         break;
-    case Inclement_Weather:
-        initiate(Hold);
-        break;
-    case Nominal:
-        initiate(Launch);
-        break;
+    case Inclement_Weather: initiate(Hold); break;
+    case Nominal: initiate(Launch); break;
     }
 }
 } // namespace udemy1::e23::ex4
@@ -388,21 +355,12 @@ enum class Grocery_Item { Milk = 350, Bread = 250, Apple = 132, Orange = 100 };
 // parameter into the output stream
 std::ostream& operator<<(std::ostream& os, Grocery_Item item)
 {
-    switch(item) {
-    case Grocery_Item::Milk:
-        os << "Milk";
-        break;
-    case Grocery_Item::Bread:
-        os << "Bread";
-        break;
-    case Grocery_Item::Apple:
-        os << "Apple";
-        break;
-    case Grocery_Item::Orange:
-        os << "Orange";
-        break;
-    default:
-        os << "Invalid Item";
+    switch (item) {
+    case Grocery_Item::Milk: os << "Milk"; break;
+    case Grocery_Item::Bread: os << "Bread"; break;
+    case Grocery_Item::Apple: os << "Apple"; break;
+    case Grocery_Item::Orange: os << "Orange"; break;
+    default: os << "Invalid Item";
     }
     auto value = std::underlying_type_t<Grocery_Item>(item);
     os << " : " << value;
@@ -413,14 +371,12 @@ std::ostream& operator<<(std::ostream& os, Grocery_Item item)
 // paramter is a valid enumerator or not.
 bool is_valid_grocery_item(Grocery_Item item)
 {
-    switch(item) {
+    switch (item) {
     case Grocery_Item::Milk:
     case Grocery_Item::Bread:
     case Grocery_Item::Apple:
-    case Grocery_Item::Orange:
-        return true;
-    default:
-        return false;
+    case Grocery_Item::Orange: return true;
+    default: return false;
     }
 }
 
@@ -436,9 +392,9 @@ void display_grocery_list(const std::vector<Grocery_Item>& list)
     std::cout << "--------------------------------------------------------------" << std::endl;
     int invalid_item_count{0};
     int valid_item_count{0};
-    for(Grocery_Item item : list) {
+    for (Grocery_Item item : list) {
         std::cout << item << std::endl;
-        if(is_valid_grocery_item(item))
+        if (is_valid_grocery_item(item))
             ++valid_item_count;
         else
             ++invalid_item_count;
@@ -499,18 +455,13 @@ class Player
 
 // A simple function that returns the string representation
 // of the Player::Mode paramter passed into it.
-std::string get_player_mode(Player::Mode mode){
+std::string get_player_mode(Player::Mode mode)
+{
     std::string result;
-    switch(mode){
-    case Player::Mode::Defense:
-        result="Defense";
-        break;
-    case Player::Mode::Attack:
-        result="Attack";
-        break;
-    case Player::Mode::Idle:
-        result="Idle";
-        break;
+    switch (mode) {
+    case Player::Mode::Defense: result = "Defense"; break;
+    case Player::Mode::Attack: result = "Attack"; break;
+    case Player::Mode::Idle: result = "Idle"; break;
     }
     return result;
 }
@@ -520,19 +471,11 @@ std::string get_player_mode(Player::Mode mode){
 std::string get_player_direction(Player::Direction direction)
 {
     std::string result;
-    switch(direction) {
-    case Player::Direction::East:
-        result = "East";
-        break;
-    case Player::Direction::West:
-        result = "West";
-        break;
-    case Player::Direction::North:
-        result = "North";
-        break;
-    case Player::Direction::South:
-        result = "South";
-        break;
+    switch (direction) {
+    case Player::Direction::East: result = "East"; break;
+    case Player::Direction::West: result = "West"; break;
+    case Player::Direction::North: result = "North"; break;
+    case Player::Direction::South: result = "South"; break;
     }
     return result;
 }
@@ -541,8 +484,7 @@ std::string get_player_direction(Player::Direction direction)
 // so we can easily put Player objects on the output stream.
 std::ostream& operator<<(std::ostream& os, const Player& p)
 {
-    os << "Player name:      " << p.get_name()
-       << "\nPlayer mode:      " << get_player_mode(p.mode)
+    os << "Player name:      " << p.get_name() << "\nPlayer mode:      " << get_player_mode(p.mode)
        << "\nPlayer direction: " << get_player_direction(p.direction) << std::endl;
     return os;
 }

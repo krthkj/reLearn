@@ -128,21 +128,21 @@ void assignment_pyramid(void)
     size_t total_size = str.length();
     int pos{0};
 
-    for(char c : str) {
+    for (char c : str) {
         // create spaces
         size_t space_str = total_size - pos;
-        while(space_str-- > 0)
+        while (space_str-- > 0)
             std::cout << " ";
 
         // forward
-        for(int i{0}; i < pos; ++i)
+        for (int i{0}; i < pos; ++i)
             std::cout << str.at(static_cast<size_t>(i));
 
         // center
         std::cout << c;
 
         // reverse
-        for(int i = pos - 1; i >= 0; --i)
+        for (int i = pos - 1; i >= 0; --i)
             std::cout << str.at(static_cast<size_t>(i));
 
         std::cout << std::endl;

@@ -18,7 +18,7 @@ class I_Printable
     friend std::ostream& operator<<(std::ostream& os, const I_Printable& obj);
 
   public:
-    ~I_Printable() = default;
+    ~I_Printable()                             = default;
     virtual void print(std::ostream& os) const = 0;
 };
 
@@ -33,7 +33,7 @@ class Account : public I_Printable
 {
   private:
     static constexpr const char* def_name = "Unnamed Account";
-    static constexpr double def_balance = 0.0;
+    static constexpr double def_balance   = 0.0;
 
   protected:
     std::string name;
@@ -41,8 +41,8 @@ class Account : public I_Printable
 
   public:
     Account(std::string n = def_name, double b = def_balance);
-    virtual ~Account() = default;
-    virtual bool deposit(double amt) = 0;
+    virtual ~Account()                = default;
+    virtual bool deposit(double amt)  = 0;
     virtual bool withdraw(double amt) = 0;
     virtual void print(std::ostream& os) const override;
     double get_balance(void) const;
@@ -59,8 +59,8 @@ class Savings : public Account
 {
   private:
     static constexpr const char* def_name = "Unnamed Savings Account";
-    static constexpr double def_balance = 0.0;
-    static constexpr double def_int_rate = 0.0;
+    static constexpr double def_balance   = 0.0;
+    static constexpr double def_int_rate  = 0.0;
 
   protected:
     double int_rate;
@@ -83,8 +83,8 @@ class Savings : public Account
 class Checking : public Account
 {
   private:
-    static constexpr const char* def_name = "Unnamed Checking Account";
-    static constexpr const double def_balance = 0.0;
+    static constexpr const char* def_name          = "Unnamed Checking Account";
+    static constexpr const double def_balance      = 0.0;
     static constexpr const double per_withdraw_fee = 1.5;
 
   public:
@@ -106,13 +106,13 @@ class Trust : public Savings
 {
   private:
     static constexpr const char* def_name = "Unnamed Trust Account";
-    static constexpr double def_balance = 0.0;
-    static constexpr double def_int_rate = 0.0;
+    static constexpr double def_balance   = 0.0;
+    static constexpr double def_int_rate  = 0.0;
 
-    static constexpr double bonus_amt = 50.0;
+    static constexpr double bonus_amt       = 50.0;
     static constexpr double bonus_low_limit = 5000.0;
 
-    static constexpr int max_withdraw_limit = 3;
+    static constexpr int max_withdraw_limit         = 3;
     static constexpr double max_withdraw_percentage = 0.2;
 
   protected:

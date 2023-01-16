@@ -2,6 +2,7 @@
 #define S15C_CHECKING_ACCOUNT_HPP
 
 #include "s15c_account.hpp"
+
 namespace udemy1::s15c
 {
 /**
@@ -18,8 +19,8 @@ class Checking_Account : public Account
     friend std::ostream& operator<<(std::ostream& os, const Checking_Account& acc);
 
   private:
-    static constexpr const char* def_name = "Unnamed Checking Account";
-    static constexpr const double def_balance = 0.0;
+    static constexpr const char* def_name          = "Unnamed Checking Account";
+    static constexpr const double def_balance      = 0.0;
     static constexpr const double per_withdraw_fee = 1.5;
 
   public:

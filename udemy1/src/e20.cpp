@@ -391,7 +391,7 @@ void run_template_class(void)
     vec.push_back(Item("Larry", 900.0));
     vec.push_back(Item("Moe", 400.0));
 
-    for(const auto& v : vec)
+    for (const auto& v : vec)
         std::cout << v << std::endl;
 
     std::cout << "\n--------------------------------------------------------" << std::endl;
@@ -480,7 +480,7 @@ namespace udemy1::e20::itr
 void display(const std::vector<int>& vec)
 {
     std::cout << "[";
-    for(auto const& i : vec)
+    for (auto const& i : vec)
         std::cout << i << " ";
     std::cout << "]" << std::endl;
 }
@@ -521,14 +521,14 @@ void run_iterators_test_2(void)
 
     // display all elements using iterators
     std::vector<int>::iterator it = nums.begin();
-    while(it != nums.end())
+    while (it != nums.end())
         std::cout << *(it++) << std::endl;
 
     std::cout << std::endl;
 
     // Change all vector elements to 0
     it = nums.begin();
-    while(it != nums.end()) {
+    while (it != nums.end()) {
         *it = 0;
         ++it;
     }
@@ -543,14 +543,14 @@ void run_iterators_test_3(void)
     display(nums);
 
     std::vector<int>::const_iterator it = nums.begin(); // OR: auto it = nums.cbegin();
-    while(it != nums.end())
+    while (it != nums.end())
         std::cout << *(it++) << std::endl;
 
     std::cout << "\n==============================================================================" << std::endl;
 
     // Change all vector elements to 0
     it = nums.begin();
-    while(it != nums.end()) {
+    while (it != nums.end()) {
         // *it = 0; // Compiler ERROR - read only
         ++it;
     }
@@ -566,7 +566,7 @@ void run_iterators_test_4(void)
 
     // Reverse iterator over vector
     auto it1 = nums.rbegin();
-    while(it1 != nums.rend())
+    while (it1 != nums.rend())
         std::cout << *(it1++) << std::endl;
 
     std::cout << "\n== Constant Reverse Iterators ================================================" << std::endl;
@@ -586,7 +586,7 @@ void run_iterators_test_4(void)
     std::map<std::string, std::string> fav{
         {"Frank", "C++"}, {"Larry", "PHP"}, {"Moe", "Rust"}, {"Sam", "Ruby"}, {"James", "Haskell"}};
     auto it3 = fav.begin(); // iterator over map or string-string pair
-    while(it3 != fav.end())
+    while (it3 != fav.end())
         std::cout << (*it3).first << " : " << (it3++)->second << std::endl;
 }
 
@@ -598,10 +598,10 @@ void run_iterators_test_5(void)
     display(vec);
 
     // Iterator over subset of container
-    auto start = vec.cbegin() + 2;
+    auto start  = vec.cbegin() + 2;
     auto finish = vec.cend() - 3;
 
-    while(start != finish)
+    while (start != finish)
         std::cout << *start++ << std::endl;
 }
 
@@ -620,15 +620,18 @@ class Person
 
   public:
     Person() = default;
+
     Person(std::string s, unsigned a)
         : name{s}
         , age{a}
     {
     }
+
     bool operator<(const Person& rhs) const
     {
         return (this->age < rhs.age);
     }
+
     bool operator==(const Person& rhs) const
     {
         return (this->age == rhs.age && this->name == rhs.name);
@@ -641,14 +644,14 @@ void run_algo_find(void)
 
     std::vector<int> vec{1, 5, 6, 2, 3, 4, 7, 8};
     auto loc = std::find(std::begin(vec), std::end(vec), 3);
-    if(loc != std::end(vec))
+    if (loc != std::end(vec))
         std::cout << "Found the number: " << *loc << "\tat position: " << loc - std::begin(vec) << std::endl;
     else
         std::cout << "Unable to find the number." << std::endl;
 
     std::list<Person> player{{"Larry", 45}, {"Moe", 32}, {"Sam", 25}, {"Joe", 70}};
     auto loc1 = std::find(std::begin(player), std::end(player), Person{"Sam", 25});
-    if(loc1 != std::end(player)) {
+    if (loc1 != std::end(player)) {
         std::cout << "Found Sam" << std::endl;
     } else
         std::cout << "Unable to find Sam." << std::endl;
@@ -677,7 +680,7 @@ void run_algo_countif(void)
 
     // count only value greater than 5
     const int great_num = 5;
-    num = std::count_if(vec.begin(), vec.end(), [great_num](int x) { return x > great_num; });
+    num                 = std::count_if(vec.begin(), vec.end(), [great_num](int x) { return x > great_num; });
     std::cout << num << " numbers are greater than " << great_num << std::endl;
 }
 
@@ -687,7 +690,7 @@ void run_algo_replace(void)
     std::vector<int> vec{1, 2, 6, 2, 3, 2, 1, 8, 1, 12, 10, 8, 7, 2};
 
     // display vector elements
-    for(auto& i : vec)
+    for (auto& i : vec)
         std::cout << i << " ";
     std::cout << std::endl;
 
@@ -695,7 +698,7 @@ void run_algo_replace(void)
     std::replace(vec.begin(), vec.end(), 2, 20);
 
     // display vector elements
-    for(auto& i : vec)
+    for (auto& i : vec)
         std::cout << i << " ";
     std::cout << std::endl;
 }
@@ -705,16 +708,17 @@ void run_algo_allof(void)
     std::cout << "\n=== Algo - all_of ============================================================" << std::endl;
     std::vector<int> vec{1, 2, 6, 2, 3, 2, 1, 8, 1, 12, 10, 8, 7, 2};
 
-    if(std::all_of(vec.begin(), vec.end(), [](int x) { return x > 10; }))
+    if (std::all_of(vec.begin(), vec.end(), [](int x) { return x > 10; }))
         std::cout << "All elements are > 10" << std::endl;
     else
         std::cout << "No All elements are > 10" << std::endl;
 
-    if(std::all_of(vec.begin(), vec.end(), [](int x) { return x < 20; }))
+    if (std::all_of(vec.begin(), vec.end(), [](int x) { return x < 20; }))
         std::cout << "All elements are < 20" << std::endl;
     else
         std::cout << "Np All elements are < 20" << std::endl;
 }
+
 void run_algo_transform(void)
 {
     std::cout << "\n=== Algo - string  transform =================================================" << std::endl;
@@ -729,6 +733,7 @@ void run_algo_transform(void)
 }
 
 } // namespace udemy1::e20::algo
+
 /**
  * @brief Run all examples of STL
  */

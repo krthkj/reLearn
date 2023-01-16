@@ -31,7 +31,7 @@ bool Account::deposit(double amt)
 
 bool Account::withdraw(double amt)
 {
-    if(balance - amt >= 0) {
+    if (balance - amt >= 0) {
         balance -= amt;
         return true;
     }

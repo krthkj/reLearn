@@ -23,6 +23,7 @@
  */
 
 #include "udemy1.hpp"
+
 #include <iostream>
 
 namespace udemy1
@@ -35,7 +36,7 @@ void s4c_run(void)
         std::cout << "Enter your favourite number between 1 and 100: ";
 
         std::cin >> fav_num;
-    } while(fav_num > 100 || fav_num < 1);
+    } while (fav_num > 100 || fav_num < 1);
     std::cout << "Amazing!! That's my favourite number too!" << std::endl;
     std::cout << "no really!!, " << fav_num << " is my favourite number!" << std::endl;
 }

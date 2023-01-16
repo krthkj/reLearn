@@ -7,26 +7,28 @@ Account::Account(std::string name, double balance)
     , balance{balance}
 {
 }
-Account::~Account()
-{
-}
+
+Account::~Account() {}
+
 bool Account::deposit(double amt)
 {
-    if(amt < 0)
+    if (amt < 0)
         return false;
     else {
         balance += amt;
         return true;
     }
 }
+
 bool Account::withdraw(double amt)
 {
-    if(balance - amt >= 0) {
+    if (balance - amt >= 0) {
         balance -= amt;
         return true;
     } else
         return false;
 }
+
 double Account::get_balance() const
 {
     return balance;
