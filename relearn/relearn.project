@@ -21,13 +21,13 @@
       </Linker>
       <ResourceCompiler Options=""/>
     </GlobalSettings>
-    <Configuration Name="Debug" CompilerType="CLANG" DebuggerType="LLDB Debugger" Type="Executable" BuildCmpWithGlobalSettings="append" BuildLnkWithGlobalSettings="append" BuildResWithGlobalSettings="append">
-      <Compiler Options="-Wmain;-pedantic-errors;-g;-O0;-pedantic;-W;-fopenmp;-std=c++17;-Wall" C_Options="-Wmain;-pedantic-errors;-g;-O0;-pedantic;-W;-fopenmp;-std=c++17;-Wall" Assembler="" Required="yes" PreCompiledHeader="" PCHInCommandLine="no" PCHFlags="" PCHFlagsPolicy="1">
+    <Configuration Name="Debug" CompilerType="CLANG" DebuggerType="GNU gdb debugger" Type="Executable" BuildCmpWithGlobalSettings="append" BuildLnkWithGlobalSettings="append" BuildResWithGlobalSettings="append">
+      <Compiler Options="-Wmain;-pedantic-errors;-g;-O0;-pedantic;-W;-fopenmp;-std=c++20;-Wall" C_Options="-Wmain;-pedantic-errors;-g;-O0;-pedantic;-W;-fopenmp;-std=c++20;-Wall" Assembler="" Required="yes" PreCompiledHeader="" PCHInCommandLine="no" PCHFlags="" PCHFlagsPolicy="1">
         <IncludePath Value="../relearn/include/"/>
         <IncludePath Value="../relearn_dl/include/"/>
         <IncludePath Value="../relearn_sl/include/"/>
       </Compiler>
-      <Linker Options="-O0" Required="yes">
+      <Linker Options="-fopenmp;-O0" Required="yes">
         <LibraryPath Value="$(WorkspacePath)/cmake-build-$(WorkspaceConfiguration)/output/"/>
         <Library Value="librelearn_dl.so"/>
         <Library Value="librelearn_sl.a"/>
