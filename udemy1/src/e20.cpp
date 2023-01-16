@@ -1,7 +1,7 @@
 /**
  * Copyright © 2023 by Karthik Jain <krthkj.public@gmail.com>
  * All Rights Reserved.
- * Using MIT licence, refer the license file supplied with the project.
+ * Using MIT license, refer the license file supplied with the project.
  *
  * File : s20c.cpp
  * Desc : Section 20: Standard Template library
@@ -74,11 +74,11 @@
  * Generic Programming using Macros
  * - used extensively in legacy C++ code
  * - more extensively used in C-code.
- * - part of Preprocessor directives
+ * - part of Pre-processor directives
  *
  *******************************************************************************
  * Macro (#define)
- * - C++ preprocessor directive
+ * - C++ pre-processor directive
  * - No type information
  * - simple substitution by compiler
  * Example:
@@ -108,10 +108,10 @@
  * - Generic programming/meta-programming
  *
  * Note:
- * - C++ does it at compile time not at runtime, and helps with type-checking
+ * - C++ does it at compile time not at run-time, and helps with type-checking
  * - compiler writes actual function/classes
  * - concept is easy to understand, but templates can be very complex
- * - error messages provided by complier can be difficult to understand
+ * - error messages provided by compiler can be difficult to understand
  * - code is not generated unless the user uses the specialized version of the template
  *
  *******************************************************************************
@@ -164,11 +164,11 @@
  * | Copy assignment (operator=) | Copy one container to another                                   |
  * | Move assignment (operator=) | Move one container to another                                   |
  * | size                        | returns the number of elements in the container                 |
- * | empty                       | returns boolean - is the container empty                        |
+ * | empty                       | returns Boolean - is the container empty                        |
  * | insert                      | inserts an element into the container                           |
- * | operator< and operator<=    | returns boolean - compare contents of 2 containers              |
- * | operator> and operator>=    | returns boolean - compare contents of 2 containers              |
- * | operator== and operator!=   | returns boolean - are the contents of 2 containers equal or not |
+ * | operator< and operator<=    | returns Boolean - compare contents of 2 containers              |
+ * | operator> and operator>=    | returns Boolean - compare contents of 2 containers              |
+ * | operator== and operator!=   | returns Boolean - are the contents of 2 containers equal or not |
  * | swap                        | swap the elements of 2 containers                               |
  * | erase                       | remove element(s) from a container                              |
  * | clear                       | remove all elements from the container                          |
@@ -180,7 +180,7 @@
  *
  * Container elements **** Important Note ****
  * - A copy of the elements will be stored in the container: all primitives are okay
- * - elements should be: copyable and assignable (copy constructor/copy assignment)
+ * - elements should be: copy-able and assignable (copy constructor/copy assignment)
  *                       Movable for efficiency (move constructor/move assignment)
  * - Ordered associative containers must be able to compare elements : operator<, operator==
  *
@@ -270,7 +270,7 @@
  *
  * Suppose we are iterating over vector of 10 elements,
  * and we 'clear()' the vector while iterating. What happens?
- * Undefined behaviour - our iterator are pointing to invalid locations
+ * Undefined behavior - our iterator are pointing to invalid locations
  *
  *******************************************************************************
  *******************************************************************************
@@ -509,7 +509,7 @@ void run_iterators_test_2(void)
 
 void run_iterators_test_3(void)
 {
-    std::cout << "\n==============================================================================" << std::endl;
+    std::cout << "\n== Constant iterators ========================================================" << std::endl;
 
     std::vector<int> nums{1, 2, 3, 4, 5};
     display(nums);
@@ -531,7 +531,7 @@ void run_iterators_test_3(void)
 
 void run_iterators_test_4(void)
 {
-    std::cout << "\n==============================================================================" << std::endl;
+    std::cout << "\n== Reverse Iterators =========================================================" << std::endl;
 
     std::vector<int> nums{1, 2, 3, 4, 5};
     display(nums);
@@ -541,7 +541,7 @@ void run_iterators_test_4(void)
     while(it1 != nums.rend())
         std::cout << *(it1++) << std::endl;
 
-    std::cout << "\n==============================================================================" << std::endl;
+    std::cout << "\n== Constant Reverse Iterators ================================================" << std::endl;
 
     // constant reverse over a list
     std::list<std::string> names{"Larry", "Moe", "Curly", "Frank"};
@@ -552,7 +552,7 @@ void run_iterators_test_4(void)
     it2++; // points to Curly
     std::cout << *it2 << std::endl;
 
-    std::cout << "\n==============================================================================" << std::endl;
+    std::cout << "\n== Display subset using Iterators ============================================" << std::endl;
 
     // iterator over map
     std::map<std::string, std::string> fav{

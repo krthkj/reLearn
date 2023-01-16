@@ -517,34 +517,36 @@ std::string get_player_mode(Player::Mode mode){
 
 // A simple function that returns the string representation
 // of the Player::Direction paramter passed into it.
-std::string get_player_direction(Player::Direction direction) {
+std::string get_player_direction(Player::Direction direction)
+{
     std::string result;
-    switch(direction){
+    switch(direction) {
     case Player::Direction::East:
-        result="East";
+        result = "East";
         break;
     case Player::Direction::West:
-        result="West";
+        result = "West";
         break;
     case Player::Direction::North:
-        result="North";
+        result = "North";
         break;
     case Player::Direction::South:
-        result="South";
+        result = "South";
         break;
     }
     return result;
 }
 
-
 // Overloading the output stream insertion operator
 // so we can easily put Player objects on the output stream.
-std::ostream &operator<<(std::ostream &os, const Player &p) {
-    os <<   "Player name:      " << p.get_name()
+std::ostream& operator<<(std::ostream& os, const Player& p)
+{
+    os << "Player name:      " << p.get_name()
        << "\nPlayer mode:      " << get_player_mode(p.mode)
        << "\nPlayer direction: " << get_player_direction(p.direction) << std::endl;
     return os;
 }
+
 void run_enum_scoped_gameplay(void)
 {
     std::cout << "\n-- Test 5 ---------------------------------------------------------" << std::endl;
