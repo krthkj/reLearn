@@ -194,8 +194,8 @@ Mystring::Mystring(void)
     : str{nullptr} // set pointer to null
 {
     std::cout << "Default Constructor" << std::endl;
-    this->str  = new char[1]; // allocate on heap
-    *this->str = '\0';        // EOL character
+    this->str = new char[1]; // allocate on heap
+    *this->str = '\0';       // EOL character
 }
 
 /**************************************************
@@ -205,9 +205,9 @@ Mystring::Mystring(const char* s)
     : str{nullptr} // set to null
 {
     std::cout << "Arg Constructor" << std::endl;
-    if (s == nullptr) {           // if arg is nullptr
-        this->str  = new char[1]; // allocate on heap
-        *this->str = '\0';        // EOL character
+    if (s == nullptr) {          // if arg is nullptr
+        this->str = new char[1]; // allocate on heap
+        *this->str = '\0';       // EOL character
     } else {
         this->str = new char[std::strlen(s) + 1]; // create in heap
         std::strcpy(this->str, s);                // copy arg to member data
@@ -232,7 +232,7 @@ Mystring::Mystring(Mystring&& source) noexcept
 {
     std::cout << "Move Constructor" << std::endl;
     // steal pointers from srouce
-    this->str  = source.str;
+    this->str = source.str;
     source.str = nullptr;
 }
 
@@ -456,8 +456,8 @@ Mystring::Mystring(void)
     : str{nullptr} // set pointer to null
 {
     // std::cout << "Default Constructor" << std::endl;
-    this->str  = new char[1]; // allocate on heap
-    *this->str = '\0';        // EOL character
+    this->str = new char[1]; // allocate on heap
+    *this->str = '\0';       // EOL character
 }
 
 /**************************************************
@@ -467,9 +467,9 @@ Mystring::Mystring(const char* s)
     : str{nullptr} // set to null
 {
     // std::cout << "Arg Constructor" << std::endl;
-    if (s == nullptr) {           // if arg is nullptr
-        this->str  = new char[1]; // allocate on heap
-        *this->str = '\0';        // EOL character
+    if (s == nullptr) {          // if arg is nullptr
+        this->str = new char[1]; // allocate on heap
+        *this->str = '\0';       // EOL character
     } else {
         this->str = new char[std::strlen(s) + 1]; // create in heap
         std::strcpy(this->str, s);                // copy arg to member data
@@ -494,7 +494,7 @@ Mystring::Mystring(Mystring&& source)
 {
     std::cout << "Move Constructor" << std::endl;
     // steal pointers from source
-    this->str  = source.str;
+    this->str = source.str;
     source.str = nullptr;
 }
 

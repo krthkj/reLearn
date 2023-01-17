@@ -11,7 +11,7 @@ namespace udemy1::myclass
 Mystring::Mystring()
     : str{nullptr}
 {
-    this->str  = new char[1];
+    this->str = new char[1];
     *this->str = '\0';
 }
 
@@ -23,7 +23,7 @@ Mystring::Mystring(const char* s)
     : str{nullptr}
 {
     if (s == nullptr) {
-        this->str  = new char[1];
+        this->str = new char[1];
         *this->str = '\0';
     } else {
         this->str = new char[std::strlen(s) + 1];
@@ -50,7 +50,7 @@ Mystring::Mystring(Mystring&& src) noexcept
     : str{nullptr}
 {
     this->str = src.str;
-    src.str   = nullptr;
+    src.str = nullptr;
 }
 
 /**
@@ -88,7 +88,7 @@ Mystring& Mystring::operator=(Mystring&& src) noexcept
     delete[] this->str;
 
     this->str = src.str;
-    src.str   = nullptr;
+    src.str = nullptr;
 
     return *this;
 }

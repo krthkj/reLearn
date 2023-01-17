@@ -21,8 +21,8 @@ namespace udemy1
 void swap(int* a, int* b)
 {
     int temp = *a;
-    *a       = *b;
-    *b       = temp;
+    *a = *b;
+    *b = temp;
 }
 
 void s12_test_debugger(void)

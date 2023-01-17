@@ -280,6 +280,7 @@
  *
  *******************************************************************************
  * STL  Sequence containers
+ * ========================
  * std::array
  * - Fixed size
  * - direct element access
@@ -300,7 +301,52 @@
  *   std::array<int, 5> arr1 {{1,2,3,4,5}}; // C++11 format
  *   std::array<int, 5> arr1 {1,2,3,4,5}; // C++14 format
  *
+ *******************************************************************************
+ * std::vector
+ * - Dynamic size: handled automatically, contiguous memory like array
+ * - direct access (constant time)
+ * - rapid insertion and deletion at the back (constant time)
+ * - inserting or removal of elements (linear time)
+ * - all iterators available and may invalidate
  *
+ *******************************************************************************
+ * std::deque (double-ended queue)
+ * - Dynamic size: not contiguous memory, handled automatically
+ * - Direct element access (constant time)
+ * - rapid insertion and deletion at the front and back (constant time)
+ * - insertion and removal of elements (liner time)
+ * - all iterators available and my invalidate
+ *
+ * example:
+ *   std::deque<int> d1{1,2,3,4,5};
+ *   std::deque<int> d2(10,100);  // then 100s
+ *
+ * methods:
+ * size(), max_size()
+ * front(), back()
+ * push_front(), push_back()
+ * pop_front(), pop_back()
+ * emplace_front(), emplace_back()
+ *******************************************************************************
+ * std::list
+ * - Dynamic: bidirectional, non-contiguous
+ * - Fast random access is not supported. (linear time)
+ * - Rapid insertion and deletion anywhere on the container (constant time)
+ * - all iterators available and invalidate when corresponding element is deleted
+ *
+ * example:
+ *  std::list<int> l1{1,2,3,4,5}
+ *
+ * Variations:
+ * std::forward_list
+ * - single direction, forward
+ * - size(), back(), push_back(), pop_back() is not defined
+ * - insert_after(), emplace_after(), erase_after(), resize()
+ *
+ *******************************************************************************
+ *******************************************************************************
+ *******************************************************************************
+ *******************************************************************************
  *******************************************************************************
  *******************************************************************************
  *******************************************************************************
@@ -311,11 +357,15 @@
 #include "udemy1.hpp"
 
 #include <algorithm>
+#include <array>
 #include <cctype> // handling c-style functions
+#include <deque>
 #include <iomanip>
 #include <iostream>
+#include <iterator> // for std::advance
 #include <list>
 #include <map>
+#include <numeric>
 #include <string>
 #include <vector>
 
@@ -598,7 +648,7 @@ void run_iterators_test_5(void)
     display(vec);
 
     // Iterator over subset of container
-    auto start  = vec.cbegin() + 2;
+    auto start = vec.cbegin() + 2;
     auto finish = vec.cend() - 3;
 
     while (start != finish)
@@ -679,8 +729,8 @@ void run_algo_countif(void)
     std::cout << num << " odd number found." << std::endl;
 
     // count only value greater than 5
-    const int great_num = 5;
-    num                 = std::count_if(vec.begin(), vec.end(), [great_num](int x) { return x > great_num; });
+    int great_num = 5;
+    num = std::count_if(vec.begin(), vec.end(), [great_num](int x) { return x > great_num; });
     std::cout << num << " numbers are greater than " << great_num << std::endl;
 }
 
@@ -734,6 +784,582 @@ void run_algo_transform(void)
 
 } // namespace udemy1::e20::algo
 
+namespace udemy1::e20::containers
+{
+
+void run_array_test_1(void)
+{
+    std::cout << "\n=== Containers - Array test 1 ================================================" << std::endl;
+    std::array<int, 5> arr1{1, 2, 3, 4, 5};
+    std::array<int, 5> arr2;
+
+    display(arr1);
+    display(arr2); // Elements are not initialized, will have garbage
+
+    arr2 = {10, 20, 30, 40, 50};
+
+    display(arr1);
+    display(arr2);
+
+    std::cout << "Size of arr1 is: " << arr1.size() << std::endl;
+    std::cout << "Size of arr2 is: " << arr2.size() << std::endl;
+
+    arr1[2] = 1000;    // doesn't check for array out of range.
+    arr1.at(4) = 2000; // check for array out of range, will throw out_of_range exception
+    display(arr1);
+
+    std::cout << "Front of arr2 is: " << arr2.front() << std::endl;
+    std::cout << "back of arr2 is: " << arr2.back() << std::endl;
+}
+
+void run_array_test_2(void)
+{
+    std::cout << "\n=== Containers - Array test 2 - fill() =======================================" << std::endl;
+    std::array<int, 5> arr1{1, 2, 3, 4, 5};
+    std::array<int, 5> arr2{10, 20, 30, 40, 60};
+
+    display(arr1);
+    display(arr2);
+
+    // fill array elements with single value
+    arr1.fill(01);
+    display(arr1);
+    display(arr2);
+
+    // swap arrays
+    arr1.swap(arr2);
+    display(arr1);
+    display(arr2);
+}
+
+void run_array_test_3(void)
+{
+    std::cout << "\n=== Containers - Array test 3 - data() =======================================" << std::endl;
+    std::array<int, 5> arr1{1, 2, 3, 4, 5};
+
+    int* ptr = arr1.data();
+    std::cout << "pointer value: " << ptr << std::endl;
+    display(arr1);
+    *ptr = 10000;
+    display(arr1);
+}
+
+void run_array_test_4(void)
+{
+    std::cout << "\n=== Containers - Array test 4 - sort() =======================================" << std::endl;
+    std::array<int, 5> arr1{1, 3, 4, 6, 2};
+    display(arr1);
+
+    std::sort(arr1.begin(), arr1.end());
+    display(arr1);
+}
+
+void run_array_test_5(void)
+{
+    std::cout << "\n=== Containers - Array test 5 - min_element() ================================" << std::endl;
+    std::array<int, 5> arr1{1, 3, 4, 6, 2};
+
+    std::array<int, 5>::iterator min_num = std::min_element(arr1.begin(), arr1.end());
+    auto max_num = std::max_element(arr1.begin(), arr1.end());
+    display(arr1);
+    std::cout << "Minimum element: " << *min_num << std::endl;
+    std::cout << "Maximum element: " << *max_num << std::endl;
+}
+
+void run_array_test_6(void)
+{
+    std::cout << "\n=== Containers - Array test 6 - adjacent_find() ==============================" << std::endl;
+    std::array<int, 5> arr1{1, 3, 4, 6, 2};
+    std::array<int, 5> arr2{1, 3, 4, 4, 2};
+
+    display(arr1);
+    auto adjacent = std::adjacent_find(arr1.begin(), arr1.end());
+    if (adjacent != arr1.end())
+        std::cout << "Adjacent element found with value: " << *adjacent << std::endl;
+    else
+        std::cout << "No Adjacent element found" << std::endl;
+
+    display(arr2);
+    adjacent = std::adjacent_find(arr2.begin(), arr2.end());
+    if (adjacent != arr2.end())
+        std::cout << "Adjacent element found with value: " << *adjacent << std::endl;
+    else
+        std::cout << "No Adjacent element found" << std::endl;
+}
+
+void run_array_test_7(void)
+{
+    std::cout << "\n=== Containers - Array test 7 - accumulate() =================================" << std::endl;
+    std::array<int, 5> arr1{1, 2, 3, 4, 5};
+    display(arr1);
+
+    // accumulate is from #include <numeric>
+    int sum = std::accumulate(arr1.begin(), arr1.end(), 0);
+    std::cout << "Sum of all elements of the array: " << sum << std::endl;
+}
+
+void run_array_test_8(void)
+{
+    std::cout << "\n=== Containers - Array test 8 - count() ======================================" << std::endl;
+    std::array<int, 10> arr1{1, 3, 4, 3, 3, 3, 3, 6, 3, 3};
+    display(arr1);
+
+    auto count = std::count(arr1.begin(), arr1.end(), 3);
+    std::cout << "Found 3: " << count << " times" << std::endl;
+}
+
+void run_array_test_9(void)
+{
+    std::cout << "\n=== Containers - Array test 9 - count_if() ===================================" << std::endl;
+    std::array<int, 10> arr1{1, 2, 3, 50, 60, 70, 80, 200, 300, 400};
+    display(arr1);
+
+    // count numbers between 10 and 200
+    int count = std::count_if(arr1.begin(), arr1.end(), [](int x) { return (x > 10 && x < 200); });
+    std::cout << "Found " << count << " matches, between 10 and 200" << std::endl;
+}
+
+void run_vector_test_1()
+{
+    std::cout << "\nTest1 =========================" << std::endl;
+
+    std::vector<int> vec{1, 2, 3, 4, 5};
+    display(vec);
+
+    vec = {2, 4, 5, 6};
+    display_using_lambda(vec);
+
+    std::vector<int> vec1(10, 100); // ten 100s in the vector
+    display(vec1);
+}
+
+void run_vector_test_2()
+{
+    std::cout << "\nTest2 =========================" << std::endl;
+
+    std::vector<int> vec{1, 2, 3, 4, 5};
+    display(vec);
+    std::cout << "\nvec size: " << vec.size() << std::endl;
+    std::cout << "vec max size: " << vec.max_size() << std::endl;
+    std::cout << "vec capacity: " << vec.capacity() << std::endl;
+
+    vec.push_back(6);
+    display(vec);
+    std::cout << "\nvec size: " << vec.size() << std::endl;
+    std::cout << "vec max size: " << vec.max_size() << std::endl;
+    std::cout << "vec capacity: " << vec.capacity() << std::endl;
+
+    vec.shrink_to_fit(); // C++11
+    display(vec);
+    std::cout << "\nvec size: " << vec.size() << std::endl;
+    std::cout << "vec max size: " << vec.max_size() << std::endl;
+    std::cout << "vec capacity: " << vec.capacity() << std::endl;
+
+    vec.reserve(100);
+    display(vec);
+    std::cout << "\nvec size: " << vec.size() << std::endl;
+    std::cout << "vec max size: " << vec.max_size() << std::endl;
+    std::cout << "vec capacity: " << vec.capacity() << std::endl;
+}
+
+void run_vector_test_3()
+{
+    std::cout << "\nTest3 =========================" << std::endl;
+
+    std::vector<int> vec{1, 2, 3, 4, 5};
+    display(vec);
+
+    vec[0] = 100;
+    vec.at(1) = 200;
+
+    display(vec);
+}
+
+void run_vector_test_4()
+{
+    std::cout << "\nTest4 =========================" << std::endl;
+    std::vector<Person> stooges;
+
+    Person p1{"Larry", 18};
+    display(stooges);
+
+    stooges.push_back(p1);
+    display(stooges);
+
+    stooges.push_back(Person{"Moe", 25});
+    display(stooges);
+
+    stooges.emplace_back("Curly", 30); // Use emplace_back!!!
+    display(stooges);
+}
+
+void run_vector_test_5()
+{
+    std::cout << "\nTest5 =========================" << std::endl;
+
+    std::vector<Person> stooges{{"Larry", 18}, {"Moe", 25}, {"Curly", 30}};
+
+    display(stooges);
+    std::cout << "\nFront: " << stooges.front() << std::endl;
+    std::cout << "Back: " << stooges.back() << std::endl;
+
+    stooges.pop_back();
+    display(stooges);
+}
+
+void run_vector_test_6()
+{
+    std::cout << "\nTest6 =========================" << std::endl;
+    std::vector<int> vec{1, 2, 3, 4, 5};
+    display(vec);
+
+    vec.clear(); // remove all elements
+    display(vec);
+
+    vec = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+    display(vec);
+    vec.erase(vec.begin(), vec.begin() + 2);
+    display(vec);
+
+    vec = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+    // erase all even numbers
+    auto it = vec.begin();
+    while (it != vec.end()) {
+        if (*it % 2 == 0)
+            vec.erase(it);
+        else
+            it++; // only increment if not erased!
+    }
+    display(vec);
+}
+
+void run_vector_test_7()
+{
+    std::cout << "\nTest7 =========================" << std::endl;
+
+    std::vector<int> vec1{1, 2, 3, 4, 5};
+    std::vector<int> vec2{10, 20, 30, 40, 50};
+
+    display(vec1);
+    display(vec2);
+    std::cout << std::endl;
+
+    vec2.swap(vec1);
+    display(vec1);
+    display(vec2);
+}
+
+void run_vector_test_8()
+{
+    std::cout << "\nTest8  =========================" << std::endl;
+
+    std::vector<int> vec1{1, 21, 3, 40, 12};
+
+    display(vec1);
+    std::sort(vec1.begin(), vec1.end());
+    display(vec1);
+}
+
+void run_vector_test_9()
+{
+    // std::back_inserter contructs a back-insert iterator that inserts new elements
+    // at the end of the container it applied to. It's a special output iterator
+    // It's awesome!!!!   and  very efficient
+    // There is also a front_inserter we can use with deques and lists
+    // Copy one list to another using an iterator and back_inserter
+
+    std::cout << "\nTest9  =========================" << std::endl;
+
+    std::vector<int> vec1{1, 2, 3, 4, 5};
+    std::vector<int> vec2{10, 20};
+
+    display(vec1);
+    display(vec2);
+    std::cout << std::endl;
+
+    std::copy(vec1.begin(), vec1.end(), std::back_inserter(vec2));
+    display(vec1);
+    display(vec2);
+    std::cout << std::endl;
+
+    // Copy_if the element is even
+
+    vec1 = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+    vec2 = {10, 20};
+
+    display(vec1);
+    display(vec2);
+    std::cout << std::endl;
+
+    std::copy_if(vec1.begin(), vec1.end(), std::back_inserter(vec2), [](int x) { return x % 2 == 0; });
+    display(vec1);
+    display(vec2);
+}
+
+void run_vector_test_10()
+{
+    std::cout << "\nTest10  =========================" << std::endl;
+    // transform over 2 ranges
+
+    std::vector<int> vec1{1, 2, 3, 4, 5};
+    std::vector<int> vec2{10, 20, 30, 40, 50};
+    std::vector<int> vec3;
+
+    display(vec1);
+    display(vec2);
+
+    // 1*10, 2*20, 3*30, 4*40, 5*50 and store the results in vec3
+    std::transform(vec1.begin(), vec1.end(), vec2.begin(), std::back_inserter(vec3),
+                   [](int a, int b) { return a * b; });
+
+    display(vec3);
+}
+
+// Insertion from another vector
+// Insert vec2 into vec1 before the 5
+void run_vector_test_11()
+{
+    std::cout << "\nTest11  =========================" << std::endl;
+    std::vector<int> vec1{1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+    std::vector<int> vec2{100, 200, 300, 400};
+
+    display(vec1);
+    display(vec2);
+    std::cout << std::endl;
+
+    auto it = std::find(vec1.begin(), vec1.end(), 5);
+    if (it != vec1.end()) {
+        vec1.insert(it, vec2.begin(), vec2.end());
+        std::cout << "inserting..." << std::endl;
+    } else
+        std::cout << "Sorry, 5 not found" << std::endl;
+
+    display(vec1);
+}
+
+} // namespace udemy1::e20::containers
+
+namespace udemy1::e20::containers
+{
+
+void run_deque_test_1(void)
+{
+    std::cout << "\n deque Test1  =========================" << std::endl;
+    std::deque<int> d{1, 2, 3, 4, 5};
+    display(d);
+
+    d = {2, 4, 5, 6};
+    display(d);
+
+    std::deque<int> d1(10, 100);
+    display(d1);
+
+    d[0] = 100;
+    d.at(2) = 200;
+    display(d);
+}
+
+void run_deque_test_2(void)
+{
+    std::cout << "\n deque Test2  =========================" << std::endl;
+    std::deque<int> d{1, 2, 3, 4, 5};
+    display(d);
+
+    d.push_back(100);
+    d.push_front(200);
+    display(d);
+
+    std::cout << "Front: " << d.front() << std::endl;
+    std::cout << "Back: " << d.back() << std::endl;
+    std::cout << "Size: " << d.size() << std::endl;
+
+    d.pop_back();
+    d.pop_front();
+    display(d);
+    std::cout << "Front: " << d.front() << std::endl;
+    std::cout << "Back: " << d.back() << std::endl;
+    std::cout << "Size: " << d.size() << std::endl;
+
+    d.pop_back();
+    d.pop_front();
+    display(d);
+    std::cout << "Front: " << d.front() << std::endl;
+    std::cout << "Back: " << d.back() << std::endl;
+    std::cout << "Size: " << d.size() << std::endl;
+}
+
+void run_deque_test_3(void)
+{
+    // insert even to back of deque and odd to front
+    std::cout << "\n deque Test3  =========================" << std::endl;
+    std::vector<int> vec{1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+    std::deque<int> d{};
+    display(vec);
+    display(d);
+    for (const auto& v : vec) {
+        if (v % 2 == 0)
+            d.push_back(v);
+        else
+            d.push_front(v);
+    }
+    display(d);
+}
+
+void run_deque_test_4(void)
+{
+    // push_front vs back_ordering
+    std::cout << "\n deque Test4  =========================" << std::endl;
+    std::vector<int> vec{1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+    std::deque<int> d{};
+    display(vec);
+    display(d);
+    std::cout << "d.push_front() order: ";
+    for (const auto& v : vec)
+        d.push_front(v);
+    display(d);
+    d.clear();
+    std::cout << "d.push_back() order: ";
+    for (const auto& v : vec)
+        d.push_back(v);
+    display(d);
+}
+
+void run_deque_test_5(void)
+{
+    // push_front vs back_ordering
+    std::cout << "\n deque Test5  =========================" << std::endl;
+    std::vector<int> vec{1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+    std::deque<int> d{};
+    display(vec);
+    display(d);
+    std::cout << "std::copy( front_inserter()) order: ";
+    std::copy(vec.begin(), vec.end(), std::front_inserter(d));
+
+    display(d);
+    d.clear();
+    std::cout << "std::copy( back_inserter()) order: ";
+    std::copy(vec.begin(), vec.end(), std::back_inserter(d));
+    display(d);
+}
+
+void run_list_test_1(void)
+{
+    std::cout << "\nTest1 =========================" << std::endl;
+
+    std::list<int> l1{1, 2, 3, 4, 5};
+    display(l1);
+
+    std::list<std::string> l2;
+    l2.push_back("Back");
+    l2.push_front("Front");
+    display(l2);
+
+    std::list<int> l3;
+    l3 = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+    display(l3);
+
+    std::list<int> l4(10, 100);
+    display(l4);
+}
+
+void run_list_test_2(void)
+{
+    std::cout << "\nTest2 =========================" << std::endl;
+
+    std::list<int> l{1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+    display(l);
+    std::cout << "Size: " << l.size() << std::endl;
+
+    std::cout << "Front : " << l.front() << std::endl;
+    std::cout << "Back  : " << l.back() << std::endl;
+
+    l.clear();
+    display(l);
+    std::cout << "Size: " << l.size() << std::endl;
+}
+
+void run_list_test_3(void)
+{
+    std::cout << "\nTest3 =========================" << std::endl;
+
+    std::list<int> l{1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+    display(l);
+
+    l.resize(5);
+    display(l);
+
+    l.resize(10);
+    display(l);
+
+    std::list<Person> persons;
+    persons.resize(5); // uses the Person default constructor
+    display(persons);
+}
+
+void run_list_test_4(void)
+{
+    std::cout << "\nTest4 =========================" << std::endl;
+
+    std::list<int> l{1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+    display(l);
+
+    auto it = std::find(l.begin(), l.end(), 5);
+    if (it != l.end())
+        l.insert(it, 100);
+
+    display(l);
+    std::cout << "it=" << *it << std::endl;
+
+    std::list<int> l2{1000, 2000, 3000};
+    l.insert(it, l2.begin(), l2.end());
+    display(l);
+    std::cout << "it=" << *it << std::endl;
+
+    std::advance(it, -4); // pointing to 100
+    std::cout << *it << std::endl;
+
+    l.erase(it);
+    // std::cout << *it << std::endl; // it is invalidated
+    display(l);
+}
+
+void run_list_test_5(void)
+{
+    std::cout << "\nTest5 =========================" << std::endl;
+
+    std::list<Person> stooges{{"Larry", 18}, {"Moe", 25}, {"Curly", 17}};
+
+    display(stooges);
+    std::string name;
+    int age{};
+    std::cout << "\nEnter the name of the next stooge: ";
+    getline(std::cin, name);
+    std::cout << "Enter their age: ";
+    std::cin >> age;
+
+    stooges.emplace_back(name, age);
+    display(stooges);
+
+    // Insert Frank before Moe
+    auto it = std::find(stooges.begin(), stooges.end(), Person{"Moe", 25});
+    if (it != stooges.end())
+        stooges.emplace(it, "Frank", 18);
+    display(stooges);
+}
+
+void run_list_test_6(void)
+{
+    std::cout << "\nTest6 =========================" << std::endl;
+
+    std::list<Person> stooges{{"Larry", 18}, {"Moe", 25}, {"Curly", 17}};
+
+    display(stooges);
+    stooges.sort();
+    display(stooges);
+}
+
+} // namespace udemy1::e20::containers
+
 /**
  * @brief Run all examples of STL
  */
@@ -755,7 +1381,41 @@ void udemy1::e20_run(void)
     // e20::algo::run_algo_countif();
     // e20::algo::run_algo_replace();
     // e20::algo::run_algo_allof();
-    e20::algo::run_algo_transform();
+    // e20::algo::run_algo_transform();
 
-    // e20::algo::array
+    // e20::containers::run_array_test_1();
+    // e20::containers::run_array_test_2();
+    // e20::containers::run_array_test_3();
+    // e20::containers::run_array_test_4();
+    // e20::containers::run_array_test_5();
+    // e20::containers::run_array_test_6();
+    // e20::containers::run_array_test_7();
+    // e20::containers::run_array_test_8();
+    // e20::containers::run_array_test_9();
+
+    // e20::containers::run_vector_test_1();
+    // e20::containers::run_vector_test_2();
+    // e20::containers::run_vector_test_3();
+    // e20::containers::run_vector_test_4();
+    // e20::containers::run_vector_test_5();
+    // e20::containers::run_vector_test_6();
+    // e20::containers::run_vector_test_7();
+    // e20::containers::run_vector_test_8();
+    // e20::containers::run_vector_test_9();
+    // e20::containers::run_vector_test_10();
+    // e20::containers::run_vector_test_11();
+
+    // e20::containers::run_deque_test_1();
+    // e20::containers::run_deque_test_2();
+    // e20::containers::run_deque_test_3();
+    // e20::containers::run_deque_test_4();
+    // e20::containers::run_deque_test_5();
+
+    // std::list
+    // e20::containers::run_list_test_1();
+    // e20::containers::run_list_test_2();
+    // e20::containers::run_list_test_3();
+    // e20::containers::run_list_test_4();
+    // e20::containers::run_list_test_5();
+    e20::containers::run_list_test_6();
 }

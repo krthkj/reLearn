@@ -25,13 +25,13 @@ class Trust_Account : public Savings_Account
 
   private:
     static constexpr const char* def_name = "Unnamed Trust Account";
-    static constexpr double def_balance   = 0.0;
-    static constexpr double def_int_rate  = 0.0;
+    static constexpr double def_balance = 0.0;
+    static constexpr double def_int_rate = 0.0;
 
-    static constexpr double bonus_amt       = 50.0;
+    static constexpr double bonus_amt = 50.0;
     static constexpr double bonus_low_limit = 5000.0;
 
-    static constexpr int max_withdraw_limit         = 3;
+    static constexpr int max_withdraw_limit = 3;
     static constexpr double max_withdraw_percentage = 0.2;
 
   protected:

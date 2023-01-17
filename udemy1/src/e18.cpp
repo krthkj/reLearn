@@ -281,7 +281,7 @@ namespace udemy1::e18::ex7
 class IllegalBalanceException
 {
   public:
-    IllegalBalanceException()  = default;
+    IllegalBalanceException() = default;
     ~IllegalBalanceException() = default;
 };
 
@@ -315,7 +315,7 @@ class IllegalBalanceException : public std::exception
 {
   public:
     IllegalBalanceException() noexcept = default;
-    ~IllegalBalanceException()         = default;
+    ~IllegalBalanceException() = default;
 
     virtual const char* what() const noexcept
     {

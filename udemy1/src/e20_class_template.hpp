@@ -1,6 +1,9 @@
 #ifndef E20_CLASS_TEMPLATE_HPP
 #define E20_CLASS_TEMPLATE_HPP
 
+#include <algorithm>
+#include <array>
+#include <deque>
 #include <iostream>
 #include <string>
 #include <vector>
@@ -37,10 +40,7 @@ struct Person {
     std::string name;
     int age;
 
-    /**
-     * @brief operator'<' overloading funcion to help template function 'min'
-     * @param rhs
-     */
+    // operator'<' overloading function to help template function 'min'
     bool operator<(const Person& rhs) const
     {
         return this->age < rhs.age;
@@ -56,8 +56,8 @@ template <typename T>
 void my_swap(T& a, T& b)
 {
     T temp = a;
-    a      = b;
-    b      = temp;
+    a = b;
+    b = temp;
 }
 } // namespace udemy1::e20::functions
 
@@ -145,7 +145,7 @@ class My_Array
     int size{N};  // TODO: how to get the value of N?
     int value[N]; // the N needs to know at compiler-time
   public:
-    My_Array()  = default;
+    My_Array() = default;
     ~My_Array() = default;
 
     My_Array(int init_val)
@@ -195,7 +195,7 @@ class My_Array_Generic
     int size{N}; // TODO: how to get the value of N?
     T value[N];  // the N needs to know at compiler-time
   public:
-    My_Array_Generic()  = default;
+    My_Array_Generic() = default;
     ~My_Array_Generic() = default;
 
     My_Array_Generic(T init_val)
@@ -223,4 +223,41 @@ class My_Array_Generic
 };
 } // namespace udemy1::e20::ArrayClass
 
+namespace udemy1::e20::containers
+{
+
+class Person
+{
+    friend std::ostream& operator<<(std::ostream& os, const Person& p);
+    std::string name;
+    int age;
+
+  public:
+    Person();
+    ~Person() = default;
+    Person(std::string name, int age);
+    bool operator<(const Person& rhs) const;
+    bool operator>(const Person& rhs) const;
+    bool operator==(const Person& rhs) const;
+};
+
+template <typename T>
+void display_using_lambda(const T& obj)
+{
+    std::cout << "[ ";
+    std::for_each(obj.begin(), obj.end(), [](int x) { std::cout << x << " "; });
+    std::cout << "]" << std::endl;
+}
+
+// template function to display
+template <typename T1>
+void display(const T1& obj)
+{
+    std::cout << "[ ";
+    for (const auto& elem : obj)
+        std::cout << elem << " ";
+    std::cout << "]" << std::endl;
+}
+
+} // namespace udemy1::e20::containers
 #endif // E20_CLASS_TEMPLATE_HPP

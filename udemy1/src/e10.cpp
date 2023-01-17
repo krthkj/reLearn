@@ -144,7 +144,7 @@ void strings_and_functions()
     char whole_name[22]{};
 
     size_t first_name_length = strlen(first_name);
-    size_t last_name_length  = strlen(last_name);
+    size_t last_name_length = strlen(last_name);
 
     strcpy(whole_name, first_name);
     // strcat(whole_name," ");

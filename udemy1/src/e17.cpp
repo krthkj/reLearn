@@ -168,7 +168,7 @@ void run_unique_ptr_test(void)
     {
         std::cout << "### smart pointer variable on Heap using make_ptr" << std::endl;
         std::unique_ptr<Test> t1 = std::make_unique<Test>(1000);
-        auto t2                  = std::make_unique<Test>(2000);
+        auto t2 = std::make_unique<Test>(2000);
 
         std::unique_ptr<Test> t3;
         if (!t1)
@@ -330,10 +330,10 @@ struct Person {
 
 void run_weak_ptr_cyclic_dep_2(void)
 {
-    auto Barca        = std::make_shared<Team>();
-    auto Valdes       = std::make_shared<Person>();
+    auto Barca = std::make_shared<Team>();
+    auto Valdes = std::make_shared<Person>();
     Barca->goalKeeper = Valdes;
-    Valdes->team      = Barca;
+    Valdes->team = Barca;
 }
 
 void run_weak_ptr_cyclic_dep()
@@ -403,7 +403,7 @@ void run_weak_ptr_2(void)
     {
         {
             auto sp = std::make_shared<int>(42);
-            gw_2    = sp;
+            gw_2 = sp;
             observe_2();
         }
         observe_2();

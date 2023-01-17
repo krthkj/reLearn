@@ -93,9 +93,9 @@ namespace udemy1::e16::ex6
 class Shape // abstract class
 {
   public:
-    virtual void draw()   = 0; // pure virtual functions
+    virtual void draw() = 0;   // pure virtual functions
     virtual void rotate() = 0; // pure virtual functions
-    virtual ~Shape()      = default;
+    virtual ~Shape() = default;
 };
 
 class Open_Shape : public Shape // abstract class

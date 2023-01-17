@@ -344,8 +344,8 @@ void double_data(int* int_ptr)
 void my_swap(int* a, int* b)
 {
     int tmp = *a;
-    *a      = *b;
-    *b      = tmp;
+    *a = *b;
+    *b = tmp;
 }
 
 void display1(std::vector<std::string>* v)
@@ -515,10 +515,10 @@ int square(int& n)
 void run_l_r_value(void)
 {
     //---------------------------------
-    int x{100};       // 100 is r-value
-    x     = 1000;     // 'x' is l-value
-    x     = 100 + 22; // 'x' is l-value
-    int y = x + 200;  // '(x+200)' is an r-vaue
+    int x{100};      // 100 is r-value
+    x = 1000;        // 'x' is l-value
+    x = 100 + 22;    // 'x' is l-value
+    int y = x + 200; // '(x+200)' is an r-vaue
 
     std::string name; // 'name' is l-value
     name = "Frank";   // 'Frank' is r-value
@@ -530,7 +530,7 @@ void run_l_r_value(void)
 
     //---------------------------------
     int& ref1 = x; // ref1 is reference to l-value
-    ref1      = 1000;
+    ref1 = 1000;
     // int &ref2=100; // compiler error: 100 is an r-value
 
     //---------------------------------

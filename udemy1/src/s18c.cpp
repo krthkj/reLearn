@@ -50,7 +50,7 @@ void s18c_run(void)
         larrys_account = std::make_unique<s18c::Savings_Account>("Larry", -2000.0);
         std::cout << *larrys_account << std::endl;
 
-    } catch(const std::exception& ex) {
+    } catch (const std::exception& ex) {
         std::cerr << ex.what() << std::endl;
         //} catch(const s18c::IllegalBalanceException& ex) {
         //    std::cerr << ex.what() << std::endl;
@@ -66,7 +66,7 @@ void s18c_run(void)
         moes_account->withdraw(1000);
         std::cout << *moes_account << std::endl;
 
-    } catch(const std::exception& ex) {
+    } catch (const std::exception& ex) {
         std::cerr << ex.what() << std::endl;
         //} catch(const s18c::InsufficentFundsException& ex) {
         //    std::cerr << ex.what() << std::endl;

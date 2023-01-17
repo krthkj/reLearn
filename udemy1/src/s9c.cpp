@@ -12,6 +12,7 @@
  */
 
 #include "udemy1.hpp"
+
 #include <boost/algorithm/string/erase.hpp>
 #include <iostream>
 
@@ -59,7 +60,7 @@ void s9c_run(void)
     std::vector<int> mylist{};
     bool loop_val = true;
     std::string choice;
-    while(loop_val) {
+    while (loop_val) {
         std::cout << std::endl
                   << "P - Print numbers" << std::endl
                   << "A - Add numbers" << std::endl
@@ -76,13 +77,13 @@ void s9c_run(void)
         boost::algorithm::erase_all(choice, " ");
         int val{0};
 
-        switch((char)choice.at(0)) {
+        switch ((char)choice.at(0)) {
 
         case 'P':
         case 'p':
-            if(!mylist.empty()) {
+            if (!mylist.empty()) {
                 std::cout << "[ ";
-                for(auto i : mylist) {
+                for (auto i : mylist) {
                     std::cout << i << " ";
                 }
                 std::cout << "]" << std::endl;
@@ -94,13 +95,13 @@ void s9c_run(void)
         case 'a':
             std::cout << "Enter an integer to add to the list: ";
             std::cin >> val;
-            if(!mylist.empty()) {
+            if (!mylist.empty()) {
                 int count{0};
-                for(auto i : mylist) {
-                    if(val == i)
+                for (auto i : mylist) {
+                    if (val == i)
                         count++;
                 }
-                if(count > 0)
+                if (count > 0)
                     std::cout << val << " is a duplicate entry, it occurs " << count << " times" << std::endl;
             }
             mylist.push_back(val);
@@ -108,7 +109,7 @@ void s9c_run(void)
             break;
         case 'C':
         case 'c':
-            if(!mylist.empty()) {
+            if (!mylist.empty()) {
                 mylist.clear();
                 std::cout << "List cleared" << std::endl;
             } else
@@ -116,9 +117,9 @@ void s9c_run(void)
             break;
         case 'M':
         case 'm':
-            if(!mylist.empty()) {
+            if (!mylist.empty()) {
                 val = 0;
-                for(auto i : mylist)
+                for (auto i : mylist)
                     val += i;
                 std::cout << "The mean is " << static_cast<float>(val) / mylist.size() << std::endl;
             } else
@@ -126,9 +127,9 @@ void s9c_run(void)
             break;
         case 'S':
         case 's':
-            if(!mylist.empty()) {
+            if (!mylist.empty()) {
                 val = mylist.at(0);
-                for(auto i : mylist)
+                for (auto i : mylist)
                     val = (i < val) ? i : val;
                 std::cout << "The smallest number is " << val << std::endl;
             } else
@@ -136,9 +137,9 @@ void s9c_run(void)
             break;
         case 'L':
         case 'l':
-            if(!mylist.empty()) {
+            if (!mylist.empty()) {
                 val = mylist.at(0);
-                for(auto i : mylist)
+                for (auto i : mylist)
                     val = (i > val) ? i : val;
                 std::cout << "The largest number is " << val << std::endl;
             } else
@@ -149,9 +150,7 @@ void s9c_run(void)
             std::cout << "Goodbye..." << std::endl;
             loop_val = false;
             break;
-        default:
-            std::cout << "Unknown selection , please try again." << std::endl;
-            break;
+        default: std::cout << "Unknown selection , please try again." << std::endl; break;
         }
     }
 }

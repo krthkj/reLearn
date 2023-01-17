@@ -23,8 +23,8 @@ class Savings_Account : public Account
   private:
     // need C++11 to create following static constexpr varialbes
     static constexpr const char* def_name = "Unnamed Saving Account";
-    static constexpr double def_balance   = 0.0;
-    static constexpr double def_int_rate  = 0.0;
+    static constexpr double def_balance = 0.0;
+    static constexpr double def_int_rate = 0.0;
 
   protected:
     double int_rate;

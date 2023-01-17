@@ -1,4 +1,5 @@
 #include "accounts.hpp"
+
 #include <iostream>
 
 using std::cout, std::endl;
@@ -15,10 +16,12 @@ Account::Account()
     , name{"An Account"}
 {
 }
+
 void Account::deposit(double amt)
 {
     cout << "Account deposit called with " << amt << endl;
 }
+
 void Account::withdraw(double amt)
 {
     cout << "Account withdraw called with " << amt << endl;
@@ -29,10 +32,12 @@ Savings_Account::Savings_Account()
     : int_rate{3.0}
 {
 }
+
 void Savings_Account::deposit(double amt)
 {
     cout << "Savings Account deposit called with " << amt << endl;
 }
+
 void Savings_Account::withdraw(double amt)
 {
     cout << "Savings Account withdraw called with " << amt << endl;
@@ -51,6 +56,7 @@ Account::Account()
     : balance{0.0}
 {
 }
+
 Account::Account(double bal)
     : balance{bal}
 {
@@ -61,9 +67,10 @@ void Account::deposit(double amt)
     balance += amt;
     cout << amt << " Deposited" << endl;
 }
+
 void Account::withdraw(double amt)
 {
-    if(balance - amt >= 0) {
+    if (balance - amt >= 0) {
         balance -= amt;
         cout << amt << " Withdrawn" << endl;
     } else
@@ -74,6 +81,7 @@ Savings_Account::Savings_Account()
     : Savings_Account{0.0, 0.0}
 {
 }
+
 Savings_Account::Savings_Account(double bal, double rate)
     : Account{bal}
     , int_rate{rate}

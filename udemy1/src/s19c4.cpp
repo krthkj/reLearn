@@ -20,10 +20,10 @@
 #include <string>
 
 /**
- * @brief Challenge 19.4
+ * @brief Challenge 20.1
  *
- * Challenge 4
- * Copy Romeo and Juliet with line numbers
+ * Challenge 1
+ * Palindrome
  *
  * This challenge should be pretty easy.
  * I have provided the text to Romeo and Juliet in a file named romeoandjuliet.txt
