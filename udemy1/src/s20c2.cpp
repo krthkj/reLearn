@@ -280,8 +280,3 @@ void run_music_player(void)
     } while (selection != Player_Menu::Quit);
 }
 } // namespace udemy1::s20c2
-
-void udemy1::s20c2_run(void)
-{
-    udemy1::s20c2::run_music_player();
-}

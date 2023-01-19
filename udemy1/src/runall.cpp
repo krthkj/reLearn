@@ -43,7 +43,7 @@ void test_run_udemy1(void)
     // s19c3_run();
     // s19c4_run();
     // s20c1_run();
-    s20c2_run();
+    // s20c2_run();
     // s20c3_run();
     // s20c4_run();
     // s21c_run();
@@ -63,7 +63,7 @@ void test_run_udemy1(void)
     // e18_run();
     // e19_run();
     // e20_run();
-    // e21_run();
+    e21_run();
     // e23_run();
 
     /**

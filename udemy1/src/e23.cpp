@@ -444,13 +444,34 @@ class Player
     Direction direction;
 
   public:
-    Player(std::string n, Mode m = Mode::Idle, Direction d = Direction::North): name{n}, mode{m}, direction{d}{}
-    ~Player()= default;
+    Player(std::string n, Mode m = Mode::Idle, Direction d = Direction::North)
+        : name{n}
+        , mode{m}
+        , direction{d}
+    {
+    }
 
-    void set_name(const std::string n) { name=n; }
-    std::string get_name()    const { return name; }
-    Mode get_mode()           const { return mode; }
-    Direction get_direction() const { return direction; }
+    ~Player() = default;
+
+    void set_name(const std::string n)
+    {
+        name = n;
+    }
+
+    std::string get_name() const
+    {
+        return name;
+    }
+
+    Mode get_mode() const
+    {
+        return mode;
+    }
+
+    Direction get_direction() const
+    {
+        return direction;
+    }
 };
 
 // A simple function that returns the string representation

@@ -23,6 +23,7 @@ Person::Person()
 bool Person::operator<(const Person& rhs) const
 {
     return this->age < rhs.age;
+    // return this->name < rhs.name;
 }
 
 bool Person::operator>(const Person& rhs) const

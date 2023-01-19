@@ -27,7 +27,7 @@ namespace udemy1
 void assignment_test(void)
 {
     float val = 7.9;
-    int val2  = 15;
+    int val2 = 15;
 
     int x2 = val; // if val==7.9, x2 becomes 7 (bad)
     std::cout << val << std::endl;

@@ -5,7 +5,12 @@
 #include <array>
 #include <deque>
 #include <iostream>
+#include <map>
+#include <queue>
+#include <set>
+#include <stack>
 #include <string>
+#include <unordered_map>
 #include <vector>
 
 /**
@@ -259,5 +264,56 @@ void display(const T1& obj)
     std::cout << "]" << std::endl;
 }
 
+template <typename T1, typename T2>
+void display(const std::map<T1, T2>& l)
+{
+    std::cout << "[ ";
+    for (const auto& elem : l) {
+        std::cout << elem.first << ":" << elem.second << " ";
+    }
+    std::cout << "]  " << std::endl;
+}
+
 } // namespace udemy1::e20::containers
+
+namespace udemy1::e20::containers_adapter
+{
+
+template <typename T>
+void display(std::stack<T> s) // using pass by value
+{
+    std::cout << "[";
+    while (!s.empty()) {
+        T elem = s.top();
+        s.pop();
+        std::cout << elem << " ";
+    }
+    std::cout << "]" << std::endl;
+}
+
+template <typename T>
+void display(std::queue<T> s) // using pass by value
+{
+    std::cout << "[";
+    while (!s.empty()) {
+        T elem = s.front();
+        s.pop();
+        std::cout << elem << " ";
+    }
+    std::cout << "]" << std::endl;
+}
+
+template <typename T>
+void display(std::priority_queue<T> s) // using pass by value
+{
+    std::cout << "[";
+    while (!s.empty()) {
+        T elem = s.top();
+        s.pop();
+        std::cout << elem << " ";
+    }
+    std::cout << "]" << std::endl;
+}
+
+} // namespace udemy1::e20::containers_adapter
 #endif // E20_CLASS_TEMPLATE_HPP

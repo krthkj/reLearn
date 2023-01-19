@@ -454,9 +454,9 @@ void run_class_example(void)
     Player frank;
     Player hero;
 
-    frank.name   = "Frank";
+    frank.name = "Frank";
     frank.health = 80;
-    frank.xp     = 15;
+    frank.xp = 15;
     frank.talk("Hi there..!");
 
     Player player[]{frank, hero};
@@ -466,9 +466,9 @@ void run_class_example(void)
     Player* enemy{nullptr};
     enemy = new ex1::Player();
 
-    (*enemy).name   = "Enemy";
+    (*enemy).name = "Enemy";
     (*enemy).health = 200;
-    enemy->xp       = 20;
+    enemy->xp = 20;
 
     enemy->talk("I will destroy you!!");
     delete enemy;
@@ -476,7 +476,7 @@ void run_class_example(void)
     //----------------------------------------
     Account frank_account;
 
-    frank_account.name    = "Frank's account";
+    frank_account.name = "Frank's account";
     frank_account.balance = 5000;
 
     frank_account.deposit(1000);
@@ -722,7 +722,7 @@ Player::Player()
     set_name("Player");
     std::cout << "No args Constructor called" << std::endl;
     health = 100;
-    xp     = 1;
+    xp = 1;
 }
 
 Player::Player(std::string n)
@@ -799,7 +799,7 @@ void run_construct_destruct(void)
         Player hero{"Hero"};
         Player villain{"Villain", 100, 12};
     }
-    Player* enemy      = new Player("Enemy");
+    Player* enemy = new Player("Enemy");
     Player* level_boss = new Player("Level Boss", 1000, 0);
 
     delete enemy;
@@ -1088,7 +1088,7 @@ Test_Shallow::Test_Shallow()
 Test_Shallow::Test_Shallow(int d)
     : data{nullptr}
 {
-    data  = new int;
+    data = new int;
     *data = d;
     std::cout << "Constructor : " << *data << std::endl;
 }
@@ -1147,7 +1147,7 @@ Test_Deep::Test_Deep()
 // Constructor
 Test_Deep::Test_Deep(int d)
 {
-    data  = new int;
+    data = new int;
     *data = d;
     std::cout << "Constructor: " << *data << std::endl;
 }
@@ -1245,7 +1245,7 @@ class Move_Test_1
 // Constructor
 Move_Test_1::Move_Test_1(int d)
 {
-    data  = new int;
+    data = new int;
     *data = d;
     std::cout << "Constructor for: " << d << std::endl;
 }
@@ -1299,7 +1299,7 @@ class Move_Test_2
 // Constructor
 Move_Test_2::Move_Test_2(int d)
 {
-    data  = new int;
+    data = new int;
     *data = d;
     std::cout << "Constructor for: " << d << std::endl;
 }
@@ -1680,10 +1680,10 @@ class Rectangle
     }
 
     // following constructors are disabled
-    Rectangle(float, float)         = delete;
+    Rectangle(float, float) = delete;
     Rectangle(short int, short int) = delete;
-    Rectangle(char, char)           = delete;
-    Rectangle(double, double)       = delete;
+    Rectangle(char, char) = delete;
+    Rectangle(double, double) = delete;
 
     void display_area(void)
     {
@@ -1730,7 +1730,7 @@ class Unique
         return id;
     }
 
-    Unique(const Unique&)            = delete;
+    Unique(const Unique&) = delete;
     Unique& operator=(const Unique&) = delete;
 };
 

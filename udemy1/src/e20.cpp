@@ -344,9 +344,171 @@
  * - insert_after(), emplace_after(), erase_after(), resize()
  *
  *******************************************************************************
+ * STL set containers
+ * ------------------
+ * - Associative containers
+ *   - Collection of stored objects that allow fast retrieval using a key
+ *   - STL provides Sets and Maps.
+ *   - Using implemented as a balanced binary tree of hashsets
+ *   - Most operations are very balanced
+ *
+ * std::set
+ * std::unordered_set
+ * std::multiset
+ * std::unordered_nultiset
+ *
  *******************************************************************************
+ * std::set
+ *
+ * - #include <set>
+ * - similar to mathematical set
+ * - ordered by key
+ * - no direct access, no front and back
+ * - no duplicate elements (duplicates are ignored)
+ * - all iterators available and invalidate when corresponding element is deleted
+ *
+ * methods
+ * size(), empty(), max_size(), count()
+ * insert(), erase(), clear()
+ * find() - dont use std::find for sets, use the find() defined by std::set
+ *
+ * std::nultiset
+ * - #include <set>
+ * - sorted key
+ * - allows duplicate elements
+ * - all iterators available and invalidate when corresponding element is deleted
+ *
+ * std::unordered_set
+ * - #include <unordered_set>
+ * - Elements are unordered
+ * - no duplicate elements
+ * - elements cannot be modified, (must erase() and insert() element)
+ * - no reverse iterators allowed and invalidate when corresponding element is deleted
+ *
+ * std::unordered_multiset
+ * - #include <unordered_set>
+ * - Elements are unordered
+ * - Allows duplicate elements
+ * - no reverse iterators allowed and invalidate when corresponding element is deleted
+ *
+ *
  *******************************************************************************
+ * STL map containers
+ * Associative containers
+ * - Collection of stored objects that allow fast retrieval using a key
+ * - STL provides sets and maps
+ * - usually implemented as a balanced tree or hashsets
+ * - most operations are very efficient.
+ *
+ * std::map
+ * std::unordered_map
+ * std::multimap
+ * std::unordered_multimap
+ *
  *******************************************************************************
+ * std::map
+ * - #include <map>
+ * - similar to dictionary
+ * - elements are stored as key, value pair (std::pair)
+ * - ordered by key
+ * - no duplicate elements(keys are unique)
+ * - Direct element access using the key.
+ * - All iterators available and invalidate when corresponding element is detected.
+ *
+ * Methods
+ * - Front and back dont exist
+ * size(), max_size(), empty
+ * insert(), erase(), clear
+ * .[], at()
+ *
+ *******************************************************************************
+ * std::multimap
+ * - #include <map>
+ * - similar to dictionary
+ * - elements are stored as key, value pair (std::pair)
+ * - ordered by key
+ * - Allows duplicate elements
+ * - Direct element access using the key.
+ * - All iterators available and invalidate when corresponding element is detected.
+ *******************************************************************************
+ * std::unordered_map
+ * - #include <unordered_map>
+ * - elements are stored as key, value pair (std::pair)
+ * - elements are ordered by key
+ * - No duplicate elements
+ * - Direct element access using the key.
+ * - no reverse iterator allowed and invalidate when corresponding element is detected.
+ *******************************************************************************
+ * std::unordered_multimap
+ * - #include <unordered_map>
+ * - elements are stored as key, value pair (std::pair)
+ * - elements are not ordered
+ * - Allows duplicate elements
+ * - Direct element access using the key.
+ * - no reverse iterator allowed and invalidate when corresponding element is detected.
+ *******************************************************************************
+ * STD Container adapters
+ * =======================
+ *
+ * std::stack
+ * - last-in-first-out (LIFO) data structure.
+ * - implemented as an adapter over other stl containers, can be implemented as vector or list or deque
+ * - all operations occur on one end of the stack (top)
+ * - no iterator are supported and no stl algo
+ * - #include <stack>
+ *
+ * methods
+ * - push() - inserts elements at the top of stack
+ * - pop()  - removed elements at the top of stack,
+ * - top()  - access the top of the stack
+ * - empty()- check if stack is empty
+ * - size() - number of elements in stack
+ *
+ * example:
+ *   std::stack<int> s;  // by default it uses deque as container
+ *   std::stack<int, std::vector<int>> s1;  // stack using vector container
+ *   std::stack<int, std::list<int>> s2;  // stack using list container
+ *   std::stack<int, std::deque<int>> s3;  // stack using deque container
+ *
+ *******************************************************************************
+ * std::queue
+ * - first-in -first-out (FIFO) data structure
+ * - implemented as an adapter over other stl containers, can be implemented as list or deque
+ * - Elements are pushed from back and popped from the front
+ * - no iterator are supported and no stl algo
+ * - #include <queue>
+ *
+ * methods
+ * - push() - inserts elements at the back of the queue
+ * - pop()  - removed elements at the front of queue,
+ * - front()- access the front of the stack
+ * - back() - access the back of the stack
+ * - empty()- check if queue is empty
+ * - size() - number of elements in queue
+ *
+ * example:
+ *   std::queue<int> s;  // by default it uses deque as container
+ *   std::queue<int, std::list<int>> s2;  // queue using list container
+ *   std::queue<int, std::deque<int>> s3;  // queue using deque container
+ *
+ *******************************************************************************
+ * std::priority_queue
+ * --------------------
+ * - allows insertion and removal of elements in order from the front of the container
+ * - elements are stored internally as a vector by default (heap data structure is used internally)
+ * - elements are inserted in priority order (largest value will always be at the front)
+ * - no iterator are supported and no stl algo
+ * - #include <queue>
+ *
+ * methods
+ * - push() - inserts elements into the sorted order
+ * - pop()  - removed the top element (greatest priority)
+ * - top()  - access the top element (greatest priority)
+ * - empty()- check if queue is empty
+ * - size() - number of elements in queue
+ *
+ * example:
+ *   std::priority_queue<int> pq;  // by default it uses vector as container
  *******************************************************************************
  *******************************************************************************
  *******************************************************************************
@@ -366,7 +528,9 @@
 #include <list>
 #include <map>
 #include <numeric>
+#include <set>
 #include <string>
+#include <unordered_set>
 #include <vector>
 
 /**
@@ -1350,7 +1514,6 @@ void run_list_test_5(void)
 void run_list_test_6(void)
 {
     std::cout << "\nTest6 =========================" << std::endl;
-
     std::list<Person> stooges{{"Larry", 18}, {"Moe", 25}, {"Curly", 17}};
 
     display(stooges);
@@ -1358,7 +1521,243 @@ void run_list_test_6(void)
     display(stooges);
 }
 
+void run_set_test_1(void)
+{
+    std::cout << "\nTest1 =========================" << std::endl;
+    std::set<int> s1{1, 4, 3, 5, 2};
+    display(s1);
+
+    s1 = {1, 2, 3, 4, 5, 5, 3, 4, 4, 1, 2, 4, 5, 2, 1, 3, 4, 5, 2, 3};
+    display(s1);
+
+    s1.insert(0);
+    s1.insert(10);
+    display(s1);
+
+    if (s1.count(10))
+        std::cout << "10 is in the set" << std::endl;
+    else
+        std::cout << "10 is NOT in the set" << std::endl;
+
+    auto it = s1.find(5); // using std::set::find() , not the generic std::find()
+    if (it != s1.end())
+        std::cout << "Found: " << *it << std::endl;
+    s1.clear();
+    display(s1);
+}
+
+void run_set_test_2(void)
+{
+    std::cout << "\nTest2 =========================" << std::endl;
+    std::set<Person> stooges{{"Larry", 23}, {"Curly", 40}, {"Moe", 15}, {"Curly", 5}};
+    display(stooges);
+
+    stooges.emplace("James", 44);
+    display(stooges);
+
+    stooges.emplace("Frank", 44); // doesn't exist, 44 already exists
+    display(stooges);
+
+    auto it = stooges.find(Person{"Curly", 40});
+    if (it != stooges.end())
+        stooges.erase(it);
+    display(stooges);
+
+    it = stooges.find(Person{"XXXXX", 15}); // Will remove Moe !!!, uses operator<
+    if (it != stooges.end())
+        stooges.erase(it);
+    display(stooges);
+}
+
+void run_set_test_3(void)
+{
+    std::cout << "\nTest3 =========================" << std::endl;
+    std::set<std::string> s{"A", "B", "C"};
+    display(s);
+
+    auto result = s.insert("D");
+    display(s);
+
+    std::cout << std::boolalpha << std::endl;
+    std::cout << "first: " << *(result.first) << std::endl;
+    std::cout << "second: " << result.second << std::endl << std::endl;
+
+    result = s.insert("A");
+    display(s);
+
+    std::cout << std::boolalpha;
+    std::cout << "first: " << *(result.first) << std::endl;
+    std::cout << "second: " << result.second << std::endl;
+}
+
+void display(const std::map<std::string, std::set<int>>& m)
+{
+    std::cout << "[ ";
+    for (const auto& elem : m) {
+        std::cout << elem.first << ": [ ";
+        for (const auto& set_elem : elem.second)
+            std::cout << set_elem << " ";
+        std::cout << "] ";
+    }
+    std::cout << "]  " << std::endl;
+}
+
+void run_map_test_1(void)
+{
+    std::cout << "\nTest1 =========================" << std::endl;
+    std::map<std::string, int> m{{"Larry", 3}, {"Moe", 1}, {"Curly", 2}};
+    display(m);
+
+    m.insert(std::pair<std::string, int>("Anna", 15));
+    display(m);
+
+    m.insert(std::make_pair("Joe", 5));
+    display(m);
+
+    m["Frank"] = 18;
+    display(m);
+
+    m["Frank"] += 10;
+    display(m);
+
+    m.erase("Frank");
+    display(m);
+
+    std::cout << "Count of Joe: " << m.count("Joe") << std::endl;
+    std::cout << "Count of Frank: " << m.count("Frank") << std::endl;
+
+    auto it = m.find("Larry");
+    if (it != m.end())
+        std::cout << "Found: " << it->first << ", " << it->second << std::endl;
+
+    m.clear();
+    display(m);
+}
+
+void run_map_test_2(void)
+{
+    std::cout << "\nTest2 =========================" << std::endl;
+    std::map<std::string, std::set<int>> grades{{"Larry", {20, 10, 30}}, {"Moe", {94, 36}}, {"Curly", {90, 80, 100}}};
+    display(grades);
+
+    grades["Larry"].insert(95); // insert 95 into the set
+    display(grades);
+
+    auto it = grades.find("Moe");
+    if (it != grades.end())
+        it->second.insert(120);
+    display(grades);
+}
+
 } // namespace udemy1::e20::containers
+
+namespace udemy1::e20::containers_adapter
+{
+void run_stack_test(void)
+{
+    std::cout << "\nStack test =========================" << std::endl;
+    std::stack<int> s;
+    std::stack<int, std::vector<int>> s1;
+    std::stack<int, std::list<int>> s2;
+    std::stack<int, std::deque<int>> s3;
+
+    for (int i : {1, 2, 3, 4, 5})
+        s.push(i);
+    display(s);
+
+    s.push(100);
+    display(s);
+
+    s.pop();
+    s.pop();
+    display(s);
+
+    while (!s.empty())
+        s.pop();
+    display(s);
+
+    std::cout << "Size " << s.size() << std::endl;
+
+    s.push(10);
+    display(s);
+
+    s.top() = 100;
+    display(s);
+}
+
+void run_queue_test(void)
+{
+    std::cout << "\nQueue test =========================" << std::endl;
+    std::queue<int> q;
+
+    for (int i : {1, 2, 3, 4, 5, 6})
+        q.push(i);
+    display(q);
+
+    std::cout << "Front: " << q.front() << std::endl;
+    std::cout << "Back: " << q.back() << std::endl;
+
+    q.push(100);
+    display(q);
+
+    q.pop();
+    q.pop();
+    display(q);
+
+    while (!q.empty())
+        q.pop();
+    display(q);
+    std::cout << "Size " << q.size() << std::endl;
+
+    q.push(10);
+    q.push(100);
+    q.push(1000);
+    q.push(10000);
+    display(q);
+
+    std::cout << "Front: " << q.front() << std::endl;
+    std::cout << "Back: " << q.back() << std::endl;
+
+    q.front() = 5;
+    q.back() = 5000;
+    display(q);
+    std::cout << "Front: " << q.front() << std::endl;
+    std::cout << "Back: " << q.back() << std::endl;
+}
+
+void run_priority_queue_test_1(void)
+{
+
+    std::cout << "\nPriority Queue test =========================" << std::endl;
+    std::priority_queue<int> pq;
+    for (int i : {3, 5, 7, 12, 23, 12, 4, 100, 0, 3, 5, 7})
+        pq.push(i);
+
+    std::cout << "Size: " << pq.size() << std::endl;
+    std::cout << "Top: " << pq.top() << std::endl;
+    display(pq);
+
+    pq.pop();
+    display(pq);
+}
+
+void run_priority_queue_test_2(void)
+{
+    std::cout << "\nPriority Queue test =========================" << std::endl;
+    using e20::containers::Person;
+    std::priority_queue<Person> pq;
+    pq.push(Person{"A", 10});
+    pq.push(Person{"B", 1});
+    pq.push(Person{"C", 14});
+    pq.push(Person{"D", 18});
+    pq.push(Person{"E", 7});
+    pq.push(Person{"F", 27});
+    display(pq);
+}
+
+void run_stack_test_5(void) {}
+
+} // namespace udemy1::e20::containers_adapter
 
 /**
  * @brief Run all examples of STL
@@ -1417,5 +1816,18 @@ void udemy1::e20_run(void)
     // e20::containers::run_list_test_3();
     // e20::containers::run_list_test_4();
     // e20::containers::run_list_test_5();
-    e20::containers::run_list_test_6();
+    // e20::containers::run_list_test_6();
+
+    // e20::containers::run_set_test_1();
+    // e20::containers::run_set_test_2();
+    // e20::containers::run_set_test_3();
+
+    // e20::containers::run_map_test_1();
+    // e20::containers::run_map_test_2();
+
+    // e20::containers_adapter::run_stack_test();
+    // e20::containers_adapter::run_queue_test();
+    e20::containers_adapter::run_priority_queue_test_1();
+    e20::containers_adapter::run_priority_queue_test_2();
+    // e20::containers_adapter::run_stack_test_5();
 }
