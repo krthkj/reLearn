@@ -1,13 +1,18 @@
+image: alpine:latest
+
 stages:
   - build
   - test
 
+before_script:
+    - echo "Installing boost-dev..."
+    - apk add --no-cache boost-dev
+
 build:
     stage: build
-    image: alpine:latest
     before_script:
-        - echo "Installing GCC, CMake, make and boost-dev..."
-        - apk add --no-cache gcc g++ cmake boost-dev make
+        - echo "Installing GCC, CMake, make..."
+        - apk add --no-cache gcc g++ cmake  make
     script:
         - echo $PATH
         - echo "Building project..."
@@ -23,7 +28,6 @@ build:
 
 test:
     stage: test
-    image: alpine:latest
     script:
         - echo "Running output file..."
         - cd cmake-build-Debug/output
