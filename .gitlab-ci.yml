@@ -7,11 +7,12 @@ build:
     image: alpine:latest
     before_script:
         - echo "Installing GCC, CMake, make and boost-dev..."
-        - apk add --no-cache gcc cmake boost-dev make
+        - apk add --no-cache gcc g++ cmake boost-dev make
     script:
+        - echo $PATH
         - echo "Building project..."
         - mkdir -p cmake-build-Debug/output
-        - cmake -Bcmake-build-Debug/relearn -H./relearn
+        - cmake -DCMAKE_CXX_COMPILER=g++ -DCMAKE_C_COMPILER=gcc -Bcmake-build-Debug/relearn -H./relearn
         - cd cmake-build-Debug/relearn && make -j`nproc`
     artifacts:
         untracked: false
