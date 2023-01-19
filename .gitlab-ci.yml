@@ -1,31 +1,65 @@
 image: ubuntu:latest
 
 stages:
+  - build_udemy
+  - build_dll
+  - build_so
   - build
   - test
 
 before_script:
-  - apt-get update && apt-get install -y cmake g++ make libboost-all-dev
+    - apt-get update && apt-get install -y cmake g++ make libboost-all-dev
+
+build_udemy:
+    stage: build
+    script:
+        - echo "Building project..."
+        - mkdir -p cmake-build-Debug/output
+        - cmake -Bcmake-build-Debug/udemy1 -H./udemy1
+        - cd cmake-build-Debug/udemy1 && make -j`nproc`
+    artifacts:
+        paths:
+            - cmake-build-Debug/output/
+
+build_dll:
+    stage: build
+    script:
+        - echo "Building project..."
+        - mkdir -p cmake-build-Debug/output
+        - cmake -Bcmake-build-Debug/relearn_dl -H./relearn_dl
+        - cd cmake-build-Debug/relearn_dl && make -j`nproc`
+    artifacts:
+        paths:
+            - cmake-build-Debug/output/
+
+build_so:
+    stage: build
+    script:
+        - echo "Building project..."
+        - mkdir -p cmake-build-Debug/output
+        - cmake -Bcmake-build-Debug/relearn_sl -H./relearn_sl
+        - cd cmake-build-Debug/relearn_sl && make  -j`nproc`
 
 build:
-  stage: build
-  script:
-    - mkdir -p cmake-build-Debug/output
-    - cmake -Bcmake-build-Debug/udemy1 -H./udemy1
-    - cmake -Bcmake-build-Debug/relearn_dl -H./relearn_dl
-    - cmake -Bcmake-build-Debug/relearn_sl -H./relearn_sl
-    - cmake -Bcmake-build-Debug/relearn -H./relearn
-    - cd cmake-build-Debug/udemy1 && make -j`nproc`
-    - cd -
-    - cd cmake-build-Debug/relearn_dl && make -j`nproc`
-    - cd -
-    - cd cmake-build-Debug/relearn_sl && make  -j`nproc`
-    - cd -
-    - cd cmake-build-Debug/relearn && make -j`nproc`
-    - cd -
+    stage: build
+    script:
+        - echo "Building project..."
+        - mkdir -p cmake-build-Debug/output
+        - cmake -Bcmake-build-Debug/relearn -H./relearn
+        - cd cmake-build-Debug/relearn && make -j`nproc`
+    artifacts:
+        paths:
+            - cmake-build-Debug/output/
+    dependencies:
+        - build_udemy
+        - build_dll
+        - build_so
 
 test:
     stage: test
     script:
+        - echo "Running output file..."
         - cd cmake-build-Debug/output
         - ./relearn
+    dependencies:
+        - build
