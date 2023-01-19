@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CodeLite_Project Name="relearn" Version="11000" InternalType="">
+  <Plugins>
+    <Plugin Name="CppCheck"/>
+  </Plugins>
   <VirtualDirectory Name="doc"/>
   <Description/>
   <Dependencies/>
@@ -10,6 +13,7 @@
   <Dependencies Name="Debug">
     <Project Name="relearn_dl"/>
     <Project Name="relearn_sl"/>
+    <Project Name="udemy1"/>
   </Dependencies>
   <Settings Type="Executable">
     <GlobalSettings>
@@ -26,11 +30,13 @@
         <IncludePath Value="../relearn/include/"/>
         <IncludePath Value="../relearn_dl/include/"/>
         <IncludePath Value="../relearn_sl/include/"/>
+        <IncludePath Value="../udemy1/include/"/>
       </Compiler>
       <Linker Options="-fopenmp" Required="yes">
         <LibraryPath Value="$(WorkspacePath)/cmake-build-$(WorkspaceConfiguration)/output/"/>
         <Library Value="librelearn_dl.so"/>
         <Library Value="librelearn_sl.a"/>
+        <Library Value="libudemy1.so"/>
       </Linker>
       <ResourceCompiler Options="" Required="no"/>
       <General OutputFile="relearn" IntermediateDirectory="" Command="$(WorkspacePath)/cmake-build-$(WorkspaceConfiguration)/output/$(ProjectName)" CommandArguments="" UseSeparateDebugArgs="no" DebugArguments="" WorkingDirectory="$(WorkspacePath)/cmake-build-$(WorkspaceConfiguration)/output" PauseExecWhenProcTerminates="yes" IsGUIProgram="no" IsEnabled="yes"/>

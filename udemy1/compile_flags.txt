@@ -1,7 +1,4 @@
--I/home/karthik/develop/relearn/relearn
--I/home/karthik/develop/relearn/relearn/include
--I/home/karthik/develop/relearn/relearn_dl/include
--I/home/karthik/develop/relearn/relearn_sl/include
+-I/home/karthik/develop/relearn/udemy1
 -I/home/karthik/develop/relearn/udemy1/include
 -I/include/c++/12
 -I/include/x86_64-linux-gnu/c++/12

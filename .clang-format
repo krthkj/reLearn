@@ -1,6 +1,6 @@
 ---
 BasedOnStyle: LLVM
-AlignConsecutiveAssignments: Consecutive
+#AlignConsecutiveAssignments: Consecutive
 AlignConsecutiveBitFields: Consecutive
 AlignConsecutiveMacros: Consecutive
 AllowShortBlocksOnASingleLine: Empty
