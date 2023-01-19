@@ -1,13 +1,13 @@
-image: ubuntu:latest
-
 stages:
   - build
   - test
 
 build:
     stage: build
+    image: alpine:latest
     before_script:
-        - apt-get update && apt-get install -y cmake g++ make libboost-all-dev
+        - echo "Installing GCC, CMake, make and libboost-dev..."
+        - apk add --no-cache gcc cmake libboost-dev make
     script:
         - echo "Building project..."
         - mkdir -p cmake-build-Debug/output
@@ -22,6 +22,7 @@ build:
 
 test:
     stage: test
+    image: alpine:latest
     script:
         - echo "Running output file..."
         - cd cmake-build-Debug/output
