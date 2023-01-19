@@ -2,6 +2,7 @@ image: ubuntu:latest
 
 stages:
   - build
+  - test
 
 before_script:
   - apt-get update && apt-get install -y cmake g++ make
@@ -28,7 +29,3 @@ test:
     script:
         - cd cmake-build-Debug/output
         - ./relearn
-
-
-
-    
