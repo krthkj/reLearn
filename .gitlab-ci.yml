@@ -6,8 +6,8 @@ build:
     stage: build
     image: alpine:latest
     before_script:
-        - echo "Installing GCC, CMake, make and libboost-dev..."
-        - apk add --no-cache gcc cmake libboost-dev make
+        - echo "Installing GCC, CMake, make and boost-dev..."
+        - apk add --no-cache gcc cmake boost-dev make
     script:
         - echo "Building project..."
         - mkdir -p cmake-build-Debug/output
