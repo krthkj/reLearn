@@ -16,6 +16,8 @@
 
 namespace udemy1
 {
+void printlib(void);
+
 void test_run_udemy1(void);
 
 /**

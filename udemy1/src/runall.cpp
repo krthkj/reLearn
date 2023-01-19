@@ -18,6 +18,11 @@
 namespace udemy1
 {
 
+void printlib(void)
+{
+    std::cout << "[udemy1] <func> udemy1::printlib" << std::endl;
+}
+
 void test_run_udemy1(void)
 {
 
@@ -63,7 +68,7 @@ void test_run_udemy1(void)
     // e18_run();
     // e19_run();
     // e20_run();
-    e21_run();
+    // e21_run();
     // e23_run();
 
     /**
