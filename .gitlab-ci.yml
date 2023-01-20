@@ -7,18 +7,19 @@ build:
     image: alpine:latest
     before_script:
         - echo "Installing GCC, boost-dev, CMake, make..."
-        - apk add --no-cache gcc g++ cmake boost-dev git
+        - apk add --no-cache gcc g++ cmake boost-dev git make
         - echo "Downloading GoogleTestFramework.."
         - git clone https://github.com/google/googletest.git
         - echo "Installing GoogleTestFramework..."
         - cd googletest
-        - cmake -Bbuild -DCMAKE_CXX_COMPILER=g++ -DCMAKE_C_COMPILER=gcc 
+        - cmake -Bbuild -DCMAKE_CXX_COMPILER=g++ -DCMAKE_C_COMPILER=gcc
+        - cmake --build build -j`nproc`
         - cmake --build build --target install -j`nproc`
     script:
         - echo $PATH
         - echo "Building project..."
         - mkdir -p cmake-build-Debug/output
-        - cmake cmake-build-Debug -DCMAKE_CXX_COMPILER=g++ -DCMAKE_C_COMPILER=gcc -Bcmake-build-Debug -H.
+        - cmake -DCMAKE_CXX_COMPILER=g++ -DCMAKE_C_COMPILER=gcc -Bcmake-build-Debug -H.
         - cmake --build cmake-build-Debug -j`nproc`
     artifacts:
         untracked: false
