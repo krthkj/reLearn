@@ -29,6 +29,9 @@ build:
 test:
     stage: test
     image: alpine:latest
+    before_script:
+        - echo "Installing boost-dev..."
+        - apk add --no-cache boost-dev
     script:
         - echo "Running output file..."
         - ./cmake-build-Debug/output/unittest-relearn
