@@ -8,7 +8,7 @@ cmake_minimum_required(VERSION 3.0)
 #}}}}
 
 enable_language(CXX C ASM)
-
+# Project name
 project(relearn_sl)
 
 
@@ -17,6 +17,22 @@ project(relearn_sl)
 # Place your code here
 #}}}}
 
+# This setting is useful for providing JSON file used by CodeLite for code completion
+set(CMAKE_EXPORT_COMPILE_COMMANDS 1)
+
+set(CONFIGURATION_NAME "Debug")
+
+set(CL_WORKSPACE_DIRECTORY ..)
+# Set default locations
+set(CL_OUTPUT_DIRECTORY ${CMAKE_CURRENT_LIST_DIR}/${CL_WORKSPACE_DIRECTORY}/cmake-build-${CONFIGURATION_NAME}/output)
+set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CL_OUTPUT_DIRECTORY})
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CL_OUTPUT_DIRECTORY})
+set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CL_OUTPUT_DIRECTORY})
+
+# Projects
+
+
+# Top project
 # Define some variables
 set(PROJECT_relearn_sl_PATH "${CMAKE_CURRENT_LIST_DIR}")
 set(WORKSPACE_PATH "${CMAKE_CURRENT_LIST_DIR}/..")

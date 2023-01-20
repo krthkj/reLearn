@@ -9,7 +9,7 @@ cmake_minimum_required(VERSION 3.0)
 
 enable_language(CXX C ASM)
 # Project name
-project(relearn)
+project(unittest-relearn)
 
 
 
@@ -34,7 +34,7 @@ set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CL_OUTPUT_DIRECTORY})
 
 # Top project
 # Define some variables
-set(PROJECT_relearn_PATH "${CMAKE_CURRENT_LIST_DIR}")
+set(PROJECT_unittest-relearn_PATH "${CMAKE_CURRENT_LIST_DIR}")
 set(WORKSPACE_PATH "${CMAKE_CURRENT_LIST_DIR}/..")
 
 
@@ -45,7 +45,8 @@ set(WORKSPACE_PATH "${CMAKE_CURRENT_LIST_DIR}/..")
 
 include_directories(
     .
-    ../relearn/include/
+    /usr/local/include
+    ../unittest-relearn/include/
     ../relearn_dl/include/
     ../relearn_sl/include/
     ../udemy1/include/
@@ -66,6 +67,7 @@ add_definitions(-Wall)
 
 # Linker options
 set(LINK_OPTIONS -fopenmp)
+set(LINK_OPTIONS ${LINK_OPTIONS} -O0)
 
 
 if(WIN32)
@@ -80,6 +82,7 @@ link_directories(
 
 # Define the CXX sources
 set ( CXX_SRCS
+    ${CMAKE_CURRENT_LIST_DIR}/src/udemy1-testing.cpp
     ${CMAKE_CURRENT_LIST_DIR}/src/main.cpp
 )
 
@@ -99,13 +102,12 @@ endif(WIN32)
 # Place your code here
 #}}}}
 
-add_executable(relearn ${RC_SRCS} ${CXX_SRCS} ${C_SRCS} ${ASM_SRCS})
-target_link_libraries(relearn ${LINK_OPTIONS})
+add_executable(unittest-relearn ${RC_SRCS} ${CXX_SRCS} ${C_SRCS} ${ASM_SRCS})
+target_link_libraries(unittest-relearn ${LINK_OPTIONS})
 
-target_link_libraries(relearn
-    librelearn_dl.so
-    librelearn_sl.a
+target_link_libraries(unittest-relearn
     libudemy1.so
+    libgtest.a
 )
 
 

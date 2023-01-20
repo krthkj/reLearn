@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<CodeLite_Project Name="relearn" Version="11000" InternalType="">
-  <Plugins>
-    <Plugin Name="CppCheck"/>
-  </Plugins>
-  <VirtualDirectory Name="doc"/>
+<CodeLite_Project Name="unittest-relearn" Version="11000" InternalType="">
   <Description/>
   <Dependencies/>
   <VirtualDirectory Name="src">
+    <File Name="src/udemy1-testing.cpp"/>
     <File Name="src/main.cpp"/>
   </VirtualDirectory>
-  <VirtualDirectory Name="include"/>
+  <VirtualDirectory Name="include">
+    <File Name="include/udemy1-testing.hpp"/>
+  </VirtualDirectory>
+  <Dependencies Name="Debug"/>
   <Settings Type="Executable">
     <GlobalSettings>
       <Compiler Options="" C_Options="" Assembler="">
@@ -21,20 +21,20 @@
       <ResourceCompiler Options=""/>
     </GlobalSettings>
     <Configuration Name="Debug" CompilerType="CLANG" DebuggerType="GNU gdb debugger" Type="Executable" BuildCmpWithGlobalSettings="append" BuildLnkWithGlobalSettings="append" BuildResWithGlobalSettings="append">
-      <Compiler Options="-Wmain;-pedantic-errors;-g;-O0;-pedantic;-W;-fopenmp;-std=c++20;-Wall" C_Options="-Wmain;-pedantic-errors;-g;-O0;-pedantic;-W;-fopenmp;-std=c++20;-Wall" Assembler="" Required="yes" PreCompiledHeader="" PCHInCommandLine="no" PCHFlags="" PCHFlagsPolicy="1">
-        <IncludePath Value="../relearn/include/"/>
+      <Compiler Options="-Wmain;-pedantic-errors;-g;-O0;-pedantic;-W;-fopenmp;-std=c++20;-Wall" C_Options="-Wmain;-pedantic-errors;-g;-O0;-pedantic;-W;-fopenmp;-std=c++20;-Wall" Assembler="" Required="yes" PreCompiledHeader="" PCHInCommandLine="no" PCHFlags="" PCHFlagsPolicy="0">
+        <IncludePath Value="/usr/local/include"/>
+        <IncludePath Value="../unittest-relearn/include/"/>
         <IncludePath Value="../relearn_dl/include/"/>
         <IncludePath Value="../relearn_sl/include/"/>
         <IncludePath Value="../udemy1/include/"/>
       </Compiler>
-      <Linker Options="-fopenmp" Required="yes">
+      <Linker Options="-fopenmp;-O0" Required="yes">
         <LibraryPath Value="$(WorkspacePath)/cmake-build-$(WorkspaceConfiguration)/output/"/>
-        <Library Value="librelearn_dl.so"/>
-        <Library Value="librelearn_sl.a"/>
         <Library Value="libudemy1.so"/>
+        <Library Value="libgtest.a"/>
       </Linker>
       <ResourceCompiler Options="" Required="no"/>
-      <General OutputFile="relearn" IntermediateDirectory="" Command="$(WorkspacePath)/cmake-build-$(WorkspaceConfiguration)/output/$(ProjectName)" CommandArguments="" UseSeparateDebugArgs="no" DebugArguments="" WorkingDirectory="$(WorkspacePath)/cmake-build-$(WorkspaceConfiguration)/output" PauseExecWhenProcTerminates="yes" IsGUIProgram="no" IsEnabled="yes"/>
+      <General OutputFile="unittest-relearn" IntermediateDirectory="" Command="$(WorkspacePath)/cmake-build-$(WorkspaceConfiguration)/output/$(ProjectName)" CommandArguments="" UseSeparateDebugArgs="no" DebugArguments="" WorkingDirectory="$(WorkspacePath)/cmake-build-$(WorkspaceConfiguration)/output" PauseExecWhenProcTerminates="yes" IsGUIProgram="no" IsEnabled="yes"/>
       <BuildSystem Name="CMake"/>
       <Environment EnvVarSetName="&lt;Use Defaults&gt;" DbgSetName="&lt;Use Defaults&gt;">
         <![CDATA[]]>
@@ -68,5 +68,4 @@
       </Completion>
     </Configuration>
   </Settings>
-  <Dependencies Name="Debug"/>
 </CodeLite_Project>
