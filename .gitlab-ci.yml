@@ -22,7 +22,6 @@ build:
         - cmake -DCMAKE_CXX_COMPILER=g++ -DCMAKE_C_COMPILER=gcc -Bcmake-build-Debug -H.
         - cmake --build cmake-build-Debug -j`nproc`
     artifacts:
-        untracked: false
         when: on_success
         expire_in: 1 days
         paths:
