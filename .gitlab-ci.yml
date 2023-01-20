@@ -15,10 +15,10 @@ build:
         - cmake -Bbuild -DCMAKE_CXX_COMPILER=g++ -DCMAKE_C_COMPILER=gcc
         - cmake --build build -j`nproc`
         - cmake --build build --target install -j`nproc`
+        - cd -
     script:
         - echo $PATH
         - echo "Building project..."
-        - mkdir -p cmake-build-Debug/output
         - cmake -DCMAKE_CXX_COMPILER=g++ -DCMAKE_C_COMPILER=gcc -Bcmake-build-Debug -H.
         - cmake --build cmake-build-Debug -j`nproc`
     artifacts:
