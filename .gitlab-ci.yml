@@ -1,40 +1,46 @@
+# You can override the included template(s) by including variable overrides
+# SAST customization: https://docs.gitlab.com/ee/user/application_security/sast/#customizing-the-sast-settings
+# Secret Detection customization: https://docs.gitlab.com/ee/user/application_security/secret_detection/#customizing-settings
+# Dependency Scanning customization: https://docs.gitlab.com/ee/user/application_security/dependency_scanning/#customizing-the-dependency-scanning-settings
+# Container Scanning customization: https://docs.gitlab.com/ee/user/application_security/container_scanning/#customizing-the-container-scanning-settings
+# Note that environment variables can be set in several places
+# See https://docs.gitlab.com/ee/ci/variables/#cicd-variable-precedence
 stages:
-  - build
-  - test
-
+- build
+- test
 build:
-    stage: build
-    image: alpine:latest
-    before_script:
-        - echo "Installing GCC, boost-dev, CMake, make..."
-        - apk add --no-cache gcc g++ cmake boost-dev git make
-        - echo "Downloading GoogleTestFramework.."
-        - git clone --depth 1 https://github.com/google/googletest.git
-        - echo "Installing GoogleTestFramework..."
-        - cd googletest
-        - cmake -Bbuild -DCMAKE_CXX_COMPILER=g++ -DCMAKE_C_COMPILER=gcc
-        - cmake --build build --target install -j`nproc`
-        - cd -
-    script:
-        - echo $PATH
-        - echo "Building project..."
-        - cmake -DCMAKE_CXX_COMPILER=g++ -DCMAKE_C_COMPILER=gcc -Bcmake-build-Debug -H.
-        - cmake --build cmake-build-Debug -j`nproc`
-    artifacts:
-        when: on_success
-        expire_in: 1 days
-        paths:
-            - cmake-build-Debug/output/
-
+  stage: build
+  image: alpine:latest
+  before_script:
+  - echo "Installing GCC, boost-dev, CMake, make..."
+  - apk add --no-cache gcc g++ cmake boost-dev git make
+  - echo "Downloading GoogleTestFramework.."
+  - git clone --depth 1 https://github.com/google/googletest.git
+  - echo "Installing GoogleTestFramework..."
+  - cd googletest
+  - cmake -Bbuild -DCMAKE_CXX_COMPILER=g++ -DCMAKE_C_COMPILER=gcc
+  - cmake --build build --target install -j`nproc`
+  - cd -
+  script:
+  - echo $PATH
+  - echo "Building project..."
+  - cmake -DCMAKE_CXX_COMPILER=g++ -DCMAKE_C_COMPILER=gcc -Bcmake-build-Debug -H.
+  - cmake --build cmake-build-Debug -j`nproc`
+  artifacts:
+    when: on_success
+    expire_in: 1 days
+    paths:
+    - cmake-build-Debug/output/
 test:
-    stage: test
-    image: alpine:latest
-    before_script:
-        - echo "Installing boost-dev..."
-        - apk add --no-cache boost-dev
-    script:
-        - echo "Running output file..."
-        - ./cmake-build-Debug/output/unittest-relearn
-    dependencies:
-        - build
-
+  stage: test
+  image: alpine:latest
+  before_script:
+  - echo "Installing boost-dev..."
+  - apk add --no-cache boost-dev
+  script:
+  - echo "Running output file..."
+  - "./cmake-build-Debug/output/unittest-relearn"
+  dependencies:
+  - build
+include:
+- template: Security/Secret-Detection.gitlab-ci.yml
